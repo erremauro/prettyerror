@@ -12,7 +12,9 @@ A simple javascript class to print meaningful errors, inspired by [elm][1]'s err
 
 Add PrettyError to your project from github:
 
+    ```bash
     npm install git+https://github.com/erremauro/prettyerror.git
+    ```
 
 
 ## Wait, no NPM?
@@ -22,6 +24,7 @@ This is stupid and shouldn't "bloat" NPM with its kb.
 
 ## How to use it.
 
+    ```javascript
     import { createError, logError } from 'pretty-error'
 
     const errProps = {
@@ -36,6 +39,7 @@ This is stupid and shouldn't "bloat" NPM with its kb.
 
     let prettyError = create( 'Path not found', errProps )
     logError( prettyError )
+    ```
 
 
 `createError` will create a new `PrettyError` object instance, while `logError`
