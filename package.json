@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "docs": "./node_modules/.bin/jsdoc -c .jsdocrc"
   },
   "author": "Roberto Mauro <erremauro@icloud.com>",
   "license": "MIT",
-  "dependencies": {
-    "jest-cli": "^14.1.0"
+  "devDependencies": {
+    "jest-cli": "^14.1.0",
+    "jsdoc": "^3.4.0"
   }
 }
