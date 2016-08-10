@@ -32,8 +32,8 @@ const errProps = {
   name: 'PathNotFound',
   filepath: dirPath,
   describe: 'Required directory is missing from current path.'
-  explain: 'The application was expecting to find a directory at path: ' +
-    dirPath + ' but none was found. Please verify your current path.'
+  explain: 'The application was expecting to find a directory at path: '
+    + dirPath + ' but none was found. Please verify your current path.'
   example: 'To verify your current path type "pwd" in your terminal window'
 }
 
