@@ -20,8 +20,8 @@ var wordwrap = require( 'wordwrap')( MAX_CHARS )
 
 module.exports = {
   PrettyError: PrettyError,
-  create: create,
-  log: log,
+  createError: create,
+  logError: log,
 }
 
 /**
@@ -132,14 +132,26 @@ PrettyError.prototype.toString = function() {
     message += fmtExample( this.example )
   }
 
-  message += fmtInfo( this.code, this.file )
+  message += fmtInfo( this.code, this.filepath )
 
   return message
 }
 
 function fmtHeader( message ) {
-  var message = truncate( message, ( MAX_CHARS - 17 ) )
-  return colors.cyan( '\n==== ERROR: ' + message + ' ====\n' )
+  var prefix = '\n==== ERROR: '
+  var suffix = ' ===='
+  var minLen = prefix.length + suffix.length
+  var fmt = prefix
+  fmt += truncate( message, ( MAX_CHARS - minLen ) )
+  fmt += suffix
+
+  while( fmt.length < MAX_CHARS ) {
+    fmt += '='
+  }
+
+  fmt += '\n'
+
+  return colors.cyan( fmt )
 }
 
 function fmtDescribe( description ) {
