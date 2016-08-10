@@ -1,13 +1,14 @@
 {
   "name": "pretty-error",
   "version": "0.1.0",
-  "description": "",
+  "description": "Pretty print meaningful errors.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "docs": "./node_modules/.bin/jsdoc -c .jsdocrc"
   },
   "author": "Roberto Mauro <erremauro@icloud.com>",
+  "keyword": "error, stack, err, console, pretty, prettyprint",
   "license": "MIT",
   "devDependencies": {
     "jest-cli": "^14.1.0",
