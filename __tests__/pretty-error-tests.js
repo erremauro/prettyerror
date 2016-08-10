@@ -28,6 +28,8 @@ describe( 'PrettyError', function() {
       'describe',
       'explain',
       'example',
+      'filepath',
+      'pretty'
     ].sort()
 
     var actualProps = Object.keys( error ).sort()
@@ -69,7 +71,7 @@ describe( 'PrettyError', function() {
     var error = new PrettyError( errorProps.message, errorProps )
     var printedError = error.toString()
 
-    expect( isContained( printedError, allProps ) ).toBeTruthy()
+    expect( contains( printedError, allProps ) ).toBeTruthy()
   })
 })
 
@@ -85,13 +87,24 @@ describe( 'create', function() {
   })
 })
 
+describe( 'log', function() {
+  beforeEach( function(){
+    log = require( '../index' ).log
+  })
+
+  it( 'should log a PrettyError instance', function() {
+
+  })
+})
+
+
 /**
  * Check if `testArr` is contained in `srcArr`
  * @param  {Array} srcArr  Source array
  * @param  {Array} testArr Array to test against source.
  * @return {boolean}       True if `srcArr` contains `testArr`, or false.
  */
-function isContained( srcArr, testArr ) {
+function contains( srcArr, testArr ) {
   var found = []
   for ( var i = 0; i < testArr.length; i++ ) {
     if ( srcArr.indexOf( testArr[ i ] !== -1 ) ) {
