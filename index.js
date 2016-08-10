@@ -1,4 +1,3 @@
-
 var MAX_CHARS = 80
 var colors = require( 'chalk' )
 var wordwrap = require( 'wordwrap')( MAX_CHARS )
@@ -21,6 +20,7 @@ function PrettyError( message, props ) {
   this.describe = props.describe
   this.explain = props.explain || ''
   this.example = props.example || ''
+  this.filepath = props.filepath || ''
 }
 PrettyError.prototype = Object.create( Error.prototype, PrettyError.prototype )
 PrettyError.prototype.constructor = PrettyError
@@ -37,12 +37,14 @@ PrettyError.prototype.toString = function() {
     message += fmtExample( this.example )
   }
 
+  message += fmtInfo( this.code, this.file )
+
   return message
 }
 
 function fmtHeader( message ) {
   var message = truncate( message, ( MAX_CHARS - 17 ) )
-  return colors.cyan( '\n==== Error: ' + message + ' ====\n' )
+  return colors.cyan( '\n==== ERROR: ' + message + ' ====\n' )
 }
 
 function fmtDescribe( description ) {
@@ -54,18 +56,36 @@ function fmtExplain( explanation ) {
 }
 
 function fmtExample( example ) {
-  var fmt = '\n---- Example '
-  var max = MAX_CHARS - fmt.length
-  for ( var i = 0; i <= max; i++ ) {
-    fmt += '-'
-  }
-  fmt += '\n\n'
+  var fmt = getDivider( 'EXAMPLE' ) + '\n'
   fmt += wordwrap( example )
   return fmt + '\n'
 }
 
-function fmtStack( stack ) {
-  console.log( '\n\nStack:\n\n' + stack )
+function fmtInfo( code, filepath ) {
+  if ( !code && !filepath )  { return '' }
+
+  var fmt = '\n' + getDivider()
+  if ( code ) {
+    fmt += 'Code:\t' + code + '\n'
+  }
+  if ( filepath ) {
+    fmt += 'Path:\t' + filepath + '\n'
+  }
+  return colors.blue( fmt + getDivider() )
+}
+
+/**
+ * Return a divider with an optional title
+ * @param  {string} [title] A title for the divider.
+ * @return {string}       A divider with an optional title.
+ */
+function getDivider( title ) {
+  var divider = title ? '\n---- ' + title + ' ' : ''
+  var len = MAX_CHARS - divider.length
+  for ( var i = 0; i < len; i++ ) {
+    divider += '-'
+  }
+  return divider + '\n'
 }
 
 function truncate( string, maxlen ) {
