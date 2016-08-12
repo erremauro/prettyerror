@@ -1,6 +1,8 @@
 /* eslint no-undef: 'off' */
 jest.unmock( 'chalk' )
 jest.unmock( 'wordwrap' )
+jest.unmock( '../lib/fmtutil' )
+jest.unmock( '../lib/syserrors' )
 jest.unmock('../index')
 
 var PrettyError, createError
@@ -28,12 +30,14 @@ describe( 'PrettyError', function() {
       'describe',
       'explain',
       'example',
-      'filepath',
+      'inner',
+      'path',
       'pretty'
     ].sort()
 
     var actualProps = Object.keys( error ).sort()
     expect( expectedProps ).toEqual( actualProps )
+    expect( error.pretty ).toBeTruthy()
   })
 
   it( 'should have "Error" appended to name in `name` prop.', function() {
@@ -51,7 +55,7 @@ describe( 'PrettyError', function() {
     expect( error.stack ).toBeDefined()
   })
 
-  it( 'should print message to console', function() {
+  it( 'should print message to the console', function() {
     var errorProps = {
       code: 0,
       name: 'Test',
@@ -71,13 +75,14 @@ describe( 'PrettyError', function() {
     var error = new PrettyError( errorProps.message, errorProps )
     var printedError = error.toString()
 
+    expect( printedError ).toBeDefined()
     expect( contains( printedError, allProps ) ).toBeTruthy()
   })
 })
 
 describe( 'create', function() {
   beforeEach( function(){
-    createError = require( '../index' ).create
+    createError = require( '../index' ).createError
   })
 
   it( 'should create a PrettyError instance from function', function() {
@@ -92,9 +97,7 @@ describe( 'log', function() {
     log = require( '../index' ).log
   })
 
-  it( 'should log a PrettyError instance', function() {
-
-  })
+  xit( 'should log a PrettyError instance', function() {})
 })
 
 
