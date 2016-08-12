@@ -1,6 +1,6 @@
 {
   "name": "pretty-error",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pretty print meaningful errors.",
   "main": "index.js",
   "scripts": {
@@ -13,5 +13,8 @@
   "devDependencies": {
     "jest-cli": "^14.1.0",
     "jsdoc": "^3.4.0"
+  },
+  "dependencies": {
+    "marked": "^0.3.6"
   }
 }
