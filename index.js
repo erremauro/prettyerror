@@ -1,22 +1,15 @@
 /**
  * @module  prettyError
  * @author Roberto Mauro <erremauro@icloud.com>
- * @version 0.1.0
+ * @version 0.2.0
  *
  * @property {module:prettyError~PrettyError} PrettyError PrettyError object
- * @property {Function}   create  Create a PrettyErro instance
+ * @property {Function}   create  Create a PrettyError instance
  * @property {Function} log Log a PrettyError to the console
  */
 
-/**
- * Maximum allowed chars per line
- * @const
- * @type {Number}
- */
-var MAX_CHARS = 80
-
-var colors = require( 'chalk' )
-var wordwrap = require( 'wordwrap')( MAX_CHARS )
+var fmterr = require( './lib/fmtutil' ).format
+var syserrors = require( './lib/syserrors' )
 
 module.exports = {
   PrettyError: PrettyError,
@@ -30,14 +23,16 @@ module.exports = {
  * @memberOf module:prettyError
  * @typedef module:prettyError~PrettyErrorProps
  *
- * @property {string}  name      Error name (i.e. FileNotFound)
+ * @property {string}  name      Error name (i.e. FileNotFoundError)
+ * @property {string}  errname   Error name without suffix (i.e. FileNotFound)
  * @property {!string} message   An error message
- * @property {string} [describe] A long description of the error.
+ * @property {string} [describe] A long description of the error
  * @property {string} [explain]  An explanation about how to avoid the error
- * @property {number} [code]     An error code.
- * @property {string} [filepath] Path to file or directory related to the error.
+ * @property {number} [code]     An error code
+ * @property {string} [path]     Path to file or directory related to the error
+ * @property {Error}  [inner]    An inner error wrapped by PrettyError
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 
@@ -93,23 +88,38 @@ function log( error ) {
  * @param {string} message The error message.
  * @param {module:prettyError~PrettyErrorProps} props   PrettyError properties
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  * */
 function PrettyError( message, props ) {
   Error.captureStackTrace( this, this.constructor )
   this.pretty = true
-  this.message = message
-  this.errname = props.name || ''
-  this.name = this.errname + 'Error'
-  this.code = props.code || 0
-  this.describe = props.describe || ''
-  this.explain = props.explain || ''
-  this.example = props.example || ''
-  this.filepath = props.filepath || ''
+
+  // Check if "message" is really an Error instance and assign this
+  // to the `inner` PrettyError's props.
+  if ( typeof message === 'object' && message.hasOwnProperty( 'stack' ) ) {
+    props = Object.assign( ( props || {} ), { inner: message } )
+  }
+  else if ( typeof message === 'string' ) {
+    this.message = message
+  }
+
+  this._setProps( props )
 }
 PrettyError.prototype = Object.create( Error.prototype, PrettyError.prototype )
 PrettyError.prototype.constructor = PrettyError
+
+PrettyError.prototype._setProps = function( props ) {
+  this.code = props.code || this.code || 0
+  this.errname = props.name || this.name || 'Error'
+  this.name = ( props.name || '' ) + 'Error'
+  this.describe = props.describe || props.description || this.describe || ''
+  this.explain = props.explain || props.explanation || this.explain || ''
+  this.example = props.example || props.hint || this.example || ''
+  this.path = props.path || this.path || ''
+  this.inner = props.inner || this.inner || null
+  this.message = props.message || this.message || ''
+}
 
 /**
  * Return a pretty formatted error
@@ -117,96 +127,34 @@ PrettyError.prototype.constructor = PrettyError
  * @methodOf module:prettyError~PrettyErrorProps
  * @return {string} Pretty error text
  *
- * @version 0.1.0
+ * @version 0.2.0
  * @since 0.1.0
  */
 PrettyError.prototype.toString = function() {
-  var message = fmtHeader( this.message )
-  message += fmtDescribe( this.describe )
+  var props = Object.assign({}, this )
+  var fmtTrace = ''
 
-  if ( this.explain ) {
-    message += fmtExplain( this.explain )
+  if ( !this.message && this.inner ) {
+    props = syserrors.prettyProps( this.inner )
+    fmtTrace = fmterr.trace( this.inner.stack )
   }
 
-  if ( this.example ) {
-    message += fmtExample( this.example )
+  var result = fmterr.header( props.message )
+  result += fmterr.describe( props.describe )
+
+  if ( props.explain ) {
+    result += fmterr.explain( props.explain )
   }
 
-  message += fmtInfo( this.code, this.filepath )
-
-  return message
-}
-
-function fmtHeader( message ) {
-  var prefix = '\n==== ERROR: '
-  var suffix = ' ===='
-  var minLen = prefix.length + suffix.length
-  var fmt = prefix
-  fmt += truncate( message, ( MAX_CHARS - minLen ) )
-  fmt += suffix
-
-  while( fmt.length < MAX_CHARS ) {
-    fmt += '='
+  if ( props.example ) {
+    result += fmterr.example( props.example )
   }
 
-  fmt += '\n'
-
-  return colors.cyan( fmt )
-}
-
-function fmtDescribe( description ) {
-  return colors.yellow( '\n' + wordwrap( description ) + '\n' )
-}
-
-function fmtExplain( explanation ) {
-  return '\n' + wordwrap( explanation ) + '\n'
-}
-
-function fmtExample( example ) {
-  var fmt = getDivider( 'EXAMPLE' ) + '\n'
-  fmt += wordwrap( example )
-  return fmt + '\n'
-}
-
-function fmtInfo( code, filepath ) {
-  if ( !code && !filepath )  { return '' }
-
-  var fmt = '\n' + getDivider()
-  if ( code ) {
-    fmt += 'Code:\t' + code + '\n'
+  if ( props.code === 'EUKN' ) {
+    result += fmtTrace
   }
-  if ( filepath ) {
-    fmt += 'Path:\t' + filepath + '\n'
-  }
-  return colors.blue( fmt + getDivider() )
-}
 
-/**
- * Return a divider with an optional title
- * @inner
- *
- * @param  {string} [title] A title for the divider.
- * @return {string}       A divider with an optional title.
- *
- * @version 0.1.0
- * @since 0.1.0
- */
-function getDivider( title ) {
-  var divider = title ? '\n---- ' + title + ' ' : ''
-  var len = MAX_CHARS - divider.length
-  for ( var i = 0; i < len; i++ ) {
-    divider += '-'
-  }
-  return divider + '\n'
-}
+  result += fmterr.footer( props.code, props.path )
 
-function truncate( string, maxlen ) {
-  var maxlen = maxlen || MAX_CHARS
-  var msglen = maxlen - 3
-  if ( string.length > maxlen ){
-    return string.substring( 0, msglen ) + '...';
-  }
-  else {
-    return string;
-  }
+  return result
 }
