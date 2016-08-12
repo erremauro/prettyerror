@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/erremauro/prettyerror.png?label=ready&title=Ready)](https://waffle.io/erremauro/prettyerror)
 # PrettyError
 
 A simple javascript class to print meaningful errors, inspired by [elm][1]'s error verbosity.
