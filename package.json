@@ -4,13 +4,14 @@
   "description": "Pretty print meaningful errors.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "./node_modules/.bin/jest --coverage && codecov",
     "docs": "./node_modules/.bin/jsdoc -c .jsdocrc"
   },
   "author": "Roberto Mauro <erremauro@icloud.com>",
   "keyword": "error, stack, err, console, pretty, prettyprint",
   "license": "MIT",
   "devDependencies": {
+    "codecov": "^1.0.1",
     "jest-cli": "^14.1.0",
     "jsdoc": "^3.4.0"
   },
