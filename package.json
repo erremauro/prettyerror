@@ -11,6 +11,7 @@
   "keyword": "error, stack, err, console, pretty, prettyprint",
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^2.11.12",
     "jest-cli": "^14.1.0",
     "jsdoc": "^3.4.0"
   },
