@@ -3,4 +3,5 @@ __tests__ export-ignore
 .gitignore export-ignore
 .eslintrc export-ignore
 .jsdocrc export-ignore 
+.travis.yml export-ignore
 screenshot/screenshot.png export-ignore
