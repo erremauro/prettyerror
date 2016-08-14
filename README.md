@@ -17,12 +17,6 @@ Add PrettyError to your project from github:
 npm install git+https://github.com/erremauro/prettyerror.git
 ```
 
-
-## Wait, no NPM?
-
-This is stupid and shouldn't "bloat" NPM with its kb.
-
-
 ## How to use it.
 
 ```javascript
@@ -42,17 +36,18 @@ let prettyError = create( 'Path not found', errProps )
 logError( prettyError )
 ```
 
-
 `createError` will create a new `PrettyError` object instance, while `logError`
 will log your error to the console. 
 
 You can also work directly with `PrettyError` ( for example if you whish to `extend` it ) by importing the class directly from the module with: `import { PrettyError } from 'pretty-error'`
 
+## HISTORY
+
+Review the [change log](CHANGELOG.md), it's fun! 🎉 📚
 
 ## CREDITS
 
 2016, Roberto Mauro
-
 
 ## LICENSE
 
