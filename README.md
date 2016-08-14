@@ -23,13 +23,14 @@ npm install git+https://github.com/erremauro/prettyerror.git
 import { createError, logError } from 'pretty-error'
 
 const errProps = {
-  code: -1,
+  code: 'EPNF',
+  errno: -1,
   name: 'PathNotFound',
-  filepath: dirPath,
+  path: dirPath,
   describe: 'Required directory is missing from current path.'
   explain: 'The application was expecting to find a directory at path: '
-    + dirPath + ' but none was found. Please verify your current path.'
-  example: 'To verify your current path type "pwd" in your terminal window'
+    + dirPath + ' but none was found. **Please verify your current path**.'
+  example: 'To verify your current path type `pwd` in your terminal window.'
 }
 
 let prettyError = create( 'Path not found', errProps )
