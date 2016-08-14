@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - This CHANGELOG file to keep track of changes.
 - PrettyError now accept "path" and "inner" (error) properties. If a "path"
   property is passed to PrettyError it will be displayed in the error footer.
+- Explain and Example error section now support Markdown syntax.
 
 ### Changed
 - Error formatting methods moved to a separate module under `./lib`.

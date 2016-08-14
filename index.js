@@ -32,7 +32,6 @@ module.exports = {
  * @property {string} [path]     Path to file or directory related to the error
  * @property {Error}  [inner]    An inner error wrapped by PrettyError
  *
- * @version 0.2.0
  * @since 0.1.0
  */
 
@@ -45,7 +44,6 @@ module.exports = {
  * @param  {module:prettyError~PrettyErrorProps} props   Error properties
  * @return {module:prettyError~PrettyError}          A PrettyError instance
  *
- * @version  0.1.0
  * @since 0.1.0
  */
 function create( message, props ) {
@@ -88,9 +86,8 @@ function log( error ) {
  * @param {string} message The error message.
  * @param {module:prettyError~PrettyErrorProps} props   PrettyError properties
  *
- * @version 0.2.0
  * @since 0.1.0
- * */
+ */
 function PrettyError( message, props ) {
   Error.captureStackTrace( this, this.constructor )
   this.pretty = true
