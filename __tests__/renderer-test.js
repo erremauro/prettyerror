@@ -30,15 +30,42 @@ describe( 'lib/renderer', function() {
     expect( expected ).toEqual( actual )
   })
 
-  it( 'should convert _em_ to italic', function() {
+  it( 'should convert <br /> to return', function() {
     var renderer = new PrettyRenderer({})
-    var text = 'Test'
-    var expected = colors.italic( text )
-    var actual = renderer.em( text )
+    var expected = '\r'
+    var actual = renderer.br()
     expect( expected ).toEqual( actual )
   })
 
-  it( 'should convert  `codespan` to yellow text', function() {
+  it( 'should highlight javascript `code` blocks', function() {
+    var renderer = new PrettyRenderer({})
+    var code = 'function sayHello() {\n'
+      + '    console.log( "Hello World!" );\n'
+      + '};\n'
+    var expected = '\n   \u001b[94mfunction\u001b[39m '
+      + '\u001b[37msayHello\u001b[39m\u001b[90m(\u001b[39m\u001b[90m)'
+      + '\u001b[39m \u001b[33m{\u001b[39m\n       \u001b[34mconsole\u001b[39m'
+      + '\u001b[32m.\u001b[39m\u001b[34mlog\u001b[39m\u001b[90m(\u001b[39m '
+      + '\u001b[92m"Hello World!"\u001b[39m \u001b[90m)\u001b[39m\u001b[90m;'
+      + '\u001b[39m\n   \u001b[33m}\u001b[39m\u001b[90m;\u001b[39m\n   \n'
+    var actual = renderer.code( code, 'javascript' )
+    expect( expected ).toEqual( actual )
+  })
+
+  it( 'should convert non javascript `code` blocks to yellow text', function() {
+    var renderer = new PrettyRenderer({})
+    var text = 'def say_hello:\n'
+      + '  put "Hello World"\n'
+      + 'end\n'
+    // takes colon substitution into account
+    var expected = colors.yellow( 'def say_hello*#COLON|*\n'
+      + '  put "Hello World"\n'
+      + 'end\n' )
+    var actual = renderer.codespan( text )
+    expect( expected ).toEqual( actual )
+  })
+
+  it( 'should convert `codespan` to yellow text', function() {
     var renderer = new PrettyRenderer({})
     var text = 'Test'
     var expected = colors.yellow( text )
@@ -46,10 +73,20 @@ describe( 'lib/renderer', function() {
     expect( expected ).toEqual( actual )
   })
 
-  it( 'should convert <br /> to return', function() {
+  it( 'should convert ~~del~~ to strikethrough text', function() {
+    var renderer = new PrettyRenderer({ del: colors.strikethrough })
+    var TEXT = 'Test'
+    var expected = colors.strikethrough( TEXT )
+    var actual = renderer.del( TEXT )
+    console.log({e:expected,a:actual})
+    expect( expected ).toEqual( actual )
+  })
+
+  it( 'should convert _em_ to italic', function() {
     var renderer = new PrettyRenderer({})
-    var expected = '\r'
-    var actual = renderer.br()
+    var text = 'Test'
+    var expected = colors.italic( text )
+    var actual = renderer.em( text )
     expect( expected ).toEqual( actual )
   })
 
@@ -97,7 +134,7 @@ describe( 'lib/renderer', function() {
 
   it( 'should wrap paragraphs to given columns', function() {
     var COLUMNS = 80
-    var renderer = new PrettyRenderer({columns: COLUMNS})
+    var renderer = new PrettyRenderer( { columns: COLUMNS } )
     var longText = 'Lorem Ipsum is simply dummy text of the printing and '
       + 'typesetting industry. Lorem Ipsum has been the industry\'s standard '
       + 'dummy text ever since the 1500s, when an unknown printer took a '
@@ -112,6 +149,7 @@ describe( 'lib/renderer', function() {
         expect( item.length <= COLUMNS ).toBeTruthy()
       })
   })
+
 
 })
 
