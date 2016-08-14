@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/erremauro/prettyerror.png?label=ready&title=Ready)](https://waffle.io/erremauro/prettyerror)
+[![Stories in Ready](https://badge.waffle.io/erremauro/prettyerror.png?label=ready&title=Ready)](https://waffle.io/erremauro/prettyerror) [![codecov](https://codecov.io/gh/erremauro/prettyerror/branch/master/graph/badge.svg)](https://codecov.io/gh/erremauro/prettyerror) [![Build Status](https://travis-ci.org/erremauro/prettyerror.svg?branch=master)](https://travis-ci.org/erremauro/prettyerror)
 # PrettyError
 
 A simple javascript class to print meaningful errors, inspired by [elm][1]'s error verbosity.
