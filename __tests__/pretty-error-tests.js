@@ -1,6 +1,8 @@
 /* eslint no-undef: 'off' */
 jest.unmock( 'chalk' )
-jest.unmock( 'wordwrap' )
+jest.unmock( '../lib/wordwrap' )
+jest.unmock( '../lib/renderer' )
+jest.unmock( 'cli-table' )
 jest.unmock( '../lib/fmtutil' )
 jest.unmock( '../lib/syserrors' )
 jest.unmock('../index')
@@ -14,7 +16,6 @@ describe( 'PrettyError', function() {
 
   it( 'should create a PrettyError object', function() {
     var errorDetails = {
-      code: -2,
       name: 'Test',
       describe: 'This is an error message defined during unit test.',
       explain: 'Should be inspected by a test.',
