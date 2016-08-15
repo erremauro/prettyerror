@@ -2,20 +2,28 @@
  * @module  prettyError
  * @author Roberto Mauro <erremauro@icloud.com>
  * @version 0.2.0
+ * @since 0.1.0
  *
  * @property {module:prettyError~PrettyError} PrettyError PrettyError object
  * @property {Function}   create  Create a PrettyError instance
  * @property {Function} log Log a PrettyError to the console
+ * @property {Object} colors Chalk instance
  */
 
-var fmterr = require( './lib/fmtutil' ).format
+var colors = require( 'chalk' )
+var fmtutil = require( './lib/fmtutil' )
+var fmtErr = fmtutil.format
 var syserrors = require( './lib/syserrors' )
 
 module.exports = {
+  setFormat: setFormat,
+  colors: colors,
   PrettyError: PrettyError,
   createError: create,
   logError: log,
 }
+
+///////////////
 
 /**
  * PrettyError properties
@@ -32,8 +40,19 @@ module.exports = {
  * @property {string} [path]     Path to file or directory related to the error
  * @property {Error}  [inner]    An inner error wrapped by PrettyError
  *
+ * @version  0.2.0
  * @since 0.1.0
  */
+
+
+/**
+ * Define formatting options
+ * @param {module:lib/fmtutil~FormatOptions} props PrettyError format options
+ */
+function setFormat( props ) {
+  fmtutil.setOptions( props )
+}
+
 
 /**
  * Crates a PrettyError instance
@@ -83,7 +102,7 @@ function log( error ) {
  * Initialize a new PrettyError instance with provided message and optional
  * properties.
  *
- * @param {string} message The error message.
+ * @param {string|Error} message The Error message or an Error instance.
  * @param {module:prettyError~PrettyErrorProps} props   PrettyError properties
  *
  * @since 0.1.0
@@ -133,25 +152,25 @@ PrettyError.prototype.toString = function() {
 
   if ( !this.message && this.inner ) {
     props = syserrors.prettyProps( this.inner )
-    fmtTrace = fmterr.trace( this.inner.stack )
+    fmtTrace = fmtErr.trace( this.inner.stack )
   }
 
-  var result = fmterr.header( props.message )
-  result += fmterr.describe( props.describe )
+  var result = fmtErr.header( props.message )
+  result += fmtErr.describe( props.describe )
 
   if ( props.explain ) {
-    result += fmterr.explain( props.explain )
+    result += fmtErr.explain( props.explain )
   }
 
   if ( props.example ) {
-    result += fmterr.example( props.example )
+    result += fmtErr.example( props.example )
   }
 
-  if ( props.code === 'EUKN' ) {
+  if ( props.code === 'EUNK' ) {
     result += fmtTrace
   }
 
-  result += fmterr.footer( props.code, props.path )
+  result += fmtErr.footer( props.code, props.path )
 
   return result
 }

@@ -6,10 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
-- This CHANGELOG file to keep track of changes.
-- Explain and Example error section now support Markdown syntax.
+- PrettyError formatting options can now be customized using the `setFormatting` module's method. Formatting options include support for column wrapping, markdown, section colors and labels.
 - PrettyError now accept "path" and "inner" (error) properties. If a "path"
   property is passed to PrettyError it will be displayed in the error footer.
+- Ability to create PrettyError object from Error object instance.
+- This CHANGELOG file to keep track of changes.
 
 
 ### Changed
