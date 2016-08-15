@@ -1,0 +1,6 @@
+code      : ERR
+errno     : -100
+name      : Error
+errname   : Error
+message   : Error
+describe  : An Error occurred.

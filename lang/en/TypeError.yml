@@ -1,0 +1,9 @@
+code      : ETYP
+errno     : -105
+name      : TypeError
+errname   : Type
+message   : Type Error
+explain   : >
+  Indicates that a provided argument is not an allowable type. For example,
+  passing a function to a parameter which expects a string would be considered
+  a TypeError.

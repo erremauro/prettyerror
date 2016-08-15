@@ -14,8 +14,22 @@ var colors = require( 'chalk' )
 var fmtutil = require( './lib/fmtutil' )
 var fmtErr = fmtutil.format
 var syserrors = require( './lib/syserrors' )
+var Defaults = require( './lib/defaults' )
+
+/**
+ * Module global options
+ * @type {module:prettyError~PrettyErrorOptions}
+ * @memberOf module:prettyError
+ */
+var options = {
+  lang: Defaults.LANG,
+  includes: []
+}
+
+setOptions( options )
 
 module.exports = {
+  setOptions: setOptions,
   setFormat: setFormat,
   colors: colors,
   PrettyError: PrettyError,
@@ -43,6 +57,29 @@ module.exports = {
  * @version  0.2.0
  * @since 0.1.0
  */
+
+/**
+ * @typedef module:prettyError~PrettyErrorOptions
+ * @memberOf module:prettyError
+ * @property {string} lang Define error language
+ * @property {string[]} includes Additional directories to scan for
+ *                               Error definitions.
+ * @version 0.1.0
+ * @since 0.2.0
+ */
+
+/**
+ * Set prettyerror module global options
+ * @param {module:prettyError~PrettyErrorOptions} props prettyerror options
+ * @version 0.1.0
+ * @since 0.2.0
+ */
+function setOptions( props ) {
+  options = Object.assign( {}, options, props )
+  syserrors.setOptions({
+    lang: options.lang,
+  })
+}
 
 
 /**

@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
+- PrettyError module options can be customized using the `setOptions` method. Options include support for changing the global language and specify additional
+directories to scan for Error definitions.
 - PrettyError formatting options can now be customized using the `setFormatting` module's method. Formatting options include support for column wrapping, markdown, section colors and labels.
 - A chalk instance named `colors` is exposed by the module. Chalk terminal color functions can be used to customize PrettyError's formatting color.
 - PrettyError now accept "path" and "inner" (error) properties. If a "path"

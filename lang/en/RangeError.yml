@@ -1,0 +1,9 @@
+code  : ERNG
+errno : -101
+name  : RangeError,
+errname : Range
+message : Range error
+explain : >
+  Indicates that a provided argument was not within the set or range of 
+  acceptable values for a function; whether that is a numeric range, or outside
+  the set of options for a given function parameter.

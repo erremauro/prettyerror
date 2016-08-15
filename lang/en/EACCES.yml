@@ -1,0 +1,9 @@
+code  : EACCES
+errno : -1
+name  : PermissionDeniedError,
+errname : PermissionDenied
+message : Permission Denied
+describe : Access to file or directory denied by permissions.
+explain : >
+  An attempt was made to access a file in a way forbidden by its file access
+  permissions.

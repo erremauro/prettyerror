@@ -1,0 +1,9 @@
+code  : ENOENT
+errno : -8
+name  : FileOrDirectoryNotFoundError,
+errname : FileOrDirectoryNotFound
+message : File or Directory Not Found
+describe : An expected file or directory could not be found at given path.
+explain : >
+  Commonly raised by file system operations to indicate that a component of the
+  specified pathname does not exist.

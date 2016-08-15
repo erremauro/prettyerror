@@ -1,0 +1,10 @@
+code  : ECONNREFUSED
+errno : -3
+name  : PConnectionRefusedError,
+errname : ConnectionRefused
+message : Connection Refused
+describe : A connection was refused.
+explain : >
+  No connection could be made because the target machine actively refused it.
+  This usually results from trying to connect to a service that is inactive on
+  the foreign host.
