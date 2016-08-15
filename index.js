@@ -105,6 +105,7 @@ function log( error ) {
  * @param {string|Error} message The Error message or an Error instance.
  * @param {module:prettyError~PrettyErrorProps} props   PrettyError properties
  *
+ * @version 0.1.1
  * @since 0.1.0
  */
 function PrettyError( message, props ) {
@@ -114,7 +115,9 @@ function PrettyError( message, props ) {
   // Check if "message" is really an Error instance and assign this
   // to the `inner` PrettyError's props.
   if ( typeof message === 'object' && message.hasOwnProperty( 'stack' ) ) {
-    props = Object.assign( ( props || {} ), { inner: message } )
+    props = Object.assign(
+      ( props || syserrors.prettyProps( message ) ), { inner: message }
+    )
   }
   else if ( typeof message === 'string' ) {
     this.message = message
