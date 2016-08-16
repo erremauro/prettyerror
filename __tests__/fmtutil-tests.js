@@ -75,7 +75,7 @@ describe( 'lib/fmtutil', function() {
         header: colors.cyan,
         wordwrap: true
       })
-      var expected = colors.cyan( '\n\n==== ERROR: Test ====\n' )
+      var expected = colors.cyan( '\n==== ERROR: Test =====\n' )
       var actual = fmtutil.format.header( TEXT )
       expect( expected ).toEqual( actual )
     })
@@ -136,7 +136,7 @@ describe( 'lib/fmtutil', function() {
         wordwrap: false,
       })
       var TEXT = 'example text'
-      var expected = colors.reset( '\n\n---- HINTS ---------\n\n' + TEXT + '\n' )
+      var expected = colors.reset( '\n---- HINTS ----------\n\n' + TEXT + '\n' )
       var actual = fmtutil.format.example( TEXT )
       expect( expected ).toEqual( actual )
     })
@@ -151,7 +151,7 @@ describe( 'lib/fmtutil', function() {
       })
       var TEXT = 'example text'
       var MD_TEXT = '_' + TEXT + '_'
-      var expected = '\n\n---- HINTS ---------\n'
+      var expected = '\n---- HINTS ----------\n'
         + '\n' + colors.italic( TEXT ) + '\n'
       var actual = fmtutil.format.example( MD_TEXT )
       expect( expected ).toEqual( actual )
@@ -169,7 +169,7 @@ describe( 'lib/fmtutil', function() {
         wordwrap: false,
       })
 
-      var expected = colors.reset( '\n\n---- STACKTRACE ----\n\n' + TEXT + '\n')
+      var expected = colors.reset( '\n---- STACKTRACE -----\n\n' + TEXT + '\n')
       var actual = fmtutil.format.trace( TEXT )
 
       expect( expected ).toEqual( actual )
