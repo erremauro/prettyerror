@@ -136,7 +136,9 @@ describe( 'lib/fmtutil', function() {
         wordwrap: false,
       })
       var TEXT = 'example text'
-      var expected = colors.reset( '\n---- HINTS ----------\n\n' + TEXT + '\n' )
+      var expected = colors.reset(
+        colors.reset( '\n---- HINTS ----------\n' ) + '\n' + TEXT + '\n'
+      )
       var actual = fmtutil.format.example( TEXT )
       expect( expected ).toEqual( actual )
     })
@@ -151,7 +153,7 @@ describe( 'lib/fmtutil', function() {
       })
       var TEXT = 'example text'
       var MD_TEXT = '_' + TEXT + '_'
-      var expected = '\n---- HINTS ----------\n'
+      var expected = colors.reset( '\n---- HINTS ----------\n' )
         + '\n' + colors.italic( TEXT ) + '\n'
       var actual = fmtutil.format.example( MD_TEXT )
       expect( expected ).toEqual( actual )

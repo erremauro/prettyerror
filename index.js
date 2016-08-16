@@ -189,7 +189,9 @@ PrettyError.prototype._setProps = function( props ) {
  */
 PrettyError.prototype.toString = function() {
   var props = Object.assign({}, this )
-  var fmtTrace = ''
+  var fmtTrace = this.inner ?
+    fmtErr.trace( this.inner.stack ) :
+    fmtErr.trace( this.stack )
 
   if ( !this.message && this.inner ) {
     props = syserrors.prettyProps( this.inner )
@@ -207,7 +209,7 @@ PrettyError.prototype.toString = function() {
     result += fmtErr.example( props.example )
   }
 
-  if ( props.code === 'EUNK' ) {
+  if ( props.code === Defaults.EUNX ) {
     result += fmtTrace
   }
 
