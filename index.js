@@ -75,9 +75,10 @@ module.exports = {
  * @since 0.2.0
  */
 function setOptions( props ) {
-  options = Object.assign( {}, options, props )
+  options = Object.assign( options, props )
   syserrors.setOptions({
     lang: options.lang,
+    includes: options.includes,
   })
 }
 
