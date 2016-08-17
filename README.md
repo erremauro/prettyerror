@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/erremauro/soliderror.png?label=ready&title=Ready)](https://waffle.io/erremauro/soliderror) [![codecov](https://codecov.io/gh/erremauro/soliderror/branch/master/graph/badge.svg)](https://codecov.io/gh/erremauro/soliderror) [![Build Status](https://travis-ci.org/erremauro/soliderror.svg?branch=master)](https://travis-ci.org/erremauro/soliderror)
+[![Stories in Ready](https://badge.waffle.io/erremauro/solid-error.png?label=ready&title=Ready)](https://waffle.io/erremauro/solid-error) [![codecov](https://codecov.io/gh/erremauro/solid-error/branch/master/graph/badge.svg)](https://codecov.io/gh/erremauro/solid-error) [![Build Status](https://travis-ci.org/erremauro/solid-error.svg?branch=master)](https://travis-ci.org/erremauro/solid-error)
 
 # SolidError
 
@@ -66,7 +66,7 @@ Supply a short and a long explanation for the cause and help them resolve the is
 Read [Using exteral Error Definitions](#using-external-error-definitions) to learn how to use external definitions.
 
 ```javascript
-import { SolidError, logError } from 'soliderror'
+import { SolidError, logError } from 'solid-error'
 
 // Create an error definition
 // that describe the cause of error
@@ -104,7 +104,7 @@ Sometimes you may need to throw errors that are unknown and unexpected. Wrapping
 
 ```javascript
 import fs from 'fs'
-import { SolidError, logError } from 'soliderror'
+import { SolidError, logError } from 'solid-error'
 
 fs.readFile( '/non/existent/file', ( err, data ) => {
   if ( err ) {
@@ -193,7 +193,7 @@ Solid Error will print its definition:
 Use `setFormat` to define SolidError's output appearance.
 
 ```javascript
-import solidErr, { SolidError, logError } from 'soliderror'
+import solidErr, { SolidError, logError } from 'solid-error'
 
 solidErr.setFormat({
   wordwrap: true,                      // enable wordwrap (default)
@@ -258,7 +258,7 @@ Then simply change the language from the options and add your custom error defin
 ```javascript
 import fs from 'fs'
 import path from 'path'
-import solidErr, { createError, logError } from 'soliderror'
+import solidErr, { createError, logError } from 'solid-error'
 
 // Path that contains your Error Definitions files
 const customErrPath = path.join( __dirname, './definitions' )
