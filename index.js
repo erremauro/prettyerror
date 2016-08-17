@@ -158,10 +158,17 @@ function PrettyError( message, props ) {
     )
   }
   else if ( typeof message === 'string' ) {
-    this.message = message
+    this.describe = message
   }
 
-  this._setProps( props )
+  var defaultProps = {
+    code: 'ERR',
+    errno: 0,
+    name: 'Error',
+    errname: 'Error',
+  }
+
+  this._setProps( Object.assign( defaultProps, props ) )
 }
 PrettyError.prototype = Object.create( Error.prototype, PrettyError.prototype )
 PrettyError.prototype.constructor = PrettyError
