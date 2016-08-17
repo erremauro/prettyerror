@@ -1,7 +1,7 @@
 {
-  "name": "pretty-error",
+  "name": "solid-error",
   "version": "0.2.0",
-  "description": "Pretty print meaningful errors.",
+  "description": "Print meaningful errors to the terminal.",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest --coverage && codecov",

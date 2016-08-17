@@ -1,12 +1,12 @@
 /**
- * @module  prettyError
+ * @module  solidError
  * @author Roberto Mauro <erremauro@icloud.com>
  * @version 0.2.0
  * @since 0.1.0
  *
- * @property {module:prettyError~PrettyError} PrettyError PrettyError object
- * @property {Function}   create  Create a PrettyError instance
- * @property {Function} log Log a PrettyError to the console
+ * @property {module:solidError~SolidError} SolidError SolidError object
+ * @property {Function}   create  Create a SolidError instance
+ * @property {Function} log Log a SolidError to the console
  * @property {Object} colors Chalk instance
  */
 
@@ -18,8 +18,8 @@ var Defaults = require( './lib/defaults' )
 
 /**
  * Module global options
- * @type {module:prettyError~PrettyErrorOptions}
- * @memberOf module:prettyError
+ * @type {module:solidError~SolidErrorOptions}
+ * @memberOf module:solidError
  */
 var options = {
   lang: Defaults.LANG,
@@ -32,7 +32,7 @@ module.exports = {
   setOptions: setOptions,
   setFormat: setFormat,
   colors: colors,
-  PrettyError: PrettyError,
+  SolidError: SolidError,
   createError: create,
   logError: log,
 }
@@ -40,10 +40,10 @@ module.exports = {
 ///////////////
 
 /**
- * PrettyError properties
+ * SolidError properties
  *
- * @memberOf module:prettyError
- * @typedef module:prettyError~PrettyErrorProps
+ * @memberOf module:solidError
+ * @typedef module:solidError~SolidErrorProps
  *
  * @property {string}  name      Error name (i.e. FileNotFoundError)
  * @property {string}  errname   Error name without suffix (i.e. FileNotFound)
@@ -52,15 +52,15 @@ module.exports = {
  * @property {string} [explain]  An explanation about how to avoid the error
  * @property {number} [code]     An error code
  * @property {string} [path]     Path to file or directory related to the error
- * @property {Error}  [inner]    An inner error wrapped by PrettyError
+ * @property {Error}  [inner]    An inner error wrapped by SolidError
  *
  * @version  0.2.0
  * @since 0.1.0
  */
 
 /**
- * @typedef module:prettyError~PrettyErrorOptions
- * @memberOf module:prettyError
+ * @typedef module:solidError~SolidErrorOptions
+ * @memberOf module:solidError
  * @property {string} lang Define error language
  * @property {string[]} includes Additional directories to scan for
  *                               Error definitions.
@@ -69,8 +69,8 @@ module.exports = {
  */
 
 /**
- * Set prettyerror module global options
- * @param {module:prettyError~PrettyErrorOptions} props prettyerror options
+ * Set soliderror module global options
+ * @param {module:solidError~SolidErrorOptions} props soliderror options
  * @version 0.1.0
  * @since 0.2.0
  */
@@ -85,7 +85,7 @@ function setOptions( props ) {
 
 /**
  * Define formatting options
- * @param {module:lib/fmtutil~FormatOptions} props PrettyError format options
+ * @param {module:lib/fmtutil~FormatOptions} props SolidError format options
  */
 function setFormat( props ) {
   fmtutil.setOptions( props )
@@ -93,25 +93,25 @@ function setFormat( props ) {
 
 
 /**
- * Crates a PrettyError instance
+ * Crates a SolidError instance
  *
- * @memberOf module:prettyError
+ * @memberOf module:solidError
  *
  * @param  {string} message Error message
- * @param  {module:prettyError~PrettyErrorProps} props   Error properties
- * @return {module:prettyError~PrettyError}          A PrettyError instance
+ * @param  {module:solidError~SolidErrorProps} props   Error properties
+ * @return {module:solidError~SolidError}          A SolidError instance
  *
  * @since 0.1.0
  */
 function create( message, props ) {
-  return new PrettyError( message, props )
+  return new SolidError( message, props )
 }
 
 /**
  * Log an error to the console. Pretty unuseful, unless you have to print
- * a PrettyError.
+ * a SolidError.
  *
- * @memberOf module:prettyError
+ * @memberOf module:solidError
  *
  * @param  {Error} error An error to be printed to the console.
  *
@@ -133,25 +133,25 @@ function log( error ) {
  * formatted error message when printed to the console or converted to string.
  *
  * @extends {Error}
- * @memberOf module:prettyError
+ * @memberOf module:solidError
  *
  * @description
  *
- * Initialize a new PrettyError instance with provided message and optional
+ * Initialize a new SolidError instance with provided message and optional
  * properties.
  *
  * @param {string|Error} message The Error message or an Error instance.
- * @param {module:prettyError~PrettyErrorProps} props   PrettyError properties
+ * @param {module:solidError~SolidErrorProps} props   SolidError properties
  *
  * @version 0.1.1
  * @since 0.1.0
  */
-function PrettyError( message, props ) {
+function SolidError( message, props ) {
   Error.captureStackTrace( this, this.constructor )
   this.pretty = true
 
   // Check if "message" is really an Error instance and assign this
-  // to the `inner` PrettyError's props.
+  // to the `inner` SolidError's props.
   if ( typeof message === 'object' && message.hasOwnProperty( 'stack' ) ) {
     props = Object.assign(
       ( props || syserrors.prettyProps( message ) ), { inner: message }
@@ -170,10 +170,10 @@ function PrettyError( message, props ) {
 
   this._setProps( Object.assign( defaultProps, props ) )
 }
-PrettyError.prototype = Object.create( Error.prototype, PrettyError.prototype )
-PrettyError.prototype.constructor = PrettyError
+SolidError.prototype = Object.create( Error.prototype, SolidError.prototype )
+SolidError.prototype.constructor = SolidError
 
-PrettyError.prototype._setProps = function( props ) {
+SolidError.prototype._setProps = function( props ) {
   this.code = props.code || this.code || 0
   this.errname = props.name || this.name || 'Error'
   this.name = ( props.name || '' ) + 'Error'
@@ -188,13 +188,13 @@ PrettyError.prototype._setProps = function( props ) {
 /**
  * Return a pretty formatted error
  *
- * @methodOf module:prettyError~PrettyErrorProps
+ * @methodOf module:solidError~SolidErrorProps
  * @return {string} Pretty error text
  *
  * @version 0.2.0
  * @since 0.1.0
  */
-PrettyError.prototype.toString = function() {
+SolidError.prototype.toString = function() {
   var props = Object.assign({}, this )
   var fmtTrace = this.inner ?
     fmtErr.trace( this.inner.stack ) :

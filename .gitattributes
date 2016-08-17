@@ -4,4 +4,5 @@ __tests__ export-ignore
 .eslintrc export-ignore
 .jsdocrc export-ignore 
 .travis.yml export-ignore
+examples/ export-ignore
 screenshot/screenshot.png export-ignore

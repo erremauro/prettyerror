@@ -1,0 +1,7 @@
+jsdocs
+coverage
+examples
+travis.yml
+.eslintrc
+.jsdocrc
+.babelrc

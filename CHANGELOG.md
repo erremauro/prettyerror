@@ -6,13 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
-- PrettyError module options can be customized using the `setOptions` method. Options include support for changing the global language and specify additional
+- SolidError module options can be customized using the `setOptions` method. Options include support for changing the global language and specify additional
 directories to scan for Error definitions.
-- PrettyError formatting options can now be customized using the `setFormatting` module's method. Formatting options include support for column wrapping, markdown, section colors and labels.
-- A chalk instance named `colors` is exposed by the module. Chalk terminal color functions can be used to customize PrettyError's formatting color.
-- PrettyError now accept "path" and "inner" (error) properties. If a "path"
-  property is passed to PrettyError it will be displayed in the error footer.
-- Ability to create PrettyError object from Error object instance.
+- SolidError formatting options can now be customized using the `setFormatting` module's method. Formatting options include support for column wrapping, markdown, section colors and labels.
+- A chalk instance named `colors` is exposed by the module. Chalk terminal color functions can be used to customize SolidError's formatting color.
+- SolidError now accept "path" and "inner" (error) properties. If a "path"
+  property is passed to SolidError it will be displayed in the error footer.
+- Ability to create SolidError object from Error object instance.
 - This CHANGELOG file to keep track of changes.
 
 
@@ -22,4 +22,4 @@ directories to scan for Error definitions.
 ## [0.1.0] - 2016-08-10
 
 ### Added
-- prettyerror module
+- soliderror module

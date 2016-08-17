@@ -7,21 +7,21 @@ jest.unmock( '../lib/fmtutil' )
 jest.unmock( '../lib/syserrors' )
 jest.unmock('../index')
 
-var PrettyError, createError
+var SolidError, createError
 
-describe( 'PrettyError', function() {
+describe( 'SolidError', function() {
   beforeEach( function(){
-    PrettyError = require( '../index' ).PrettyError
+    SolidError = require( '../index' ).SolidError
   })
 
-  it( 'should create a PrettyError object', function() {
+  it( 'should create a SolidError object', function() {
     var errorDetails = {
       name: 'Test',
       describe: 'This is an error message defined during unit test.',
       explain: 'Should be inspected by a test.',
       example: 'expect( error ).toBeDefined()'
     }
-    var error = new PrettyError( 'Test error message', errorDetails )
+    var error = new SolidError( 'Test error message', errorDetails )
 
     var expectedProps = [
       'code',
@@ -42,17 +42,17 @@ describe( 'PrettyError', function() {
   })
 
   it( 'should have "Error" appended to name in `name` prop.', function() {
-    var error = new PrettyError( 'No Message', { name: 'Test' } )
+    var error = new SolidError( 'No Message', { name: 'Test' } )
     expect( error.name ).toEqual( 'TestError' )
   })
 
   it( 'should have standard name in `errname` prop.', function() {
-    var error = new PrettyError( 'No Message', { name: 'Test' } )
+    var error = new SolidError( 'No Message', { name: 'Test' } )
     expect( error.errname ).toEqual( 'Test' )
   })
 
   it( 'should have error stack informations', function() {
-    var error = new PrettyError( 'No Message', { name: 'Test' } )
+    var error = new SolidError( 'No Message', { name: 'Test' } )
     expect( error.stack ).toBeDefined()
   })
 
@@ -73,7 +73,7 @@ describe( 'PrettyError', function() {
       return values
     })( errorProps )
 
-    var error = new PrettyError( errorProps.message, errorProps )
+    var error = new SolidError( errorProps.message, errorProps )
     var printedError = error.toString()
 
     expect( printedError ).toBeDefined()
@@ -86,7 +86,7 @@ describe( 'create', function() {
     createError = require( '../index' ).createError
   })
 
-  it( 'should create a PrettyError instance from function', function() {
+  it( 'should create a SolidError instance from function', function() {
     var error = createError( 'No Message', { name: 'Test' })
     expect( error ).toBeDefined()
     expect( error.errname ).toEqual( 'Test' )
@@ -98,7 +98,7 @@ describe( 'log', function() {
     log = require( '../index' ).log
   })
 
-  xit( 'should log a PrettyError instance', function() {})
+  xit( 'should log a SolidError instance', function() {})
 })
 
 
