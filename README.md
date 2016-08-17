@@ -8,11 +8,11 @@ A simple javascript class to print meaningful errors, inspired by [elm][1]'s err
 
 ## Installation
 
-Add SolidError to your project from github:
+Install SolidError using NPM:
 
-```bash
-npm install git+https://github.com/erremauro/solid-error.git
-```
+  ```bash
+  npm install --save solid-error
+  ```
 
 ## What it's useful for
 
