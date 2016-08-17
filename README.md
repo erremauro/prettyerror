@@ -63,7 +63,7 @@ To provide your users with more informations regarding your error, create an err
 
 Supply a short and a long explanation for the cause and help them resolve the issue by giving them some hints. Use markdown syntax to format and highlight your text.
 
-Read [Using exteral Error Definitions](#using-external-error-definitions) to learn how to use external definitions.
+Read [Using external Error Definitions](#using-external-error-definitions) to learn how to use external definitions.
 
 ```javascript
 import { SolidError, logError } from 'solid-error'
@@ -238,7 +238,7 @@ Your solid error will now look something like:
 You can easly support internazionalization with multiple language translations.
 In addition to translate your custom errors, you can override the default error definitions by naming your definition like a [class error][4] or a [syserror code][4].
 
-Read [Using exteral Error Definitions](#using-external-error-definitions) to learn how to setup external definitions.
+Read [Using external Error Definitions](#using-external-error-definitions) to learn how to setup external definitions.
 
 To override the default `ENOENT` SystemError definition, for example, create a file named `ENOENT.yml` in your target language directory. To override `ENOENT` for the Italian language, save you file to `./errdef/it/ENOENT.yml`
 
