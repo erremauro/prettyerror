@@ -1,9 +1,9 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
+This project adheres to [Semantic Versioning](http://semver.org/). However, note tha **major** API changes could be pushed on a minor semantic version until version 1.0.0 is reached.
 
-## [Unreleased]
+## [0.2.0] - 2016-08-17
 
 ### Added
 - SolidError module options can be customized using the `setOptions` method. Options include support for changing the global language and specify additional
