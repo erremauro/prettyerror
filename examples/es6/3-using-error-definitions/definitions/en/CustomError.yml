@@ -1,0 +1,24 @@
+code      : ECST
+errno     : -500
+name      : CustomError
+errname   : Custom
+message   : Custom Error
+describe  : This custom error was defined in an external file.
+explain   : >
+  **Error Definition** files use `YAML` syntax to let you freely format
+  your message. `YAML` is more readable than `JSON` and text can span
+  multiple lines.
+example   : >
+  Formatting **markdown** syntax is easy. 
+
+
+  > I don't know why you'd want to use a quote in an error, but you can.
+
+  
+  By the way, SolidError also support code highlighting for javascript syntax:
+
+    ```javascript
+    function greet( name ) {
+      return 'Hello, ' + name
+    }
+    ```

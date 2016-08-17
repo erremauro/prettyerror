@@ -162,6 +162,29 @@ Describe your error in a `ConfigurationNotFoundError.yml` file, and save it unde
       $ awesome --initConfig
   ```
 
+Add the error definitions directory to the options:
+
+```javascript
+import solidErr, { SolidError, logError } from 'solid-error'
+
+solidErr.setConfig({
+  includes: [ './errdef' ]
+})
+```
+
+Now, when your custom error gets logged, 
+
+```
+try {
+  getConfig() // throws a ConfigurationNotFoundError
+}
+catch ( configErr ) {
+  logError( new SolidError( configErr ) )
+}
+```
+
+Solid Error will print its definition:
+
 ![external definitions](screenshots/01-custom-error.png)
 
 
@@ -204,7 +227,7 @@ let errProps = {
 logError( new SolidError( errProps.describe, errProps ) )
 ```
 
-You solid error will now look something like:
+Your solid error will now look something like:
 
 ![custom look](screenshots/03-custom-look.png)
 
