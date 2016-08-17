@@ -174,7 +174,7 @@ solidErr.setConfig({
 
 Now, when your custom error gets logged, 
 
-```
+```javascript
 try {
   getConfig() // throws a ConfigurationNotFoundError
 }
