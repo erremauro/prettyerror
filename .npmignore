@@ -1,6 +1,8 @@
+__tests__
 jsdocs
 coverage
 examples
+screnshots
 travis.yml
 .eslintrc
 .jsdocrc
