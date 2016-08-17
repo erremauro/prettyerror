@@ -73,6 +73,7 @@ import { SolidError, logError } from 'solid-error'
 const errProps = {
   code: 'ECNF',
   errno: -500,
+  path: '/etc/awesome.cfg'
   name: 'ConfigurationNotFoundError',
   message: 'Configuration Not Found',
   describe: 'Configuration file not found.',
@@ -145,6 +146,7 @@ Describe your error in a `ConfigurationNotFoundError.yml` file, and save it unde
   errno     : -500
   name      : ConfigurationNotFoundError
   message   : Configuration Not Found
+  path      : /etc/awesome.cfg
   explain   : >
     An expected configuration file for this application was not found
     at path `/etc/awesome.cfg`. This could happen if the file was moved or 
