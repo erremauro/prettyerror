@@ -1,4 +1,3 @@
-/* eslint no-undef: 'off' */
 jest.unmock( 'chalk' )
 jest.unmock( '../lib/wordwrap' )
 jest.unmock( '../lib/renderer' )

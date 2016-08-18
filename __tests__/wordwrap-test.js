@@ -1,4 +1,3 @@
-/* eslint no-undef: 'off' */
 jest.unmock( '../lib/wordwrap' )
 
 var wordwrap

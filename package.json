@@ -1,6 +1,6 @@
 {
   "name": "solid-error",
-  "version": "0.2.1",
+  "version": "0.2.2-alpha",
   "description": "Print meaningful errors to the terminal.",
   "main": "index.js",
   "scripts": {

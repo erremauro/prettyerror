@@ -1,4 +1,3 @@
-/* eslint no-undef: 'off' */
 jest.unmock( 'fs' )
 jest.unmock( 'chalk' )
 jest.unmock( 'marked' )

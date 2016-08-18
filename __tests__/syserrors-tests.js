@@ -1,4 +1,3 @@
-/* eslint no-undef: 'off' */
 jest.unmock( 'path' )
 jest.unmock( 'fs' )
 jest.unmock( 'js-yaml' )

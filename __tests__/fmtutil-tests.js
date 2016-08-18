@@ -1,4 +1,3 @@
-/* eslint no-undef: 'off' */
 jest.unmock( 'chalk' )
 jest.unmock( 'marked' )
 jest.unmock( 'cli-table')
