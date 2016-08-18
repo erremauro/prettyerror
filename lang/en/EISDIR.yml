@@ -1,8 +1,0 @@
-code  : EISDIR
-errno : -6
-name  : IsDirectoryError,
-errname : IsDirectory
-message : Is A Directory
-describe : Expect a file but directory was given instead.
-explain : >
-  An operation expected a file, but the given pathname was a directory.

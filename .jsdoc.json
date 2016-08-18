@@ -1,0 +1,20 @@
+{
+  "plugins": [ "plugins/markdown" ],
+  "source": {
+    "include": ["./"],
+    "exclude": [
+      "./node_modules",
+      "./__tests__",
+      "./dist",
+      "./examples"
+    ],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "./docs/jsdocs",
+    "recurse": true,
+    "private": true
+  }
+}
