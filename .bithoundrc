@@ -1,0 +1,8 @@
+{
+  "test": [
+    "__tests__/**"
+  ],
+  "critics": {
+    "lint": { "engine": "eslint" }
+  }
+}
