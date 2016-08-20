@@ -1,0 +1,6 @@
+code  : TRNG
+errno : -201
+name  : TestRangeError,
+readableName : Test Range
+message : Custom test range
+explain : This message should show up only during tests.

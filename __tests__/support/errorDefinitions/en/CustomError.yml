@@ -1,7 +1,0 @@
-code  : ECST
-errno : -100
-name  : CustomError
-errname : Custom
-message : Custom Error
-describe : This is a custom test error
-explain : This error should raise only during tests.

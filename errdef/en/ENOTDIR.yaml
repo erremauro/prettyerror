@@ -1,0 +1,8 @@
+code  : ENOTDIR
+errno : -9
+name  : DirectoryNotEmptyError
+readableName : Directory Not Empty
+message : The given directory is not empty.
+explain : >
+  A directory with entries was the target of an operation that requires
+  an empty directory. Usually an unlink operation.

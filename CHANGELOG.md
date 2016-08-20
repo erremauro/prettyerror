@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). However, note tha **major** API changes could be pushed on a minor semantic version until version 1.0.0 is reached.
 
+## [Unreleased]
+
+- SolidError has been rewritten to ES6 syntax.
+
 ## [0.2.1] - 2016-08-17
 
 ### Added
