@@ -8,6 +8,6 @@
   ],
   "critics": {
     "lint": { "engine": "eslint" },
-    "wc": 5000,
+    "wc": 5000
   }
 }
