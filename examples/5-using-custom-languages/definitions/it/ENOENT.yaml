@@ -1,8 +1,8 @@
 code  : ENOENT
 errno : -2
 name  : FileOrDirectoryNotFoundError
-message : File o Directory Non Trovata
-describe : File o directory non trovata al percorso indicato.
+readableName : File o Directory Non Trovata
+message : File o directory non trovata al percorso indicato.
 explain : >
   Tipicamente invocato da operazioni che coinvolgono il file system per
   indicare che un componente al percorso specificato non esiste.

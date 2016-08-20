@@ -17,6 +17,7 @@
     },
     "extends": "eslint:recommended",
     "rules": {
+        "no-console": 0,
         "no-path-concat": 2,
         "no-process-exit": 2,
         "no-sync": 0,

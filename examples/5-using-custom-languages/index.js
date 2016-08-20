@@ -5,20 +5,21 @@
  * @version 0.1.0
  * @since 0.2.0
  */
-import fs from 'fs'
-import path from 'path'
-import solidErr, { createError, logError } from '../../../index'
+const fs = require( 'fs' )
+const path = require( 'path' )
+const solidError = require( '../../dist/index' )
+const SolidError = solidError.SolidError
+const logError = solidError.logError
 
 // Path that contains your Error Definitions files
 const customErrPath = path.join( __dirname, './definitions' )
 
-solidErr.setOptions({
+solidError.setOptions({
   lang: 'it',                   // set the language to 'it'
   includes: [ customErrPath ]
 })
-
-solidErr.setFormat({
-  headerTitle: 'ERRORE',
+solidError.setStyles({
+  headerTitle: 'ERRORE:',
 })
 
 try {
@@ -27,7 +28,5 @@ try {
 }
 catch( readErr ) {
   // log translated error.
-  // you can also use the helper method `createError`
-  // to create SolidError instances.
-  logError( createError( readErr ) )
+  logError( new SolidError( readErr ) )
 }
