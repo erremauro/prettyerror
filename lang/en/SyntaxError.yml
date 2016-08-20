@@ -1,9 +1,0 @@
-code      : ESTX
-errno     : -104
-name      : SyntaxError
-errname   : Syntax
-message   : Syntax Error
-explain   : >
-  Indicates that a program is not a valid Javascript. These errors may only be
-  generated and propagated as a result of code evaluation.  These errors are
-  almost always indicative of a broken program.

@@ -1,0 +1,7 @@
+code  : EISDIR
+errno : -6
+name  : IsDirectoryError
+readableName : Is A Directory
+message : Expect a file but directory was given instead.
+explain : >
+  An operation expected a file, but the given pathname was a directory.

@@ -1,0 +1,8 @@
+code  : EEXIST
+errno : -5
+name  : FileExistsError
+readableName : File Exists
+message : A file or directory already exists
+explain : >
+  An existing file was the target of an operation that required that the target
+  not exist.

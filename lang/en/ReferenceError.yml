@@ -1,9 +1,0 @@
-code      : EREF
-errno     : -103
-name      : ReferenceError
-errname   : Reference
-message   : Reference Error
-explain   : >
-  Indicates that an attempt was being made to access a variable that is not
-  defined. Such errors commonly indicate typos in code, or an otherwise
-  broken program.

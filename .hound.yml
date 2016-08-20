@@ -1,0 +1,6 @@
+jshint:
+  enabled: false
+eslint:
+  enabled: true
+  config_file: ./__tests__/.eslinter-es5.json
+  ignore_files: ./__tests__/.eslintignore

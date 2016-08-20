@@ -1,0 +1,9 @@
+code  : ETIMEDOUT
+errno : -12
+name  : OperationTimedOutError
+readableName : Operation Timed Out
+message : The current operation has timed out.
+explain : >
+  A connect or send request failed because the connected party did not properly
+  respond after a period of time. Usually encountered by http or net -- often a
+  sign that a socket.end() was not properly called.
