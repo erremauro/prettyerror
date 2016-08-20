@@ -7,6 +7,7 @@
     "__tests__/**"
   ],
   "critics": {
-    "lint": { "engine": "eslint" }
+    "lint": { "engine": "eslint" },
+    "wc": 5000,
   }
 }
