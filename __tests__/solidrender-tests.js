@@ -62,7 +62,7 @@ describe( 'lib/solidrender', function () {
         headerColor: 'cyan',
         wordwrap: true
       })
-      var expected = '\n' + colors.cyan( '==== ERROR: ==========' ) + '\n'
+      var expected = '\n' + colors.cyan( '==== ERROR ===========' ) + '\n'
       var actual = solidRender.header( )
       expect( expected ).toEqual( actual )
     })
@@ -161,7 +161,7 @@ describe( 'lib/solidrender', function () {
       var solidRender = new SolidRender( renderProps )
       var TEXT = 'example text'
       var expected = 
-        '\n' + colors.reset( '---- HINTS ----------' ) + '\n\n' + TEXT
+        '\n' + colors.reset( '---- HINTS ----------' ) + '\n\n' + TEXT + '\n'
       var actual = solidRender.hints( TEXT )
       expect( expected ).toEqual( actual )
     })

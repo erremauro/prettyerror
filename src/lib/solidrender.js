@@ -3,8 +3,8 @@
  * @module lib/solidrender
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since 0.3.0
- * @version 0.1.0
- * 
+ * @version 0.1.1
+ *
  * @requires {@link https://github.com/chalk/chalk|chalk}
  * @requires {@link https://github.com/chjj/marked|marked}
  * @requires {@link module:lib/solidtext|SolidText}
@@ -23,12 +23,12 @@ const TTYRender = require( './ttyrender' )
  * {@link SolidRenderer.SolidRendererType|renderer}.
  *
  * @see {@link module:soliderror.render|SolidError render function}
- * 
+ *
  * @property {SolidRender~SolidRenderPropsType} props SolidRender properties
- * 
+ *
  * @description Initializes markdown renderer and set renderer properties.
  * @param {SolidRender~SolidRenderPropsType} [props] SolidRender properties
- * 
+ *
  * @since 0.1.0
  * @version 0.1.0
  */
@@ -95,20 +95,26 @@ class SolidRender {
 
   /**
    * Render the error header
-   * @param  {strong} readableName SolidError readable name
+   * @param  {string} readableName SolidError readable name
    * @return {string}              Renderer header section
    * @since 0.1.0
-   * @version 0.1.0
+   * @version 0.1.1
    */
   header( readableName ) {
-    const headerTitle = readableName
-      ? `${this.props.headerTitle} ${readableName}`
-      : this.props.headerTitle
+    const headerTitle = this.fixColonInHeaderTitle(
+      this.props.headerTitle,
+      readableName
+    )
+
+    const headerText = readableName
+      ? `${headerTitle} ${readableName}`
+      : headerTitle
 
     const coloredText = this.applyColor(
       this.props.headerColor,
-      this.getDivider( headerTitle, this.props.headerStyle )
+      this.getDivider( headerText, this.props.headerStyle )
     )
+
     return `\n${coloredText}\n`
   }
 
@@ -161,11 +167,8 @@ class SolidRender {
     if ( this.props.markdown ) {
       hintsText = this.marked( hintsText )
     }
-    else {
-      hintsText = '\n' + hintsText
-    }
 
-    const formattedText = this.formatText( hintsText )
+    const formattedText = '\n' + this.formatText( hintsText ) + '\n'
     return `\n${divider}\n${formattedText}`
   }
 
@@ -221,7 +224,7 @@ class SolidRender {
    * @example
    *
    * this.applyColor(
-   *   'cyan.dim.strong.italic', 
+   *   'cyan.dim.strong.italic',
    *   'Will print a strong, italic, dimmed cyan text'
    * )
    *
@@ -239,7 +242,7 @@ class SolidRender {
   }
 
   /**
-   * Wordwrap givn `text` if 
+   * Wordwrap givn `text` if
    * {@link module:lib/solidrender~SolidReder.props.markdown|markdown} is
    * activated (true by default) otherwise returns the text as is.
    * @param  {string} text Text to be formatted.
@@ -255,10 +258,26 @@ class SolidRender {
   }
 
   /**
+   * Add or remove ending colon depending on wether header `text` is available
+   * or not.
+   * @param  {string} title      The header title
+   * @param  {string} text       The header text
+   * @return {string}            Header title with or without ending colon
+   * @since  0.1.0
+   * @version 0.1.0
+   */
+  fixColonInHeaderTitle( title, text ) {
+    if ( title.slice( -1 ) === ':' ) {
+      return text ? title : title.substr( 0, title.length - 1 )
+    }
+    return title
+  }
+
+  /**
    * Crate a divider using the optionsl `style` char and `title` provided. The
    * lenght of the divider depends on SolidRender
    * {@link module:solidrender~SolidRender.props.columns} property.
-   * 
+   *
    * @param  {string} title Divider label title
    * @param  {string} style Divider style char
    * @return {string}       A divider
@@ -266,10 +285,10 @@ class SolidRender {
    * @example
    *
    * getDivider( 'HINTS', '=' )
-   * 
+   *
    * // return something like:
    * // ==== HINTS: ===============
-   * 
+   *
    * @since 0.1.0
    * @version 0.1.0
    */
