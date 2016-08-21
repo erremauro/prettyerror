@@ -5,8 +5,9 @@ report
 docs
 old-*
 examples
-screnshots
+screenshots
 travis.yml
-.eslintrc
-.jsdocrc
+.eslintrc.json
+.jsdoc.json
 .babelrc
+.bithoundrc

@@ -1,3 +1,5 @@
+[![NPM][npm-img]][npm-url]
+
 [![Stories in Ready][waffle-img]][waffle-url] [![bitHound Dependencies][bh-dep-img]][bh-dep-url] [![bitHound Code][bh-code-img]][bh-code-url] [![codecov][codecov-img]][codecov-url] [![Build Status][travis-img]][travis-url]
 
 # SolidError
@@ -320,13 +322,19 @@ SolidError is released under the MIT License. For more informations read the [LI
 [3]: https://nodejs.org/api/errors.html#errors_class_error "View Node's Error documentation"
 [4]: https://nodejs.org/api/errors.html "View Node Error Documentation."
 
+[npm-img]: https://nodei.co/npm/solid-error.png
+[npm-url]: https://npmjs.org/package/solid-error
+
 [waffle-img]: https://badge.waffle.io/erremauro/solid-error.png?label=ready&title=Ready
 [waffle-url]: https://waffle.io/erremauro/solid-error
+
 [bh-dep-img]: https://www.bithound.io/github/erremauro/solid-error/badges/dependencies.svg
 [bh-dep-url]: https://www.bithound.io/github/erremauro/solid-error/v0.3.0-beta/dependencies/npm
 [bh-code-img]: https://www.bithound.io/github/erremauro/solid-error/badges/code.svg
 [bh-code-url]: https://www.bithound.io/github/erremauro/solid-error
+
 [codecov-img]: https://codecov.io/gh/erremauro/solid-error/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/erremauro/solid-error
+
 [travis-img]: https://travis-ci.org/erremauro/solid-error.svg?branch=master
 [travis-url]: https://travis-ci.org/erremauro/solid-error
