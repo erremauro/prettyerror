@@ -312,7 +312,7 @@ SolidError is written and mantained by Roberto Mauro.
 
 ## LICENSE
 
-SolidError is releases under the MIT License. For more information review the [LICENSE](LICENSE) file.
+SolidError is released under the MIT License. For more informations read the [LICENSE](LICENSE) file.
 
 
 [1]: http://elm-lang.org "Open Elm Lang Official Site"
