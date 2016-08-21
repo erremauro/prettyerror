@@ -1,9 +1,0 @@
-code  : EEXIST
-errno : -5
-name  : FileExistsError,
-errname : FileExists
-message : File Exists
-describe : A file or directory already exists
-explain : >
-  An existing file was the target of an operation that required that the target
-  not exist.

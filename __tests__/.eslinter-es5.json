@@ -1,28 +1,24 @@
 {
     "env": {
         "node": true,
-        "es6": true,
-        "commonjs": true,
         "jest": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": 7,
+        "ecmaVersion": 5,
         "sourceType": "module",
         "ecmaFeatures": {
             "impliedStrict": true,
-            "modules": true,
-            "experimentalObjectRestSpread": true
+            "modules": true
         }
     },
     "extends": "eslint:recommended",
     "rules": {
-        "no-console": 0,
         "no-path-concat": 2,
         "no-process-exit": 2,
         "no-sync": 0,
         "array-callback-return": 2,
-        "arrow-body-style": 2,
+        "arrow-body-style": 0,
         "dot-notation": 2,
         "eqeqeq": 2,
         "no-alert": 2,
@@ -74,13 +70,13 @@
         "no-useless-constructor": 2,
         "no-useless-escape": 2,
         "no-useless-rename": 2,
-        "no-var": 2,
+        "no-var": 0,
         "no-with": 2,
-        "object-shorthand": 2,
+        "object-shorthand": 0,
         "operator-assignment": 2,
-        "prefer-arrow-callback": 2,
-        "prefer-const": 2,
-        "prefer-rest-params": 2,
+        "prefer-arrow-callback": 0,
+        "prefer-const": 0,
+        "prefer-rest-params": 0,
         "prefer-spread": 2
     }
 }

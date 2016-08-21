@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). However, note tha **major** API changes could be pushed on a minor semantic version until version 1.0.0 is reached.
 
+## [0.3.0] - 2016-08-21
+
+### Changed
+- SolidError **has been rewritten to ES6 syntax**. The distributed code is 
+  built with Babel to ensure compatibility with **node@^4.5.0**. 
+  This should also give a general boost in code optimization and performance 
+  (metrics did in fact score a little high than the source code).
+- Is now possible to set a **custom renderer** to have complete control on
+  how a SolidError renders in the terminal. **Note**: when a custom renderer
+  is active, calls to `setStyles` will be ignored.
+- `setFormat` has been **renamed** to `setStyles`.
+- SolidError `toString` method now renders a default Error output when invoked.
+  To render a SolidError in the terminal use `logError`.
+
 ## [0.2.1] - 2016-08-17
 
 ### Added

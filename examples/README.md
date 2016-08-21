@@ -1,34 +1,13 @@
-# SolidError Usage Examples
+# Running the examples
 
-This folder contains a series of examples that show how to use and customize SolidError. 
+The `example` folder is not included in the distributed package. In order to
+run the examples you need to fork or clone the repo.
 
-Examples are available for both `ES5` and `ES6` syntax, so read and run the ones you are more comfortable with.
+To clone the repository:
 
-## Installation
-
-The `example` folder is excluded from the distributed library. In order to try the examples on your system, you must clone the project locally.
-
-To clone the project locally, run:
-
-  git clone https://github.com/erremauro/soliderror
-
-### ES6 Pre-requisites
-
-In order to run examples from the `./es6` folder [Babel][1] must be installed on your system.
-
-To install babel globally, run:
-
-  npm install -g babel-cli
+  git clone https://github.com/erremauro/solid-error.git
 
 
-Then add the ES2015 preset to the current project:
+SolidError source code target node@^6.0.0. However, the examples should run with any version of node >= 4.5.0. To run any example:
 
-  npm install babel-preset-es2015
-
-
-Run the examples using `babel-node`:
-
-  babel-node examples/es6/<example-folder>
-
-
-[1]: https://babeljs.io/docs/usage/cli/ "Read Babel CLI usage"
+  node examples/<example_folder>

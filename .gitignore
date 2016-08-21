@@ -2,3 +2,5 @@
 node_modules
 jsdocs
 coverage
+report
+old-*

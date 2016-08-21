@@ -1,6 +1,9 @@
 __tests__
 jsdocs
 coverage
+report
+docs
+old-*
 examples
 screnshots
 travis.yml

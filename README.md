@@ -34,14 +34,18 @@ However, when converted to a string, SolidError will render an in-depth, formatt
 
     <SolidError's error explanation>
 
-    ---- EXAMPLE: --------------------------------------------------
+    ---- HINTS: ----------------------------------------------------
     
-    <SolidError's example section>
+    <SolidError's hints section>
 
     ----------------------------------------------------------------
     Code: <The Error's code>
     [Path: <The Error's file or directory path>]
     ----------------------------------------------------------------
+
+### Examples
+
+See: [Running the examples](examples/README.md)
 
 ### Basic Error
 
@@ -59,11 +63,11 @@ Which will print:
 
 ### Creating a custom error
 
-To provide your users with more informations regarding your error, create an error definition to describe it.
+To provide your users with more informations regarding your error, create an _error definition_ to describe it.
 
 Supply a short and a long explanation for the cause and help them resolve the issue by giving them some hints. Use markdown syntax to format and highlight your text.
 
-Read [Using external Error Definitions](#using-external-error-definitions) to learn how to use external definitions.
+Read [Using external Error Definitions](#using-external-error-definitions) to learn how to use _external definitions_.
 
 ```javascript
 import { SolidError, logError } from 'solid-error'
@@ -75,12 +79,12 @@ const errProps = {
   errno: -500,
   path: '/etc/awesome.cfg'
   name: 'ConfigurationNotFoundError',
-  message: 'Configuration Not Found',
-  describe: 'Configuration file not found.',
+  readableName: 'Configuration Not Found',
+  message: 'Configuration file not found.',
   explain: 'An expected configuration file for this application was not found '
     + 'at path `/etc/awesome.cfg`. This could happen if the file was moved or '
     + 'deleted.\n\nPlease restore the file.',
-  example: 'To restore the file from a previous backup:\n\n'
+  hints: 'To restore the file from a previous backup:\n\n'
     + '```bash\n'
     + '$ cp /etc/awesome.bak /etc/awesome.cfg\n'
     + '$ awesome --checkcfg /etc/awesome.cfg\n'
@@ -91,7 +95,7 @@ const errProps = {
     + '```'
 }
 
-let err = new SolidError( errProps.describe, errProps )
+const err = new SolidError( errProps.describe, errProps )
 logError( err )
 ```
 
@@ -109,7 +113,7 @@ import { SolidError, logError } from 'solid-error'
 
 fs.readFile( '/non/existent/file', ( err, data ) => {
   if ( err ) {
-    let readErr = new SolidError( err )
+    const readErr = new SolidError( err )
     logError( readErr )
   }
 })
@@ -124,7 +128,7 @@ Defining Error Definitions manually in code can be a tedious task. Besides, you 
 ```javascript
 class ConfigurationNotFoundError extends Error {
   constructor( ...args ) {
-    super( ...args )
+    super( args )
     this.name = 'ConfigurationNotFoundError'
     this.message = 'Configuration file not found.'
   }
@@ -139,21 +143,21 @@ Create a directory to host your error definitions (SolidError support multiple l
   mkdir -p ./errdef/en
   ```
 
-Describe your error in a `ConfigurationNotFoundError.yml` file, and save it under `./errdef/en/`
+Describe your error in a `ConfigurationNotFoundError.yaml` file, and save it under `./errdef/en/`
 
   ```yaml
-  code      : ECNF
-  errno     : -500
-  name      : ConfigurationNotFoundError
-  message   : Configuration Not Found
-  path      : /etc/awesome.cfg
-  explain   : >
+  code : ECNF
+  errno : -500
+  name : ConfigurationNotFoundError
+  readablName : Configuration Not Found
+  path : /etc/awesome.cfg
+  explain : >
     An expected configuration file for this application was not found
     at path `/etc/awesome.cfg`. This could happen if the file was moved or 
     deleted.
 
     Please restore the file.
-  example   : >
+  hints : >
     To restore the file from a previous backup:
 
       $ cp /etc/awesome.bak /etc/awesome.cfg
@@ -169,7 +173,7 @@ Add the error definitions directory to the options:
 ```javascript
 import solidErr, { SolidError, logError } from 'solid-error'
 
-solidErr.setConfig({
+solidErr.setOptions({
   includes: [ './errdef' ]
 })
 ```
@@ -192,33 +196,32 @@ Solid Error will print its definition:
 
 ### Customizing output appearance
 
-Use `setFormat` to define SolidError's output appearance.
+Use `setStyles` to define SolidError's output appearance.
 
 ```javascript
 import solidErr, { SolidError, logError } from 'solid-error'
 
-solidErr.setFormat({
-  wordwrap: true,                      // enable wordwrap (default)
-  columns: 55,                         // width reduced to 55 columns
-  header: solidErr.colors.red,         // set header color to red
-  headerStyle: '—',                    // set header style to em-dash
-  headerTitle: 'OOPS',                 // change header title prefix
-  describe: solidErr.colors.cyan,      // set description message to cyan
-  explain: solidErr.colors.reset,      // set explain section to default color
-  example: solidErr.colors.green,      // set the example color to green
-  exampleStyle: '—',                   // change example style to em-dash
-  exampleTitle: 'HINTS',               // change example title prefix
-  footer: solidErr.colors.red,         // set footer color to red
-  footerStyle: '—',                    // set footer style to em-dash
+solidError.setStyles({
+  marginRight: 0,        // set margin right to 0 (default: 2)
+  columns: 55,           // width reduced to 55 columns
+  wordwrap: true,        // enable wordwrap (default)
+  headerColor: 'red',    // set header color to red
+  headerStyle: '—',      // set header style to em-dash
+  headerTitle: 'OOPS',   // change header title prefix
+  message: 'cyan',       // set description message to cyan
+  hintsColor: 'green',   // set the example color to green
+  hintsStyle: '—',       // change example style to em-dash
+  hintsTitle: 'HINTS',   // change example title prefix
+  footer: 'red',         // set footer color to red
+  footerStyle: '—',      // set footer style to em-dash
 })
 
-// A dummy error definition
-let errProps = {
+const errProps = {
   code: 'ESTYL',
   errno: -1,
   name: 'ExampleStyleError',
-  message: 'Example Style Error',
-  describe: 'Just an example error to show appeareance customization',
+  readableName: 'Example Style Error',
+  message: 'Just an example error to show appeareance customization',
   explain: 'This error was custom created to test **SolidError** style '
     + 'customization.\n\nHeader and footer should be **red** '
     + 'while the error description should be **cyan**. Also, section divider\'s'
@@ -240,7 +243,7 @@ In addition to translate your custom errors, you can override the default error 
 
 Read [Using external Error Definitions](#using-external-error-definitions) to learn how to setup external definitions.
 
-To override the default `ENOENT` SystemError definition, for example, create a file named `ENOENT.yml` in your target language directory. To override `ENOENT` for the Italian language, save you file to `./errdef/it/ENOENT.yml`
+To override the default `ENOENT` SystemError definition, for example, create a file named `ENOENT.yaml` in your target language directory. To override `ENOENT` for the Italian language, save you file to `./errdef/it/ENOENT.yaml`
 
 Define your translated error:
 
@@ -248,8 +251,8 @@ Define your translated error:
   code  : ENOENT
   errno : -2
   name  : FileOrDirectoryNotFoundError
-  message : File o Directory Non Trovata
-  describe : File o directory non trovata al percorso indicato.
+  readableName : File o Directory Non Trovata
+  message : File o directory non trovata al percorso indicato.
   explain : >
   Tipicamente invocato da operazioni che coinvolgono il file system per
   indicare che un componente al percorso specificato non esiste.
@@ -260,7 +263,7 @@ Then simply change the language from the options and add your custom error defin
 ```javascript
 import fs from 'fs'
 import path from 'path'
-import solidErr, { createError, logError } from 'solid-error'
+import solidErr, { SolidError, logError } from 'solid-error'
 
 // Path that contains your Error Definitions files
 const customErrPath = path.join( __dirname, './definitions' )
@@ -275,10 +278,8 @@ try {
   fs.readFileSync( '/non/existent/file' )
 }
 catch( readErr ) {
-  // log translated error.
-  // you can also use the helper method `createError`
-  // to create SolidError instances.
-  logError( createError( readErr ) )
+  // log the translated error.
+  logError( new SolidError( readErr ) )
 }
 ```
 
@@ -288,15 +289,15 @@ Now, when a `ENOENT` system error gets logged, you will get the transalted versi
 
 ## HISTORY
 
-Review the [change log](CHANGELOG.md), it's fun! 🎉 📚
+Review the [change log](CHANGELOG.md), if you're into that stuff! 🕵
 
 ## CREDITS
 
-2016, Roberto Mauro
+SolidError is written and mantained by Roberto Mauro.
 
 ## LICENSE
 
-Really?
+SolidError is release under the MIT License. For more information review the [LICENSE](LICENSE) file.
 
 
 [1]: http://elm-lang.org "Open Elm Lang Official Site"
