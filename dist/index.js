@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Public Module. Expose 
+ * Public Module. Expose
  * {@link module:lib/soliderror~SolidError|SolidError} and
  * provide api for settings options and rendering styles. Note that settings
  * styles while using a custom
@@ -10,11 +10,12 @@
  * @module soliderror
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since 0.3.0
- * @version 0.1.0
+ * @version 0.1.1
  */
 var SolidRender = require('./lib/solidrender');
 var SolidError = require('./lib/soliderror');
 var SolidApi = require('./lib/solidapi');
+var SolidText = require('./lib/solidtext');
 
 SolidApi.setOptions({
   renderer: new SolidRender()
@@ -103,5 +104,12 @@ module.exports = {
    * @since 0.1.0
    * @version 0.1.0
    */
-  SolidError: SolidError
+  SolidError: SolidError,
+  /**
+   * @memberOf module:soliderror
+   * @type {module:lib/solidtext~SolidText}
+   * @since 0.1.1
+   * @version 0.1.0
+   */
+  SolidText: SolidText
 };

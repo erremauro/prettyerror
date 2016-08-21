@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/erremauro/solid-error.png?label=ready&title=Ready)](https://waffle.io/erremauro/solid-error) [![codecov](https://codecov.io/gh/erremauro/solid-error/branch/master/graph/badge.svg)](https://codecov.io/gh/erremauro/solid-error) [![Build Status](https://travis-ci.org/erremauro/solid-error.svg?branch=master)](https://travis-ci.org/erremauro/solid-error)
+[![Stories in Ready][waffle-img]][waffle-url] [![bitHound Dependencies][bh-dep-img]][bh-dep-url] [![bitHound Code][bh-code-img]][bh-code-url] [![codecov][codecov-img]][codecov-url] [![Build Status][travis-img]][travis-url]
 
 # SolidError
 
@@ -208,7 +208,7 @@ solidError.setStyles({
   headerColor: 'red',    // set header color to red
   headerStyle: '—',      // set header style to em-dash
   headerTitle: 'OOPS',   // change header title prefix
-  message: 'cyan',       // set description message to cyan
+  messageColor: 'cyan',  // set description message to cyan
   hintsColor: 'green',   // set the example color to green
   hintsStyle: '—',       // change example style to em-dash
   hintsTitle: 'HINTS',   // change example title prefix
@@ -235,6 +235,21 @@ logError( new SolidError( errProps.describe, errProps ) )
 Your solid error will now look something like:
 
 ![custom look](screenshots/03-custom-look.png)
+
+#### Custom Renderers
+
+You can opt-out from the default style by providing a **custom renderer**.
+
+```javascript
+import MyCustomRender from './myRenderer'
+import solidErr from 'solid-error'
+
+solidErr.setOptions({
+  renderer: new MyCustomRender()
+})
+```
+
+Take a look at [SolidRender](src/lib/solidrender), the default renderer, to learn how to write your custom renderer.
 
 ### Using custom languages
 
@@ -304,3 +319,14 @@ SolidError is releases under the MIT License. For more information review the [L
 [2]: screenshots/screenshot.png "SolidError Example Screenshot"
 [3]: https://nodejs.org/api/errors.html#errors_class_error "View Node's Error documentation"
 [4]: https://nodejs.org/api/errors.html "View Node Error Documentation."
+
+[waffle-img]: https://badge.waffle.io/erremauro/solid-error.png?label=ready&title=Ready
+[waffle-url]: https://waffle.io/erremauro/solid-error
+[bh-dep-img]: https://www.bithound.io/github/erremauro/solid-error/badges/dependencies.svg
+[bh-dep-url]: https://www.bithound.io/github/erremauro/solid-error/v0.3.0-beta/dependencies/npm
+[bh-code-img]: https://www.bithound.io/github/erremauro/solid-error/badges/code.svg
+[bh-code-url]: https://www.bithound.io/github/erremauro/solid-error
+[codecov-img]: https://codecov.io/gh/erremauro/solid-error/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/erremauro/solid-error
+[travis-img]: https://travis-ci.org/erremauro/solid-error.svg?branch=master
+[travis-url]: https://travis-ci.org/erremauro/solid-error

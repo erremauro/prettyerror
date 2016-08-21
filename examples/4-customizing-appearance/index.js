@@ -18,7 +18,7 @@ solidError.setStyles({
   message: 'cyan',       // set description message to cyan
   hintsColor: 'green',   // set the example color to green
   hintsStyle: '—',       // change example style to em-dash
-  hintsTitle: 'HINTS',   // change example title prefix
+  hintsTitle: 'EXAMPLE', // change example title prefix
   footer: 'red',         // set footer color to red
   footerStyle: '—',      // set footer style to em-dash
 })
@@ -33,7 +33,7 @@ const errProps = {
     + 'customization.\n\nHeader and footer should be **red** '
     + 'while the error description should be **cyan**. Also, section divider\'s'
     + ' styles should look different.',
-  example: 'Example section should be called _`HINTS`_ now.'
+  example: 'HINTS section should be called `EXAMPLE` now.'
 }
 
 logError( new SolidError( errProps.describe, errProps ) )

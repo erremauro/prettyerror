@@ -10,15 +10,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @module lib/ttyrender
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since  0.3.0
- * @version 0.1.0
+ * @version 0.1.1
  *
- * @requires {@link https://github.com/chalk/chalk|chalk}
  * @requires {@link https://github.com/thlorenz/cardinal|cardinal}
  * @requires {@link https://github.com/Automattic/cli-table|cli-table}
  * @requires {@link module:lib/solidtext~SolidText|SolidText}
  */
 
-var colors = require('chalk');
 var Table = require('cli-table');
 var cardinal = require('cardinal');
 var SolidText = require('./solidtext');
@@ -58,23 +56,23 @@ var TTYRender = function () {
         emojis: true,
         wordwrap: true,
         highlightOptions: {},
-        blockquote: colors.gray.italic,
-        code: colors.yellow,
-        codespan: colors.yellow,
-        del: colors.dim.gray.strikethrough,
-        em: colors.italic,
-        firstHeading: colors.blue.bold,
+        blockquote: SolidText.color.gray.italic,
+        code: SolidText.color.yellow,
+        codespan: SolidText.color.yellow,
+        del: SolidText.color.dim.gray.strikethrough,
+        em: SolidText.color.italic,
+        firstHeading: SolidText.color.blue.bold,
         gfm: true,
-        heading: colors.green,
-        hr: colors.reset,
-        href: colors.blue.underline,
-        html: colors.gray,
-        link: colors.blue,
-        listitem: colors.reset,
-        paragraph: colors.reset,
-        strong: colors.bold,
-        table: colors.reset,
-        text: colors.white
+        heading: SolidText.color.green,
+        hr: SolidText.color.reset,
+        href: SolidText.color.blue.underline,
+        html: SolidText.color.gray,
+        link: SolidText.color.blue,
+        listitem: SolidText.color.reset,
+        paragraph: SolidText.color.reset,
+        strong: SolidText.color.bold,
+        table: SolidText.color.reset,
+        text: SolidText.color.white
       };
     }
     /**
@@ -485,7 +483,7 @@ var TTYRender = function () {
   }, {
     key: 'highlight',
     value: function highlight(code, lang, opts) {
-      if (!colors.enabled) {
+      if (!SolidText.color.enabled) {
         return code;
       }
 

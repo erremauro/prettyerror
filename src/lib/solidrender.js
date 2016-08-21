@@ -3,16 +3,12 @@
  * @module lib/solidrender
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since 0.3.0
- * @version 0.1.1
+ * @version 0.1.3
  *
- * @requires {@link https://github.com/chalk/chalk|chalk}
- * @requires {@link https://github.com/chjj/marked|marked}
  * @requires {@link module:lib/solidtext|SolidText}
  * @requires {@link module:lib/ttyrender|TTYRender}
  */
 
-const colors = require( 'chalk' )
-const marked = require( 'marked' )
 const SolidText = require( './solidtext' )
 const TTYRender = require( './ttyrender' )
 
@@ -35,7 +31,6 @@ const TTYRender = require( './ttyrender' )
 class SolidRender {
 
   constructor( props ) {
-    this.marked = marked
     this.setProps( props )
   }
 
@@ -54,7 +49,7 @@ class SolidRender {
       markdown: this.props.markdown
     }
 
-    this.marked.setOptions({
+    SolidText.setMarkedOptions({
       renderer: new TTYRender( ttyProps ),
       sanitize: true,
       tables: true,
@@ -79,7 +74,7 @@ class SolidRender {
       messageColor: 'yellow',
       explainColor: 'reset',
       headerColor: 'cyan',
-      hintsColor: 'green',
+      hintsColor: 'reset',
       footerColor: 'cyan',
       traceColor: 'reset',
       headerTitle: 'ERROR:',
@@ -136,14 +131,17 @@ class SolidRender {
    * @param  {string} text SolidError's error explanation
    * @return {string}      Renderer explain section
    * @since 0.1.0
-   * @version 0.1.0
+   * @version 0.1.1
    */
   explain( text ) {
     if ( this.props.markdown ) {
-      return this.marked( text )
+      return SolidText.markdown2tty( text )
     }
 
-    return '\n' + this.applyColor( this.props.explain, text )
+    return '\n' + this.applyColor(
+      this.props.explain,
+      this.formatText( text )
+    )
   }
 
   /**
@@ -164,12 +162,11 @@ class SolidRender {
       divider
     )
 
-    if ( this.props.markdown ) {
-      hintsText = this.marked( hintsText )
-    }
+    hintsText = this.props.markdown
+      ? SolidText.markdown2tty( hintsText )
+      : '\n' + this.formatText( hintsText ) + '\n'
 
-    const formattedText = '\n' + this.formatText( hintsText ) + '\n'
-    return `\n${divider}\n${formattedText}`
+    return `\n${divider}\n${hintsText}`
   }
 
   /**
@@ -229,12 +226,12 @@ class SolidRender {
    * )
    *
    * @since 0.1.0
-   * @version 0.1.0
+   * @version 0.1.1
    */
   applyColor( name, text ) {
-    name.split( '.' ).forEach( style => {
-      if ( typeof colors[ style ] === 'function' ) {
-        const colorFn = colors[ style ]
+    name.split( '.' ).forEach( name => {
+      if ( typeof SolidText.color[ name ] === 'function' ) {
+        const colorFn = SolidText.color[ name ]
         text = colorFn( text )
       }
     })

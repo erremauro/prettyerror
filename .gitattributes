@@ -6,4 +6,4 @@
 .travis.yml export-ignore
 __tests__ export-ignore
 examples/ export-ignore
-screenshots
+screenshots export--ignore

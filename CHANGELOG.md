@@ -5,10 +5,16 @@ This project adheres to [Semantic Versioning](http://semver.org/). However, note
 
 ## [0.3.0] - 2016-08-21
 
+### Added
+- Add `SolidText` object to manipulate and format text: a useful set of
+  utilities for coloring text to terminal, format markdown syntax, wordwrap
+  text and other stuff. `SolidText` can be used as a helper object for custom
+  renderers.
+
 ### Changed
-- SolidError **has been rewritten to ES6 syntax**. The distributed code is 
-  built with Babel to ensure compatibility with **node@^4.5.0**. 
-  This should also give a general boost in code optimization and performance 
+- SolidError **has been rewritten to ES6 syntax**. The distributed code is
+  built with Babel to ensure compatibility with **node@^4.5.0**.
+  This should also give a general boost in code optimization and performance
   (metrics did in fact score a little high than the source code).
 - Is now possible to set a **custom renderer** to have complete control on
   how a SolidError renders in the terminal. **Note**: when a custom renderer
@@ -16,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/). However, note
 - `setFormat` has been **renamed** to `setStyles`.
 - SolidError `toString` method now renders a default Error output when invoked.
   To render a SolidError in the terminal use `logError`.
+- [Chalk][chalk] color object moved to `SolidText`.
 
 ## [0.2.1] - 2016-08-17
 
@@ -23,7 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/). However, note
 - SolidError module options can be customized using the `setOptions` method. Options include support for changing the global language and specify additional
 directories to scan for Error definitions.
 - SolidError formatting options can now be customized using the `setFormatting` module's method. Formatting options include support for column wrapping, markdown, section colors and labels.
-- A chalk instance named `colors` is exposed by the module. Chalk terminal color functions can be used to customize SolidError's formatting color.
+- A [chalk][chalk] instance named `colors` is exposed by the module. Chalk's terminal color functions can be used to customize SolidError's formatting color.
 - SolidError now accept "path" and "inner" (error) properties. If a "path"
   property is passed to SolidError it will be displayed in the error footer.
 - Ability to create SolidError object from Error object instance.
@@ -37,3 +44,5 @@ directories to scan for Error definitions.
 
 ### Added
 - soliderror module
+
+[chalk]: https://github.com/chalk/chalk "View Chalk project"
