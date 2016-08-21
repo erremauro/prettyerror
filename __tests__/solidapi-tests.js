@@ -1,46 +1,47 @@
+jest.unmock( 'chalk' )
 jest.unmock( '../dist/lib/solidapi' )
 
-var SolidApi
+let SolidApi
 
-describe( 'lib/solidapi', function () {
+describe( 'lib/solidapi', () => {
 
-  describe( 'getOptions', function () {
-    beforeEach( function () {
+  describe( 'getOptions', () => {
+    beforeEach( () => {
       SolidApi = require( '../dist/lib/solidapi' )
     })
 
-    it( 'should get options', function () {
-      var actual = SolidApi.getOptions()
+    it( 'should get options', () => {
+      const actual = SolidApi.getOptions()
       expect( actual.renderer ).toBeNull()
       expect( actual.lang ).toBeDefined()
       expect( actual.includes ).toBeDefined()
     })
   })
 
-  describe( 'setOptions', function () {
-    beforeEach( function () {
+  describe( 'setOptions', () => {
+    beforeEach( () => {
       SolidApi = require( '../dist/lib/solidapi' )
     })
 
-    it( 'should set options', function () {
-      var testProps = { lang: 'it' }
+    it( 'should set options', () => {
+      const testProps = { lang: 'it' }
       SolidApi.setOptions( testProps )
-      var expected = SolidApi.getOptions()
+      const expected = SolidApi.getOptions()
       expect( expected.lang ).toEqual( 'it' )
     })
   })
 
-  describe( 'setStyles', function () {
-    beforeEach( function () {
+  describe( 'setStyles', () => {
+    beforeEach( () => {
       SolidApi = require( '../dist/lib/solidapi' )
     })
 
-    it( 'should set styles on SolidRender', function () {
-      var mockRender = {
-        constructor: { name: 'SolidRender' }, 
+    it( 'should set styles on SolidRender', () => {
+      const mockRender = {
+        constructor: { name: 'SolidRender' },
         setProps: jest.fn()
       }
-      var testProps = {
+      const testProps = {
         headerColors: 'cyan'
       }
       SolidApi.setOptions({ renderer: mockRender })

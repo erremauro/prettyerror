@@ -1,8 +1,6 @@
 {
   "ignore": [
-    "**/dist/**",
-    "**/examples/**",
-    "**/__tests__/**"
+    "**/dist/**"
   ],
   "test": [
     "__tests__/**"

@@ -5,11 +5,15 @@
  * @module lib/solidtext
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since 0.3.0
- * @version 0.1.0
+ * @version 0.1.1
  *
+ * @requires {@link https://github.com/chjj/marked|marked}
+ * @requires {@link https://github.com/chalk/chalk|chalk}
  * @requires {@link https://github.com/omnidan/node-emoji|node-emoji}
  */
 
+var chalk = require('chalk');
+var marked = require('marked');
 var emoji = require('node-emoji');
 
 /**
@@ -19,6 +23,7 @@ var emoji = require('node-emoji');
  * @version 0.1.0
  */
 var HARD_RETURN = '\r';
+
 /**
  * @memberOf module:lib/
  * @const {RegEx}
@@ -26,6 +31,7 @@ var HARD_RETURN = '\r';
  * @version 0.1.0
  */
 var HARD_RETURN_RE = new RegExp(HARD_RETURN);
+
 /**
  * @memberOf module:lib/solidtext
  * @const {RegEx}
@@ -41,8 +47,9 @@ var HARD_RETURN_GFM_RE = new RegExp(HARD_RETURN + '|<br />');
  * @version 0.1.0
  */
 var SolidText = {
+
   /**
-   * Wordwrap `text` at max `width` with support for GitHub flavored markdown 
+   * Wordwrap `text` at max `width` with support for GitHub flavored markdown
    * @param  {string} text   Text to wordwrap
    * @param  {string} width  Columns width
    * @param  {boolean} gfm   Support GitHub flavored markdown
@@ -78,6 +85,7 @@ var SolidText = {
 
     return wordrapped.join('\n');
   },
+
   /**
    * Calculate the `text`'s length escaping terminal entities.
    * @param  {string} text Text to calculate for length
@@ -89,6 +97,7 @@ var SolidText = {
     var ttyEntities = /\u001b\[(?:\d{1,3})(?:;\d{1,3})*m/g;
     return text.replace(ttyEntities, '').length;
   },
+
   /**
    * Truncate the give `string` to `maxlen` and add ellipsis at th end.
    * @param  {string} string String to be truncated
@@ -106,6 +115,7 @@ var SolidText = {
 
     return string;
   },
+
   /**
    * Capitalize the first letter of the given `text`
    * @param  {string} text Text where the first letter should be capitalized
@@ -118,6 +128,7 @@ var SolidText = {
     var remainingText = text.slice(1);
     return firstUp + remainingText;
   },
+
   /**
    * Escape RegExp from the give `text`
    * @version 0.1.0
@@ -127,6 +138,7 @@ var SolidText = {
     var regExpPattern = /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g;
     return text.replace(regExpPattern, '\\$&');
   },
+
   /**
    * Render emoji from emoji tag (i.e. :heart: ) found in given `text`.
    * @param  {string} text Text with emojis.
@@ -143,7 +155,37 @@ var SolidText = {
 
       return emojiSign + ' ';
     });
-  }
+  },
+
+  /**
+   * Render markdown syntax to terminal syntax
+   * @param {string} text markdown formatted text.
+   * @returns {string} terminal rendered text
+   * @since 0.1.2
+   * @version 0.1.0
+   */
+  markdown2tty: function markdown2tty(text) {
+    return marked(text);
+  },
+
+  /**
+   * Set marked options.
+   * @param {object} props Marked options object.
+   * @since 0.1.2
+   * @version 0.1.0
+   */
+  setMarkedOptions: function setMarkedOptions(props) {
+    return marked.setOptions(props);
+  },
+
+  /**
+   * Colorize text for terminal output using
+   * {@link https://github.com/chalk/chalk|chalk}
+   * @type {Chalk}
+   * @version 0.1.0
+   * @since 0.1.1
+   */
+  color: chalk
 };
 
 module.exports = SolidText;

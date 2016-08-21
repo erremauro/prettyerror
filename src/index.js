@@ -1,5 +1,5 @@
 /**
- * Public Module. Expose 
+ * Public Module. Expose
  * {@link module:lib/soliderror~SolidError|SolidError} and
  * provide api for settings options and rendering styles. Note that settings
  * styles while using a custom
@@ -8,11 +8,12 @@
  * @module soliderror
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since 0.3.0
- * @version 0.1.0
+ * @version 0.1.1
  */
 const SolidRender = require( './lib/solidrender' )
 const SolidError = require( './lib/soliderror' )
 const SolidApi = require( './lib/solidapi' )
+const SolidText = require( './lib/solidtext' )
 
 SolidApi.setOptions({
   renderer: new SolidRender()
@@ -102,4 +103,11 @@ module.exports = {
    * @version 0.1.0
    */
   SolidError,
+  /**
+   * @memberOf module:soliderror
+   * @type {module:lib/solidtext~SolidText}
+   * @since 0.1.1
+   * @version 0.1.0
+   */
+  SolidText
 }

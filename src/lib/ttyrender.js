@@ -4,15 +4,13 @@
  * @module lib/ttyrender
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since  0.3.0
- * @version 0.1.0
- * 
- * @requires {@link https://github.com/chalk/chalk|chalk}
+ * @version 0.1.1
+ *
  * @requires {@link https://github.com/thlorenz/cardinal|cardinal}
  * @requires {@link https://github.com/Automattic/cli-table|cli-table}
  * @requires {@link module:lib/solidtext~SolidText|SolidText}
  */
 
-const colors = require( 'chalk' )
 const Table = require( 'cli-table' )
 const cardinal = require( 'cardinal' )
 const SolidText = require( './solidtext' )
@@ -38,8 +36,8 @@ class TTYRender {
     this.setProps( props )
     this.emojis = emojis
     this.transform = this.compose(
-      this.undoColon.bind( this ), 
-      this.unescapeEntities.bind( this ), 
+      this.undoColon.bind( this ),
+      this.unescapeEntities.bind( this ),
       this.emojis.bind( this )
     )
   }
@@ -50,23 +48,23 @@ class TTYRender {
       emojis: true,
       wordwrap: true,
       highlightOptions: {},
-      blockquote: colors.gray.italic,
-      code: colors.yellow,
-      codespan: colors.yellow,
-      del: colors.dim.gray.strikethrough,
-      em: colors.italic,
-      firstHeading: colors.blue.bold,
+      blockquote: SolidText.color.gray.italic,
+      code: SolidText.color.yellow,
+      codespan: SolidText.color.yellow,
+      del: SolidText.color.dim.gray.strikethrough,
+      em: SolidText.color.italic,
+      firstHeading: SolidText.color.blue.bold,
       gfm: true,
-      heading: colors.green,
-      hr: colors.reset,
-      href: colors.blue.underline,
-      html: colors.gray,
-      link: colors.blue,
-      listitem: colors.reset,
-      paragraph: colors.reset,
-      strong: colors.bold,
-      table: colors.reset,
-      text: colors.white,
+      heading: SolidText.color.green,
+      hr: SolidText.color.reset,
+      href: SolidText.color.blue.underline,
+      html: SolidText.color.gray,
+      link: SolidText.color.blue,
+      listitem: SolidText.color.reset,
+      paragraph: SolidText.color.reset,
+      strong: SolidText.color.bold,
+      table: SolidText.color.reset,
+      text: SolidText.color.white,
     }
   }
   /**
@@ -119,7 +117,7 @@ class TTYRender {
    */
   code( code, lang ) {
     return '\n' + this.indentify(
-      this.highlight( code, lang, this.props, this.props.highlightOptions ) 
+      this.highlight( code, lang, this.props, this.props.highlightOptions )
     ) + '\n'
   }
 
@@ -405,7 +403,7 @@ class TTYRender {
    * @since 0.1.0
    */
   highlight( code, lang, opts ) {
-    if ( !colors.enabled ) { return code }
+    if ( !SolidText.color.enabled ) { return code }
 
     const style = opts.code;
 

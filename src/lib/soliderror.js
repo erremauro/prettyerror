@@ -15,18 +15,44 @@ const ExtendableError = require( './exterror' )
 
 /**
  * @class
- * @classdesc
- * Augmented error for providing detailed error description
+ *
+ * SolidError is an Error object with properties to write a more verbose
+ * error explanation and hints to help the user understand and resolve
+ * the facing issue.
+ *
+ * @example
+ *
+ *  const err = new SolidError(
+ *   'Command not found.',
+ *   {
+ *     code: 'ECNF',
+ *     errno: -512,
+ *     name: 'CmdNotFoundError',
+ *     readableName: 'Command not found',
+ *     explain: 'The command you tried to run was not found. Path to the binary '
+ *       + 'file could be missing from `$PATH` environment or the binary could '
+ *       + 'not exists anymore. Also, check your spelling. '
+ *     hints: 'To view your current $PATH environment type:\n\n'
+ *       + '    echo $PATH\n\n'
+ *       + 'To search for the binary type:\n\n'
+ *       + '    which <command_name>'
+ *   }
+ * )
+ *
  * @extends {module:lib/exterror~ExtError}
+ *
  * @property {string} [code] An error code
  * @property {number} [errno] The error number
  * @property {string} message The error message
  * @property {string} stack The error stack trace
  * @property {string} [path] An optional reference path
  * @property {SolidErrorPropsType} props SolidError property
+ *
  * @description Extends Error with provided `message` and `props`
+ *
  * @param {string|Object} [message] An error message or an Error instance
  * @param {SolidErrorPropsType} [props] SolidError properties
+ *
  * @since 0.1.0
  * @version 0.1.0
  */
@@ -45,7 +71,7 @@ class SolidError extends ExtendableError {
     else if ( typeof message === 'object' ) {
       props = message
     }
-    
+
     this.setProps( props )
   }
 
@@ -55,7 +81,7 @@ class SolidError extends ExtendableError {
    * @since 0.1.0
    * @version 0.1.0
    */
-  defaultProps() {
+  get defaultProps() {
     return {
       code: 'EUNX',
       errno: 1,
@@ -72,15 +98,16 @@ class SolidError extends ExtendableError {
    * `code`, `errno`, `message` and `path`.
    * @param {SolidErrorPropsType} props
    * @since 0.1.0
-   * @version 0.1.0 
+   * @version 0.1.0
    */
   setProps( props ) {
-    this.props = Object.assign( this.props || this.defaultProps(), props )
-    this.name = this.props.name || this.name
-    this.code = this.props.code || this.code
-    this.errno = this.props.errno || this.errno
-    this.message = this.props.message || this.message
-    this.path = this.props.path || this.path
+    this.props = Object.assign( this.props || this.defaultProps, props )
+    const classProps = [ 'name', 'code', 'errno', 'message', 'path' ]
+    classProps.forEach( propName => {
+      if ( typeof this.props[ propName ] !== 'undefined' ) {
+        this[ propName ] = this.props[ propName ]
+      }
+    })
   }
 }
 
