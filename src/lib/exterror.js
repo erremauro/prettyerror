@@ -30,7 +30,7 @@ function ExtError( message ) {
   if (typeof Error.captureStackTrace === 'function') {
     Error.captureStackTrace(this, this.constructor)
   }
-  else { 
+  else {
     this.stack = ( new Error( message ) ).stack
   }
 }

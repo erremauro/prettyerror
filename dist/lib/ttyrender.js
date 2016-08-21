@@ -11,7 +11,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since  0.3.0
  * @version 0.1.0
- * 
+ *
  * @requires {@link https://github.com/chalk/chalk|chalk}
  * @requires {@link https://github.com/thlorenz/cardinal|cardinal}
  * @requires {@link https://github.com/Automattic/cli-table|cli-table}

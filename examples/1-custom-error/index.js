@@ -1,10 +1,13 @@
 /**
  * Shows how to log a custom error with SolidError
  * @author Roberto Mauro <erremauro@icloud.com>
- * @version 0.1.1
+ * @version 0.1.2
  * @since 0.2.0
  */
-import { SolidError, logError } from '../../dist/index'
+
+const solidError = require( '../../dist/index' )
+const SolidError = solidError.SolidError
+const logError = solidError.logError
 
 // define your extended error properties
 const errProps = {

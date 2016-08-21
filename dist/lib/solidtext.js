@@ -42,7 +42,7 @@ var HARD_RETURN_GFM_RE = new RegExp(HARD_RETURN + '|<br />');
  */
 var SolidText = {
   /**
-   * Wordwrap `text` at max `width` with support for GitHub flavored markdown 
+   * Wordwrap `text` at max `width` with support for GitHub flavored markdown
    * @param  {string} text   Text to wordwrap
    * @param  {string} width  Columns width
    * @param  {boolean} gfm   Support GitHub flavored markdown

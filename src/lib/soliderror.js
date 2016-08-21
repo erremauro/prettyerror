@@ -45,7 +45,7 @@ class SolidError extends ExtendableError {
     else if ( typeof message === 'object' ) {
       props = message
     }
-    
+
     this.setProps( props )
   }
 
@@ -72,15 +72,16 @@ class SolidError extends ExtendableError {
    * `code`, `errno`, `message` and `path`.
    * @param {SolidErrorPropsType} props
    * @since 0.1.0
-   * @version 0.1.0 
+   * @version 0.1.0
    */
   setProps( props ) {
     this.props = Object.assign( this.props || this.defaultProps(), props )
-    this.name = this.props.name || this.name
-    this.code = this.props.code || this.code
-    this.errno = this.props.errno || this.errno
-    this.message = this.props.message || this.message
-    this.path = this.props.path || this.path
+    const classProps = [ 'name', 'code', 'errno', 'message', 'path' ]
+    classProps.forEach( propName => {
+      if ( typeof this.props[ propName ] !== 'undefined' ) {
+        this[ propName ] = this.props[ propName ]
+      }
+    })
   }
 }
 

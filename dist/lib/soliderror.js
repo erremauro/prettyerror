@@ -92,18 +92,21 @@ var SolidError = function (_ExtendableError) {
      * `code`, `errno`, `message` and `path`.
      * @param {SolidErrorPropsType} props
      * @since 0.1.0
-     * @version 0.1.0 
+     * @version 0.1.0
      */
 
   }, {
     key: 'setProps',
     value: function setProps(props) {
+      var _this2 = this;
+
       this.props = Object.assign(this.props || this.defaultProps(), props);
-      this.name = this.props.name || this.name;
-      this.code = this.props.code || this.code;
-      this.errno = this.props.errno || this.errno;
-      this.message = this.props.message || this.message;
-      this.path = this.props.path || this.path;
+      var classProps = ['name', 'code', 'errno', 'message', 'path'];
+      classProps.forEach(function (propName) {
+        if (typeof _this2.props[propName] !== 'undefined') {
+          _this2[propName] = _this2.props[propName];
+        }
+      });
     }
   }]);
 

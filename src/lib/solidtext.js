@@ -40,7 +40,7 @@ const HARD_RETURN_GFM_RE = new RegExp( HARD_RETURN + '|<br />' )
  */
 const SolidText = {
   /**
-   * Wordwrap `text` at max `width` with support for GitHub flavored markdown 
+   * Wordwrap `text` at max `width` with support for GitHub flavored markdown
    * @param  {string} text   Text to wordwrap
    * @param  {string} width  Columns width
    * @param  {boolean} gfm   Support GitHub flavored markdown
@@ -52,12 +52,12 @@ const SolidText = {
     const splitRe = gfm ? HARD_RETURN_GFM_RE : HARD_RETURN_RE
     const sections = text.split( splitRe )
     const wordrapped = []
-    
+
     sections.forEach( section => {
       const words = section.split( /[ \t\n]+/ )
       let column = 0
       let nextText = ''
-      
+
       words.forEach( word => {
         const addOne = column !== 0;
         if ( ( column + SolidText.textLength( word ) + addOne ) > width ) {

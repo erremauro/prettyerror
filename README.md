@@ -24,7 +24,7 @@ It accept external Error Definition files that will be automatically mapped to y
 
 ## How it works
 
-At its core SolidError is an [Error][3] subclass so you can threat it as normal [Error][3] instance. You can log it, throw it, read its stack trace, the usual. 
+At its core SolidError is an [Error][3] subclass so you can threat it as normal [Error][3] instance. You can log it, throw it, read its stack trace, the usual.
 
 However, when converted to a string, SolidError will render an in-depth, formatted, error explanation to the console that follows the convention:
 
@@ -35,7 +35,7 @@ However, when converted to a string, SolidError will render an in-depth, formatt
     <SolidError's error explanation>
 
     ---- HINTS: ----------------------------------------------------
-    
+
     <SolidError's hints section>
 
     ----------------------------------------------------------------
@@ -54,7 +54,7 @@ The most basic error you can create looks like this:
 ```javascript
 import { SolidError, logError }
 
-logError( new SolidError( 'Something got wrong' ) )
+logError( new SolidError( 'Something went wrong.' ) )
 ```
 
 Which will print:
@@ -153,7 +153,7 @@ Describe your error in a `ConfigurationNotFoundError.yaml` file, and save it und
   path : /etc/awesome.cfg
   explain : >
     An expected configuration file for this application was not found
-    at path `/etc/awesome.cfg`. This could happen if the file was moved or 
+    at path `/etc/awesome.cfg`. This could happen if the file was moved or
     deleted.
 
     Please restore the file.
@@ -178,7 +178,7 @@ solidErr.setOptions({
 })
 ```
 
-Now, when your custom error gets logged, 
+Now, when your custom error gets logged,
 
 ```javascript
 try {
@@ -297,7 +297,7 @@ SolidError is written and mantained by Roberto Mauro.
 
 ## LICENSE
 
-SolidError is release under the MIT License. For more information review the [LICENSE](LICENSE) file.
+SolidError is releases under the MIT License. For more information review the [LICENSE](LICENSE) file.
 
 
 [1]: http://elm-lang.org "Open Elm Lang Official Site"

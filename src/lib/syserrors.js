@@ -221,7 +221,7 @@ class SysErrors {
     props.message = article + props.readableName + ' occurred.'
 
     props.message = err.message
-      ? this.formatMessage( err.message ) 
+      ? this.formatMessage( err.message )
       : props.message
     return props
   }
