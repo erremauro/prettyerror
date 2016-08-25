@@ -1,0 +1,280 @@
+/**
+ * SolidError is a module that help you print meaningful, in-depth errors to
+ * the terminal to help your users resolve the issue.
+ *
+ * @module solid-error
+ * @author Roberto Mauro <erremauro@icloud.com>
+ * @license MIT
+ * @version 0.3.1
+ */
+const soliderror = {
+  SolidError: SolidError,
+  SolidText: SolidText,
+  logError: logError,
+  render: render,
+  setOptions: setOptions,
+  options: options
+}
+
+/**
+ * @external Error
+ * @see  {@link https://nodejs.org/api/errors.html#errors_class_error|Error}
+ */
+
+/**
+ * @external chalk
+ * @see {@link https://github.com/chalk/chalk|chalk}
+ */
+
+/**
+ * A renderer for handling {@link module:solid-error~SolidError|SolidError}
+ * rendering process.
+ * @typedef {Object} SolidRenderer
+ */
+const SolidRenderer = {
+  /**
+   * Render the error header
+   * @param  {string} readableName Error readable name
+   * @return {string}              Rendered header string
+   */
+  header: ( readableName ) => {},
+  /**
+   * Render the error message
+   * @param  {string} text Error message
+   * @return {string}      Rendered error string
+   */
+  message: ( text ) => {},
+  /**
+   * Render the error explanation
+   * @param  {string} text The error explain message
+   * @return {string}      Rendered explain string
+   */
+  explain: ( text ) => {},
+  /**
+   * Render some error hints
+   * @param  {string} text The error hints
+   * @return {string}      Rendered hints string
+   */
+  hints: ( text ) => {},
+  /**
+   * Render the stack trace
+   * @param  {string} stack        The stack trace
+   * @param  {CallSite[]} callSite Stack frame collection
+   * @return {string}              Rendered stack trace string
+   */
+  trace: ( stack, callSite ) => {},
+  /**
+   * Render the error footer
+   * @param  {?string} errorCode The error code
+   * @param  {?string} errorPath The error path
+   * @return {string}           Rendered footer string
+   */
+  footer: ( errorCode, errorPath ) => {}
+}
+
+/**
+ * SolidError object property.
+ * @typedef SolidErrorProps
+ * @property {string}  [code=EERR]          An error code
+ * @property {number}  [errno]              The error number
+ * @property {string}  [name=Error]         The error name
+ * @property {string}  [message]            The error message
+ * @property {string}  [readableName=Error] A readable version of the name
+ * @property {?string} [path]               An optional reference path
+ * @property {?string} [explain]            Optional error explanation
+ * @property {?string} [hints]              Optional hints that help solve the issue
+ * @property {?Error}  [inner]              A parent error
+ * @since 0.3.0
+ * @version 0.1.0
+ */
+
+/**
+ * @typedef SolidErrorOptions
+ * @property {module:solid-error~SolidRenderer} [renderer]
+ * @property {string} lang
+ * @property {string[]} includes
+ * @since 0.1.0
+ * @version 0.1.0
+ */
+
+/**
+ * Log an error to the console. If the provided error is a
+ * {@link module:solid-error.SolidError|SolidError}
+ * it will be renderer using the current solid-error's
+ * {@link module:solid-error.options.renderer|renderer}
+ * @memberOf module:solid-error
+ * @param  {external:Error|module:solid-error~SolidError} error Any Error type object
+ * @returns {undefined}
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+function logError( error ) {}
+
+/**
+ * Render a {@link module:solid-error.SolidError|SolidError}
+ * @memberOf module:solid-error
+ * @type {module:solid-error~SolidRenderer}
+ * @param  {module:solid-error.SolidError} solidError A SolidError object
+ * @return {string}   Renderer SolidError
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+function render ( solidError ) {}
+
+/**
+ * solid-error options
+ * @memberOf module:solid-error
+ * @type {module:solid-error~SolidErrorOptions}
+ * @readonly
+ * @property {module:solid-error~SolidRenderer} [renderer=SolidRender]
+ * @property {string} [lang=en]
+ * @property {string[]} [includes=[]]
+ */
+const options = {}
+
+/**
+ * Update solid-error's options.
+ * @memberOf module:solid-error
+ * @param {SolidErrorOptions} props solid-error's options
+ * @returns {SolidErrorOptions} Updated options
+ * @version 0.1.0
+ * @since 0.1.0
+ */
+function setOptions( props ) {}
+
+/**
+ * @class
+ * @classdesc
+ *
+ * SolidError is an Error object with properties to write a more verbose
+ * error explanation and hints to help the user understand and resolve
+ * the facing issue.
+ *
+ * @memberOf module:solid-error
+ *
+ * @property {string} name The error name
+ * @property {string} code The error code
+ * @property {number} errno The error number
+ * @property {string} readableName A readable version of the error name.
+ * @property {?string} message The error message
+ * @property {?string} explain An error explanation
+ * @property {?string} hint A series of hint to help user resolve the issue
+ * @property {?string} path Referenced path
+ * @property {string} stack The error stack trace.
+ *
+ * @description Extends Error with provided `message` and `props`
+ * @param  {?string|?Error} [message] An error message or an Error object
+ * @param  {?module:solid-error~SolidErrorProps} [props] SolidError properties
+ */
+class SolidError extends Error {}
+
+/**
+ * Utility library to format an manipulate text.
+ * @memberOf module:solid-error
+ * @since 0.3.0
+ * @version 0.1.1
+ */
+const SolidText = {
+  /**
+   * Wordwrap `text` at max `width` with support for GitHub flavored markdown
+   * @param  {string} text   Text to wordwrap
+   * @param  {string} width  Columns width
+   * @param  {boolean} gfm   Support GitHub flavored markdown
+   * @return {string}        Wordwrapped text
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  wordwrap: ( text, width, gfm ) => {},
+
+   /**
+   * Calculate the `text`'s length, escaping terminal entities.
+   * @param  {string} text Text to calculate for length
+   * @return {number}      Text only length
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  textLength: ( text ) => {},
+
+  /**
+   * Truncate the give `string` to `maxlen` and add ellipsis at th end.
+   * @param  {string} text String to be truncated
+   * @param  {number} maxlen Truncate at length
+   * @return {string}        Truncated text
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  truncate: ( text, maxlen ) => {},
+
+  /**
+   * Capitalize the first letter of the given `text`
+   * @param  {string} text Text where the first letter should be capitalized
+   * @return {string}      Text with first letter capitalized
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  capitalizeFirstLetter: ( text ) => {},
+
+  /**
+   * Strip syserrors Error prefix text
+   * @param  {string} errorMessage An syserror message
+   * @return {string}              Syserror message without prefix text.
+   * @since 0.1.1
+   * @version 0.1.0
+   */
+  stripErrorCodes: ( errorMessage ) => {},
+
+  /**
+   * Escape RegExp from the give `text`
+   * @param {string} text Regular expression text
+   * @returns {string} Escaped RegExp
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  escapeRegExp: ( text ) => {},
+
+  /**
+   * Render emoji from emoji tag (i.e. :heart: ) found in given `text`.
+   * @param  {string} text Text with emojis.
+   * @return {string}      Text with rendered emoji tags
+   * @version 0.1.0
+   * @since 0.1.0
+   */
+  emojis: ( text ) => {},
+
+  /**
+   * Return the corresponding unicode emoji from a give ejomi code.
+   * @param  {string} emojiString Emoji code (example: ":heart:")
+   * @returns {string}             Unicode emoji string
+   */
+  findEmojiFrom: ( emojiString ) => {},
+
+  /**
+   * Render markdown syntax to terminal syntax
+   * @param {string} text markdown formatted text.
+   * @returns {string} terminal rendered text
+   * @since 0.1.2
+   * @version 0.1.0
+   */
+  markdown2tty: ( text ) => {},
+
+  /**
+   * Set marked options.
+   * @param {object} props Marked options object.
+   * @returns {Object} marked option object
+   * @since 0.1.2
+   * @version 0.1.0
+   */
+  setMarkedOptions: ( props ) => {},
+
+  /**
+   * Colorize text for terminal output using
+   * {@link https://github.com/chalk/chalk|chalk}
+   * @type {external:chalk}
+   * @version 0.1.0
+   * @since 0.1.1
+   */
+  color: {}
+
+}
+
+module.exports = soliderror

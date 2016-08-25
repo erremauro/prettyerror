@@ -1,20 +1,42 @@
 {
-  "plugins": [ "plugins/markdown" ],
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/jsdoc-babel"
+  ],
+  "babel": {
+    "extensions": [
+      "js",
+      "jsdoc",
+      "flow"
+    ],
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-flow-strip-types"
+    ]
+  },
   "source": {
-    "include": ["./"],
+    "include": [
+      "./src"
+    ],
     "exclude": [
       "./node_modules",
       "./__tests__",
       "./dist",
-      "./examples"
+      "./no_flow",
+      "./examples",
+      "./src/api.jsdoc"
     ],
-    "includePattern": ".+\\.js(doc)?$",
+    "includePattern": ".+\\.js(doc|\\.flow)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "opts": {
     "encoding": "utf8",
     "destination": "./jsdocs",
     "recurse": true,
-    "private": true
+    "private": true,
+    "template": "node_modules/minami"
   }
 }

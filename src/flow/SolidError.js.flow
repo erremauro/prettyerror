@@ -1,0 +1,24 @@
+declare class ExtendableError extends Error {
+  name: string,
+  message: string,
+  stack: string,
+  path?: string,
+};
+
+declare class SolidObjectError extends ExtendableError {
+  name: string,
+  message: string,
+  path?: string,
+  props: SolidErrorProps
+}
+
+declare class SolidError extends SolidObjectError {
+  code?: string,
+  errno?: number,
+  name: string,
+  message: string,
+  path?: string,
+  props: SolidErrorProps
+};
+
+type ValidError = SolidError | Error

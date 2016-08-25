@@ -1,0 +1,5 @@
+code      : EERR
+errno     : -100
+name      : Errore
+readableName   : Errore
+message  : Si è verificato un errore.

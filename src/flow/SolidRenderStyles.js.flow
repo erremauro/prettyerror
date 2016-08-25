@@ -1,0 +1,24 @@
+/**
+ * @typedef {Object} SolidRenderStyles
+ */
+declare type SolidRenderStyles = {
+  columns: number,
+  wordwrap: boolean,
+  markdown: boolean,
+  marginRight: number,
+  textColor: string,
+  messageColor: string,
+  explainColor: string,
+  headerColor: string,
+  hintsColor: string,
+  footerColor: string,
+  traceColor: string,
+  headerTitle: string,
+  hintsTitle: string,
+  traceTitle: string,
+  dividerStyle: string,
+  headerStyle: string,
+  hintsStyle: string,
+  footerStyle: string,
+  traceStyle: string
+};

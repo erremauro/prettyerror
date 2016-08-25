@@ -1,0 +1,26 @@
+/**
+ * SolidError object property.
+ * @typedef SolidErrorProps
+ * @property {string}  [code]         An error code
+ * @property {number}  [errno]        The error number
+ * @property {string}  name           The error name
+ * @property {string}  message        The error message
+ * @property {string}  [readableName] A readable version of the name
+ * @property {?string} [path]         An optional reference path
+ * @property {?string} [explain]      Optional error explanation
+ * @property {?string} [hints]        Optional hints that help solve the issue
+ * @property {?Error}  [inner]        A parent error
+ * @since 0.3.0
+ * @version 0.1.0
+ */
+declare type SolidErrorProps = {
+  code: string,
+  errno: number,
+  name: string,
+  readableName: string,
+  message: string,
+  explain?: string,
+  hints?: string,
+  path?: string,
+  inner?: Error,
+};

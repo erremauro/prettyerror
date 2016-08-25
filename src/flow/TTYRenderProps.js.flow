@@ -1,0 +1,28 @@
+/**
+ * @typedef TTYRenderProps
+ */
+declare type TTYRenderProps = {
+  tables?: boolean,
+  columns?: number,
+  emojis?: boolean,
+  wordwrap?: boolean,
+  tableSettings?: Object,
+  highlightOptions?: Object,
+  blockquote?: Function,
+  code?: Function,
+  codespan?: Function,
+  del?: Function,
+  em?: Function,
+  firstHeading?: Function,
+  gfm?: boolean,
+  heading?: Function,
+  hr?: Function,
+  href?: Function,
+  html?: Function,
+  link?: Function,
+  listitem?: Function,
+  paragraph?: Function,
+  strong?: Function,
+  table?: Function,
+  text?: Function,
+};

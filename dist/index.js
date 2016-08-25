@@ -1,74 +1,53 @@
 'use strict';
 
 /**
- * Public Module. Expose
- * {@link module:lib/soliderror~SolidError|SolidError} and
- * provide api for settings options and rendering styles. Note that settings
+ * SolidError Module. Export {@link SolidError} class and
+ * provide API for settings options and rendering styles. Note that settings
  * styles while using a custom
- * {@link module:lib/solidapi.options.renderer|rederer} will have no effect.
- * @see  {@link module:lib/solidapi|SolidApi}
- * @module soliderror
+ * {@link module:shared/SolidApi.options.renderer|rederer} will have no effect.
+ *
+ * @see  {@link module:shared/SolidApi|SolidApi}
+ *
+ * @module solid-error
  * @author Roberto Mauro <erremauro@icloud.com>
  * @since 0.3.0
  * @version 0.1.1
+ *
+ * 
  */
-var SolidRender = require('./lib/solidrender');
-var SolidError = require('./lib/soliderror');
-var SolidApi = require('./lib/solidapi');
-var SolidText = require('./lib/solidtext');
 
-SolidApi.setOptions({
-  renderer: new SolidRender()
-});
-
-/**
- * Log an Error to the console. If the provided error is a SolidError
- * it will be renderer using the current
- * {@link module:lib/solidapi.options.renderer|rederer}
- * @memberOf module:soliderror
- * @param  {Error} error Any Error type object
- * @version 0.1.0
- * @since 0.1.0
- */
-function logError(error) {
-  if (error.constructor.name !== 'SolidError') {
-    return console.log(error);
-  }
-  console.log(render(error));
-}
-
-/**
- * Render a SolidError
- * @memberOf module:soliderror
- * @param  {module:lib/soliderror~SolidError} solidError A SolidError object
- * @return {string}            Renderer SolidError
- * @version 0.1.0
- * @since 0.1.0
- */
-function render(solidError) {
-  var options = SolidApi.getOptions();
-  var render = options.renderer;
-
-  var result = '';
-
-  result += render.header(solidError.props.readableName || '');
-  result += render.message(solidError.message);
-
-  if (solidError.props.explain) {
-    result += render.explain(solidError.props.explain);
-  }
-
-  if (solidError.props.hints) {
-    result += render.hints(solidError.props.hints);
-  }
-
-  return result + render.footer(solidError.code, solidError.path);
-}
+var SolidApi = require('./shared/SolidApi');
+var SolidPrinter = require('./lib/SolidPrinter');
+var SolidError = require('./class/SolidError');
+var SolidText = require('./lib/SolidText');
 
 module.exports = {
   /**
+   * @memberOf module:solid-error
+   */
+  logError: SolidPrinter.logError,
+  /**
+   * @memberOf module:solid-error
+   */
+  render: SolidPrinter.render,
+  /**
+   * @name module:solid-error.SolidError
+   * @memberOf module:solid-error
+   * @type {module:lib/soliderror~SolidError}
+   * @since 0.1.0
+   * @version 0.1.0
+   */
+  SolidError: SolidError,
+  /**
+   * @memberOf module:solid-error
+   * @type {module:lib/SolidText}
+   * @since 0.1.1
+   * @version 0.1.0
+   */
+  SolidText: SolidText,
+  /**
    * Update library options.
-   * @memberOf module:soliderror
+   * @memberOf module:solid-error
    * @function
    * @param {SolidErrorOptionsType} props Library options
    * @since 0.1.0
@@ -78,7 +57,7 @@ module.exports = {
 
   /**
    * Get the current library options
-   * @memberOf module:soliderror
+   * @memberOf module:solid-error
    * @function
    * @return {SolidErrorOptionsType}
    * @since 0.1.0
@@ -89,27 +68,11 @@ module.exports = {
   /**
    * Set the default library renderer styles. Note that updating styles when
    * a **custom renderer** is currently active, it will have no effect.
-   * @memberOf module:soliderror
+   * @memberOf module:solid-error
    * @function
-   * @param {module:soliderror~SolidErrorStylesType} props Solid Renderer styles
+   * @param {module:solid-error~SolidErrorStylesType} props Solid Renderer styles
    * @since 0.1.0
    * @version 0.1.0
    */
-  setStyles: SolidApi.setStyles,
-  logError: logError,
-  render: render,
-  /**
-   * @memberOf  module:soliderror
-   * @type {module:lib/soliderror~SolidError}
-   * @since 0.1.0
-   * @version 0.1.0
-   */
-  SolidError: SolidError,
-  /**
-   * @memberOf module:soliderror
-   * @type {module:lib/solidtext~SolidText}
-   * @since 0.1.1
-   * @version 0.1.0
-   */
-  SolidText: SolidText
+  setStyles: SolidApi.setStyles
 };
