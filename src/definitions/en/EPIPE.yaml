@@ -1,0 +1,9 @@
+code  : EPIPE
+errno : -11
+name  : BrokenPipeError
+readableName : Broken Pipe
+message : Attempt to write on a pipe, socket or FIFO failed.
+explain : >
+  A write on a pipe, socket, or FIFO for which there is no process to read
+  the data. Commonly encountered at the net and http layers,indicative that the
+  remote side of the stream being written to has been closed.

@@ -1,0 +1,7 @@
+{
+  "linters": {
+    "flow": {
+      "lib": "src/flow"
+    }
+  }
+}

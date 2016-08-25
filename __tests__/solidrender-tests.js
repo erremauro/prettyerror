@@ -3,9 +3,10 @@ jest.unmock( 'marked' )
 jest.unmock( 'cli-table' )
 jest.unmock( 'cardinal' )
 jest.unmock( 'node-emoji' )
-jest.unmock( '../dist/lib/solidtext' )
-jest.unmock( '../dist/lib/ttyrender' )
-jest.unmock( '../dist/lib/solidrender' )
+jest.unmock( '../dist/class/SolidObject' )
+jest.unmock( '../dist/lib/SolidText' )
+jest.unmock( '../dist/class/TTYRender' )
+jest.unmock( '../dist/class/SolidRender' )
 
 const colors = require( 'chalk' )
 let SolidRender
@@ -13,7 +14,7 @@ let SolidRender
 describe( 'lib/solidrender', () => {
   describe( 'constructor', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should initialize props', () => {
@@ -37,7 +38,7 @@ describe( 'lib/solidrender', () => {
 
   describe( 'header', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should render header', () => {
@@ -68,7 +69,7 @@ describe( 'lib/solidrender', () => {
 
   describe( 'message', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should render message', () => {
@@ -85,7 +86,7 @@ describe( 'lib/solidrender', () => {
 
   describe( 'explain', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should render explain', () => {
@@ -118,7 +119,7 @@ describe( 'lib/solidrender', () => {
 
   describe( 'trace', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should format trace', () => {
@@ -142,7 +143,7 @@ describe( 'lib/solidrender', () => {
 
   describe( 'hints', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should render hints', () => {
@@ -185,7 +186,7 @@ describe( 'lib/solidrender', () => {
 
   describe( 'footer', () => {
     beforeEach( () => {
-      SolidRender = require( '../dist/lib/solidrender' )
+      SolidRender = require( '../dist/class/SolidRender' )
     })
 
     it( 'should render footer', () => {

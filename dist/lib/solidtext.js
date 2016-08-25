@@ -1,15 +1,9 @@
 'use strict';
 
 /**
- * Text utility functions to format an manipulate text.
- * @module lib/solidtext
- * @author Roberto Mauro <erremauro@icloud.com>
- * @since 0.3.0
- * @version 0.1.1
- *
- * @requires {@link https://github.com/chjj/marked|marked}
- * @requires {@link https://github.com/chalk/chalk|chalk}
- * @requires {@link https://github.com/omnidan/node-emoji|node-emoji}
+ * SolidText.js
+ * 2016, Roberto Mauro <erremauro@icloud.com>
+ * 
  */
 
 var chalk = require('chalk');
@@ -17,7 +11,7 @@ var marked = require('marked');
 var emoji = require('node-emoji');
 
 /**
- * @memberOf module:lib/solidtext
+ * @memberOf module:lib/SolidText
  * @const {string}
  * @since 0.1.0
  * @version 0.1.0
@@ -25,7 +19,7 @@ var emoji = require('node-emoji');
 var HARD_RETURN = '\r';
 
 /**
- * @memberOf module:lib/
+ * @memberOf module:lib/SolidText
  * @const {RegEx}
  * @since 0.1.0
  * @version 0.1.0
@@ -33,7 +27,7 @@ var HARD_RETURN = '\r';
 var HARD_RETURN_RE = new RegExp(HARD_RETURN);
 
 /**
- * @memberOf module:lib/solidtext
+ * @memberOf module:lib/SolidText
  * @const {RegEx}
  * @since 0.1.0
  * @version 0.1.0
@@ -41,10 +35,13 @@ var HARD_RETURN_RE = new RegExp(HARD_RETURN);
 var HARD_RETURN_GFM_RE = new RegExp(HARD_RETURN + '|<br />');
 
 /**
- * @name module:lib/solidtext~SolidText
- * @memberOf module:lib/solidtext
- * @since 0.1.0
- * @version 0.1.0
+ * Utility functions to format an manipulate text.
+ * @module lib/SolidText
+ * @requires {@link https://github.com/chjj/marked|marked}
+ * @requires {@link https://github.com/chalk/chalk|chalk}
+ * @requires {@link https://github.com/omnidan/node-emoji|node-emoji}
+ * @since 0.3.0
+ * @version 0.1.1
  */
 var SolidText = {
 
@@ -100,20 +97,20 @@ var SolidText = {
 
   /**
    * Truncate the give `string` to `maxlen` and add ellipsis at th end.
-   * @param  {string} string String to be truncated
+   * @param  {string} text String to be truncated
    * @param  {number} maxlen Truncate at length
    * @return {string}        Truncated text
    * @version 0.1.0
    * @since 0.1.0
    */
-  truncate: function truncate(string, maxlen) {
+  truncate: function truncate(text, maxlen) {
     var msglen = maxlen - 3;
 
-    if (string.length > maxlen) {
-      return string.substring(0, msglen) + '...';
+    if (text.length > maxlen) {
+      return text.substring(0, msglen) + '...';
     }
 
-    return string;
+    return text;
   },
 
   /**
@@ -126,11 +123,25 @@ var SolidText = {
   capitalizeFirstLetter: function capitalizeFirstLetter(text) {
     var firstUp = text.charAt(0).toUpperCase();
     var remainingText = text.slice(1);
+
     return firstUp + remainingText;
   },
 
   /**
+   * Strip syserrors Error prefix text
+   * @param  {string} errorMessage An syserror message
+   * @return {string}              Syserror message without prefix text.
+   * @since 0.1.1
+   * @version 0.1.0
+   */
+  stripErrorCodes: function stripErrorCodes(errorMessage) {
+    return errorMessage.replace(/Error:\s[A-Z]+:\s/g, '');
+  },
+
+  /**
    * Escape RegExp from the give `text`
+   * @param {string} text Regular expression text
+   * @returns {string} Escaped RegExp
    * @version 0.1.0
    * @since 0.1.0
    */
@@ -147,14 +158,23 @@ var SolidText = {
    * @since 0.1.0
    */
   emojis: function emojis(text) {
-    return text.replace(/:([A-Za-z0-9_\-\+]+?):/g, function (emojiString) {
-      var emojiSign = emoji.get(emojiString);
-      if (!emojiSign) {
-        return emojiString;
-      }
+    var emojiStringPattern = /:([A-Za-z0-9_\-\+]+?):/g;
+    var emojifiedText = text.replace(emojiStringPattern, SolidText.findEmojiFrom);
+    return emojifiedText;
+  },
 
-      return emojiSign + ' ';
-    });
+  /**
+   * Return the corresponding unicode emoji from a give ejomi code.
+   * @param  {string} emojiString Emoji code (example: ":heart:")
+   * @returns {string}             Unicode emoji string
+   */
+  findEmojiFrom: function findEmojiFrom(emojiString) {
+    var emojiSign = emoji.get(emojiString);
+    if (!emojiSign) {
+      return emojiString;
+    }
+
+    return emojiSign + ' ';
   },
 
   /**
@@ -171,6 +191,7 @@ var SolidText = {
   /**
    * Set marked options.
    * @param {object} props Marked options object.
+   * @returns {Object} marked option object
    * @since 0.1.2
    * @version 0.1.0
    */
