@@ -3,7 +3,8 @@
     "**/dist/**"
   ],
   "test": [
-    "__tests__/**"
+    "__tests__/**",
+    "examples/**"
   ],
   "dependencies": {
     "mute": [

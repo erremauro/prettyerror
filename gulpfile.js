@@ -112,7 +112,7 @@ gulp.task( 'run-codecov', function () {
   return gulp
     .src( config.lcovInfo )
     .pipe( $.plumber({
-      errorHandler: function ( err ) {
+      errorHandler: function () {
         this.emit('end')
       }
     }))
