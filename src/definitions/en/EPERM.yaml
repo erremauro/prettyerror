@@ -1,0 +1,7 @@
+code  : EPERM
+errno : -10
+name  : OperationNotPermittedError
+readableName : Operation Not Permitted
+message : Attempted operation requires elevated privileges.
+explain : >
+  An attempt was made to perform an operation that requires elevated privileges.

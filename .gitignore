@@ -1,5 +1,6 @@
 .env
 node_modules
+no_flow
 jsdocs
 coverage
 report
