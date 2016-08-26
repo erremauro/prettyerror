@@ -8,7 +8,10 @@
   "dependencies": {
     "mute": [
       "jest-cli",
-      "plato"
+      "plato",
+      "gulp",
+      "jsdoc-to-markdown",
+      "gulp-flowtype"
     ]
   },
   "critics": {

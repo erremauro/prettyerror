@@ -1,7 +1,7 @@
 .env
-node_modules
-no_flow
-jsdocs
+__*.js
 coverage
+jsdocs
+no_flow
+node_modules
 report
-old-*
