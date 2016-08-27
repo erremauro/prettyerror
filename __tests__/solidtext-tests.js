@@ -1,7 +1,7 @@
 jest.unmock( 'marked' )
 jest.unmock( 'chalk' )
 jest.unmock( 'node-emoji' )
-jest.unmock( '../dist/lib/solidtext' )
+jest.unmock( '../dist/lib/SolidText' )
 
 let SolidText
 
@@ -10,7 +10,7 @@ describe( 'lib/solidtext', () => {
   describe( 'wordwrap', () => {
 
     beforeEach( () => {
-      SolidText = require( '../dist/lib/solidtext' )
+      SolidText = require( '../dist/lib/SolidText' )
     })
 
     it('should wordwrap at 80 columns', () => {
@@ -62,7 +62,7 @@ describe( 'lib/solidtext', () => {
   describe( 'textLength', () => {
 
     beforeEach( () => {
-      SolidText = require( '../dist/lib/solidtext' )
+      SolidText = require( '../dist/lib/SolidText' )
     })
 
     it( 'should get textLength without entities', () => {
@@ -77,7 +77,7 @@ describe( 'lib/solidtext', () => {
   describe( 'truncate', () => {
 
     beforeEach( () => {
-      SolidText = require( '../dist/lib/solidtext' )
+      SolidText = require( '../dist/lib/SolidText' )
     })
 
     it( 'it should trucate text at 60 columns', () => {
@@ -99,7 +99,7 @@ describe( 'lib/solidtext', () => {
   describe( 'capitalizeFirstLetter', () => {
 
     beforeEach( () => {
-      SolidText = require( '../dist/lib/solidtext' )
+      SolidText = require( '../dist/lib/SolidText' )
     })
 
     it( 'it should capitalize the first letter', () => {
@@ -115,7 +115,7 @@ describe( 'lib/solidtext', () => {
   describe( 'escapeRegExp', () => {
 
     beforeEach( () => {
-      SolidText = require( '../dist/lib/solidtext' )
+      SolidText = require( '../dist/lib/SolidText' )
     })
 
     it( 'it escape regular expression from text', () => {
@@ -131,7 +131,11 @@ describe( 'lib/solidtext', () => {
   describe( 'emojis', () => {
 
     beforeEach( () => {
-      SolidText = require( '../dist/lib/solidtext' )
+      SolidText = require( '../dist/lib/SolidText' )
+    })
+
+    it( 'it should have emojis', () => {
+      expect( SolidText.emojis ).toBeDefined()
     })
 
     it( 'it should replace emoji string with actual emoji', () => {

@@ -1,18 +1,30 @@
+jest.unmock( 'path' )
+jest.unmock( 'fs' )
+jest.unmock( 'js-yaml' )
 jest.unmock( 'chalk' )
-jest.unmock( '../dist/lib/solidapi' )
+jest.unmock( 'marked' )
+jest.unmock( 'cli-table' )
+jest.unmock( 'cardinal' )
+jest.unmock( 'node-emoji' )
+jest.unmock( '../dist/class/SolidObject' )
+jest.unmock( '../dist/class/TTYRender' )
+jest.unmock( '../dist/class/SolidRender' )
+jest.unmock( '../dist/lib/SolidText' )
+jest.unmock( '../dist/lib/SysErrors' )
+jest.unmock( '../dist/shared/SolidApi' )
 
 let SolidApi
 
-describe( 'lib/solidapi', () => {
+describe( 'shared/SolidApi', () => {
 
   describe( 'getOptions', () => {
     beforeEach( () => {
-      SolidApi = require( '../dist/lib/solidapi' )
+      SolidApi = require( '../dist/shared/SolidApi' )
     })
 
     it( 'should get options', () => {
       const actual = SolidApi.getOptions()
-      expect( actual.renderer ).toBeNull()
+      expect( actual.renderer ).toBeDefined()
       expect( actual.lang ).toBeDefined()
       expect( actual.includes ).toBeDefined()
     })
@@ -20,7 +32,7 @@ describe( 'lib/solidapi', () => {
 
   describe( 'setOptions', () => {
     beforeEach( () => {
-      SolidApi = require( '../dist/lib/solidapi' )
+      SolidApi = require( '../dist/shared/SolidApi' )
     })
 
     it( 'should set options', () => {
@@ -33,7 +45,7 @@ describe( 'lib/solidapi', () => {
 
   describe( 'setStyles', () => {
     beforeEach( () => {
-      SolidApi = require( '../dist/lib/solidapi' )
+      SolidApi = require( '../dist/shared/SolidApi' )
     })
 
     it( 'should set styles on SolidRender', () => {

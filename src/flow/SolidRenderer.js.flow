@@ -1,0 +1,8 @@
+declare interface SolidRenderer {
+  header( readableName: string ): string;
+  message( text: string ): string;
+  explain( text: string ): string;
+  hints( text: string ): string;
+  trace( stack: string ): string;
+  footer( errorCode?: string, errorPath?: string ): string;
+}

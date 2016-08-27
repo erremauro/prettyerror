@@ -3,12 +3,16 @@
     "**/dist/**"
   ],
   "test": [
-    "__tests__/**"
+    "__tests__/**",
+    "examples/**"
   ],
   "dependencies": {
     "mute": [
       "jest-cli",
-      "plato"
+      "plato",
+      "gulp",
+      "jsdoc-to-markdown",
+      "gulp-flowtype"
     ]
   },
   "critics": {

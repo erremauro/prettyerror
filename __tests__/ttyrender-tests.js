@@ -3,8 +3,9 @@ jest.unmock( 'marked' )
 jest.unmock( 'cli-table' )
 jest.unmock( 'cardinal' )
 jest.unmock( 'node-emoji' )
-jest.unmock( '../dist/lib/solidtext' )
-jest.unmock( '../dist/lib/ttyrender' )
+jest.unmock( '../dist/class/SolidObject' )
+jest.unmock( '../dist/lib/SolidText' )
+jest.unmock( '../dist/class/TTYRender' )
 
 const colors = require( 'chalk' )
 let TTYRender = null
@@ -14,7 +15,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'constructor', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should initialize with props', () => {
@@ -35,7 +36,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'setProps', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'it should set props', () => {
@@ -57,7 +58,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'transform', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should compose function arguments', () => {
@@ -116,7 +117,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'blockquote', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'it should convert ""> blockquote" to markdown', () => {
@@ -135,7 +136,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'br', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should return an hard return (wordwrap: true)', () => {
@@ -157,7 +158,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'code', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should highlight javascript `code` blocks', () => {
@@ -179,7 +180,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'codespan', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert non javascript `code` blocks to yellow text', () => {
@@ -209,7 +210,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'del', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert ~~del~~ to strikethrough text', () => {
@@ -226,7 +227,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'em', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert _em_ to italic', () => {
@@ -243,7 +244,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'heading', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert first heading to blue bold text', () => {
@@ -301,7 +302,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'hr', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert --- and *** to an horizontal line', () => {
@@ -324,7 +325,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'html', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert html to stylized text', () => {
@@ -342,7 +343,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'image', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should convert ![img](...) to blue text with title', () => {
@@ -376,7 +377,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'link', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should render [link] to blue underlined text', () => {
@@ -411,7 +412,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'list', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should render an unordered list of items', () => {
@@ -473,7 +474,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'table', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should format a tablecell', () => {
@@ -523,7 +524,7 @@ describe( 'lib/ttyrender', () => {
   describe( 'paragraph', () => {
 
     beforeEach( () => {
-      TTYRender = require( '../dist/lib/ttyrender' )
+      TTYRender = require( '../dist/class/TTYRender' )
     })
 
     it( 'should wrap paragraphs to given columns', () => {

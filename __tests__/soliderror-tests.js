@@ -6,22 +6,24 @@ jest.unmock( 'marked' )
 jest.unmock( 'cli-table' )
 jest.unmock( 'cardinal' )
 jest.unmock( 'node-emoji' )
-jest.unmock( '../dist/lib/solidtext' )
-jest.unmock( '../dist/lib/ttyrender' )
-jest.unmock( '../dist/lib/solidrender' )
-jest.unmock( '../dist/lib/solidapi' )
-jest.unmock( '../dist/lib/exterror' )
-jest.unmock( '../dist/lib/syserrors' )
-jest.unmock( '../dist/lib/soliderror' )
+jest.unmock( '../dist/class/ExtError' )
+jest.unmock( '../dist/class/SolidObject' )
+jest.unmock( '../dist/class/SolidObjectError' )
+jest.unmock( '../dist/lib/SolidText' )
+jest.unmock( '../dist/lib/SysErrors' )
+jest.unmock( '../dist/class/TTYRender' )
+jest.unmock( '../dist/class/SolidRender' )
+jest.unmock( '../dist/shared/SolidApi' )
+jest.unmock( '../dist/class/SolidError' )
 
 let SolidError
 
-describe( 'lib/soliderror', () => {
+describe( 'class/SolidError', () => {
 
   describe( 'constructor', () => {
 
     beforeEach( () => {
-      SolidError = require( '../dist/lib/soliderror' )
+      SolidError = require( '../dist/class/SolidError' )
     })
 
     it( 'should initialize solid error', () => {

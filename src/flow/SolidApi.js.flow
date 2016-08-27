@@ -1,0 +1,11 @@
+/**
+ * @typedef SolidErrorOptions
+ * @property {SolidRenderer} renderer
+ * @property {string} lang
+ * @property {string[]} includes
+ */
+declare type SolidErrorOptions = {
+  renderer: any,
+  lang: string,
+  includes: string[],
+};

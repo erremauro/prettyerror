@@ -2,16 +2,17 @@ jest.unmock( 'path' )
 jest.unmock( 'fs' )
 jest.unmock( 'js-yaml' )
 jest.unmock( 'chalk' )
-jest.unmock( '../dist/lib/solidtext' )
-jest.unmock( '../dist/lib/syserrors' )
+jest.unmock( '../dist/class/SolidObject' )
+jest.unmock( '../dist/lib/SolidText' )
+jest.unmock( '../dist/lib/SysErrors' )
 
 const path = require( 'path' )
 let SysErrors
 
-describe( 'lib/syserrors', () => {
+describe( 'lib/SysErrors', () => {
   describe( 'constructor', () => {
     beforeEach( () => {
-      SysErrors = require( '../dist/lib/syserrors')
+      SysErrors = require( '../dist/lib/SysErrors')
     })
 
     it( 'should initialize SysErrors', () => {
@@ -19,34 +20,35 @@ describe( 'lib/syserrors', () => {
         lang: 'it',
         includes: [ '/path/to/custom/errdef' ]
       }
-      const sysErrors = new SysErrors( testProps )
 
-      expect( testProps.lang ).toEqual( sysErrors.props.lang )
-      expect( testProps.includes ).toEqual( sysErrors.props.includes )
+      SysErrors.setOptions( testProps )
+
+      const options = SysErrors.__get__('options')
+
+      expect( testProps.lang ).toEqual( options.lang )
+      expect( testProps.includes ).toEqual( options.includes )
     })
 
     it( 'should change properties after initialization', () => {
-      const sysErrors = new SysErrors()
       const testProps = {
         lang: 'pl',
-        includes: [ '/path/to/custom/syserrors' ]
+        includes: [ '/path/to/custom/SysErrors' ]
       }
-      sysErrors.setProps( testProps )
-
-      expect( testProps.lang ).toEqual( sysErrors.props.lang )
-      expect( testProps.includes ).toEqual( sysErrors.props.includes )
+      SysErrors.setOptions( testProps )
+      const options = SysErrors.__get__('options')
+      expect( testProps.lang ).toEqual( options.lang )
+      expect( testProps.includes ).toEqual( options.includes )
     })
 
     it( 'should convert single include string to string[]', () => {
-      const sysErrors = new SysErrors()
       const testProps = {
-        includes: '/path/to/custom/syserrors'
+        includes: '/path/to/custom/SysErrors'
       }
 
-      sysErrors.setProps( testProps )
-
-      const expected = [ '/path/to/custom/syserrors' ]
-      const actual = sysErrors.props.includes
+      SysErrors.setOptions( testProps )
+      const options = SysErrors.__get__('options')
+      const expected = [ '/path/to/custom/SysErrors' ]
+      const actual = options.includes
 
       expect( expected ).toEqual( actual )
     })
@@ -54,44 +56,43 @@ describe( 'lib/syserrors', () => {
 
   describe( 'definitionsDir', () => {
     beforeEach( () => {
-      SysErrors = require( '../dist/lib/syserrors')
+      SysErrors = require( '../dist/lib/SysErrors')
     })
 
     it( 'should get error definitions dir', () => {
       const LANG = 'it'
-      const sysErrors = new SysErrors({ lang: LANG })
-      const expected = path.join( __dirname, '../errdef/' + LANG )
-      const actual = sysErrors.definitionsDir()
+      SysErrors.setOptions({ lang: LANG })
+      const expected = path.join( __dirname, '../dist/definitions/' + LANG )
+      const actual = SysErrors.__get__( 'definitionsDir' )()
       expect( expected ).toEqual( actual )
     })
   })
 
   describe( 'includeDirs', () => {
     beforeEach( () => {
-      SysErrors = require( '../dist/lib/syserrors')
+      SysErrors = require( '../dist/lib/SysErrors')
     })
 
     it( 'should get error included dir', () => {
       const LANG = 'it'
       const INCLUDES = [ '/path/to/include' ]
-      const sysErrors = new SysErrors({ lang: LANG, includes: INCLUDES })
+      SysErrors.setOptions({ lang: LANG, includes: INCLUDES })
 
       const expected = [ path.join( '/path/to/include', LANG ) ]
-      const actual = sysErrors.includeDirs()
+      const actual = SysErrors.__get__('includeDirs')()
 
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'getSolidErrorProps', () => {
+  describe( 'createPropsFrom', () => {
     beforeEach( () => {
-      SysErrors = require( '../dist/lib/syserrors')
+      SysErrors = require( '../dist/lib/SysErrors')
     })
 
     it( 'should have error defined as inner props', () => {
-      const sysErrors = new SysErrors()
       const testError = new Error( 'test error' )
-      const props = sysErrors.getSolidErrorProps( testError )
+      const props = SysErrors.createPropsFrom( testError )
 
       expect( props.hasOwnProperty('inner') ).toBeTruthy()
       expect( props.inner ).toBeDefined()
@@ -100,7 +101,6 @@ describe( 'lib/syserrors', () => {
 
     it( 'should return a Solid Error', () => {
       const testError = new Error()
-      const sysErrors = new SysErrors()
 
       const expected = {
         code: 'EERR',
@@ -112,7 +112,7 @@ describe( 'lib/syserrors', () => {
       }
       const expectedKeys = Object.keys( expected ).sort()
 
-      const actual = sysErrors.getSolidErrorProps( testError )
+      const actual = SysErrors.createPropsFrom( testError )
       const actualKeys = Object.keys( actual ).sort()
 
       const expectedValues = expectedKeys.map( key => expected[ key ] )
@@ -123,7 +123,6 @@ describe( 'lib/syserrors', () => {
     })
 
     it( 'should return a Solid Error with custom message', () => {
-      const sysErrors = new SysErrors()
       const TEXT = 'Custom test message'
       const testError = new Error( TEXT )
       const expected = {
@@ -136,7 +135,7 @@ describe( 'lib/syserrors', () => {
       }
       const expectedKeys = Object.keys( expected ).sort()
 
-      const actual = sysErrors.getSolidErrorProps( testError )
+      const actual = SysErrors.__get__('createPropsFrom')( testError )
       const actualKeys = Object.keys( actual ).sort()
 
       const expectedValues = expectedKeys.map( key => expected[ key ] )
@@ -147,7 +146,6 @@ describe( 'lib/syserrors', () => {
     })
 
     it( 'should return a Solid Error with custom name', () => {
-      const sysErrors = new SysErrors()
       const ERROR_NAME = 'TestError'
       const testError = new Error()
       testError.name = ERROR_NAME
@@ -159,13 +157,12 @@ describe( 'lib/syserrors', () => {
         readableName: 'Test Error',
         inner: testError
       }
-      const actual = sysErrors.getSolidErrorProps( testError )
+      const actual = SysErrors.createPropsFrom( testError )
 
       expect( expected ).toEqual( actual )
     })
 
     it( 'should give precedence to user defined error', () => {
-      const sysErrors = new SysErrors()
       const testError = new RangeError()
       const expected = {
         code: 'TRNG',
@@ -178,12 +175,12 @@ describe( 'lib/syserrors', () => {
       }
       const expectedKeys = Object.keys( expected ).sort()
 
-      sysErrors.setProps({
+      SysErrors.setOptions({
         lang: 'en',
         includes: path.join( __dirname, './support/errorDefinitions' )
       })
 
-      const actual = sysErrors.getSolidErrorProps( testError )
+      const actual = SysErrors.createPropsFrom( testError )
       const actualKeys = Object.keys( actual ).sort()
 
       const expectedValues = expectedKeys.map( key => expected[ key ] )

@@ -1,0 +1,5 @@
+code      : EERR
+errno     : -100
+name      : Error
+readableName   : Error
+message  : An Error occurred.
