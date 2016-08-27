@@ -3,20 +3,20 @@ jest.unmock( 'chalk' )
 jest.unmock( 'node-emoji' )
 jest.unmock( '../dist/lib/SolidText' )
 
-let SolidText
+var SolidText = void 0
 
-describe( 'lib/solidtext', () => {
+describe( 'lib/solidtext', function () {
 
-  describe( 'wordwrap', () => {
+  describe( 'wordwrap', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidText = require( '../dist/lib/SolidText' )
     })
 
-    it('should wordwrap at 80 columns', () => {
-      const COLUMNS = 80
-      const GFM_ACTIVE = true
-      const longText = 'Lorem Ipsum is simply dummy text of the printing and '
+    it('should wordwrap at 80 columns', function () {
+      var COLUMNS = 80
+      var GFM_ACTIVE = true
+      var longText = 'Lorem Ipsum is simply dummy text of the printing and '
         + 'typesetting industry. Lorem Ipsum has been the industry\'s standard '
         + 'dummy text ever since the 1500s, when an unknown printer took a '
         + 'galley of type and scrambled it to make a type specimen book. It has '
@@ -26,18 +26,18 @@ describe( 'lib/solidtext', () => {
         + 'passages, and more recently with desktop publishing software like '
         + 'Aldus PageMaker including versions of Lorem Ipsum.'
 
-      const wordWrapText = SolidText.wordwrap( longText, COLUMNS, GFM_ACTIVE )
+      var wordWrapText = SolidText.wordwrap( longText, COLUMNS, GFM_ACTIVE )
       expect( wordWrapText ).toBeDefined()
 
-      wordWrapText.split('\n').forEach( item => {
+      wordWrapText.split('\n').forEach( function (item) {
         expect( item.length <= COLUMNS ).toBeTruthy()
       })
     })
 
-    it( 'should wordwrap at 120 columns (with gfm: false)', () => {
-      const COLUMNS = 120
-      const GFM_ACTIVE = false
-      const longText = 'Lorem Ipsum is simply dummy text of the printing and '
+    it( 'should wordwrap at 120 columns (with gfm: false)', function () {
+      var COLUMNS = 120
+      var GFM_ACTIVE = false
+      var longText = 'Lorem Ipsum is simply dummy text of the printing and '
         + 'typesetting industry. Lorem Ipsum has been the industry\'s standard '
         + 'dummy text ever since the 1500s, when an unknown printer took a '
         + 'galley of type and scrambled it to make a type specimen book. It has '
@@ -47,11 +47,11 @@ describe( 'lib/solidtext', () => {
         + 'passages, and more recently with desktop publishing software like '
         + 'Aldus PageMaker including versions of Lorem Ipsum.'
 
-      const wordWrapText = SolidText.wordwrap( longText, COLUMNS, GFM_ACTIVE )
+      var wordWrapText = SolidText.wordwrap( longText, COLUMNS, GFM_ACTIVE )
       expect( wordWrapText ).toBeDefined()
 
       wordWrapText.split('\n').forEach(
-        item => {
+        function (item) {
           expect( item.length <= COLUMNS ).toBeTruthy()
         }
       )
@@ -59,36 +59,36 @@ describe( 'lib/solidtext', () => {
 
   })
 
-  describe( 'textLength', () => {
+  describe( 'textLength', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidText = require( '../dist/lib/SolidText' )
     })
 
-    it( 'should get textLength without entities', () => {
-      const TEXT = '\u001b[31mTEST\u001b[39m'
-      const expected = 4
-      const actual = SolidText.textLength( TEXT )
+    it( 'should get textLength without entities', function () {
+      var TEXT = '\u001b[31mTEST\u001b[39m'
+      var expected = 4
+      var actual = SolidText.textLength( TEXT )
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'truncate', () => {
+  describe( 'truncate', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidText = require( '../dist/lib/SolidText' )
     })
 
-    it( 'it should trucate text at 60 columns', () => {
-      const longText = 'Lorem Ipsum is simply dummy text of the printing and '
+    it( 'it should trucate text at 60 columns', function () {
+      var longText = 'Lorem Ipsum is simply dummy text of the printing and '
         + 'typesetting industry. Lorem Ipsum has been the industry\'s standard '
-      const expectedLength = 60
-      const expectedEllipsis = '...'
+      var expectedLength = 60
+      var expectedEllipsis = '...'
 
-      const truncatedText = SolidText.truncate( longText, expectedLength )
-      const actualLength = truncatedText.length
-      const actualEllipsis = truncatedText.slice( -3 )
+      var truncatedText = SolidText.truncate( longText, expectedLength )
+      var actualLength = truncatedText.length
+      var actualEllipsis = truncatedText.slice( -3 )
 
       expect( expectedLength ).toEqual( actualLength )
       expect( expectedEllipsis ).toEqual( actualEllipsis )
@@ -96,62 +96,62 @@ describe( 'lib/solidtext', () => {
 
   })
 
-  describe( 'capitalizeFirstLetter', () => {
+  describe( 'capitalizeFirstLetter', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidText = require( '../dist/lib/SolidText' )
     })
 
-    it( 'it should capitalize the first letter', () => {
-      const TEXT = 'this should be capitalized.'
-      const expected = 'This should be capitalized.'
-      const actual = SolidText.capitalizeFirstLetter( TEXT )
+    it( 'it should capitalize the first letter', function () {
+      var TEXT = 'this should be capitalized.'
+      var expected = 'This should be capitalized.'
+      var actual = SolidText.capitalizeFirstLetter( TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'escapeRegExp', () => {
+  describe( 'escapeRegExp', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidText = require( '../dist/lib/SolidText' )
     })
 
-    it( 'it escape regular expression from text', () => {
-      const TEXT = '*|*|*|*'
-      const expected = '*|*|*|*'
-      const actual = SolidText.capitalizeFirstLetter( TEXT )
+    it( 'it escape regular expression from text', function () {
+      var TEXT = '*|*|*|*'
+      var expected = '*|*|*|*'
+      var actual = SolidText.capitalizeFirstLetter( TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'emojis', () => {
+  describe( 'emojis', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidText = require( '../dist/lib/SolidText' )
     })
 
-    it( 'it should have emojis', () => {
+    it( 'it should have emojis', function () {
       expect( SolidText.emojis ).toBeDefined()
     })
 
-    it( 'it should replace emoji string with actual emoji', () => {
-      const TEXT = ':heart:'
+    it( 'it should replace emoji string with actual emoji', function () {
+      var TEXT = ':heart:'
 
-      const expected = 10084 // unicode entity decimal
-      const actual = SolidText.emojis( TEXT ).codePointAt(0)
+      var expected = 10084 // unicode entity decimal
+      var actual = SolidText.emojis( TEXT ).codePointAt(0)
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should return same text if no emoji found', () => {
-      const TEXT = 'no emoji here'
+    it( 'should return same text if no emoji found', function () {
+      var TEXT = 'no emoji here'
 
-      const expected = TEXT
-      const actual = SolidText.emojis( TEXT )
+      var expected = TEXT
+      var actual = SolidText.emojis( TEXT )
 
       expect( expected ).toEqual( actual )
     })

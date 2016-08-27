@@ -18,17 +18,17 @@ Install SolidError using NPM:
 
 ## What it's useful for
 
-SolidError come in handy whenever you need to present **meaningful**, consistent errors to your users in a javascript console application.
+SolidError comes in handy whenever you need to present **meaningful**, consistent errors to your users in a javascript console application.
 
 It can be used to log custom errors and to wrap unexpected system errors, giving a coherent, customizable look to your errors throughout your program.
 
-It accept external Error Definition files that will be automatically mapped to your custom errors to help you keep your code organized and it support multiple languages.
+It accept external Error Definition files that will be automatically mapped to your custom errors to help you keep your code organized, plus it support multiple languages.
 
 ## How it works
 
 At its core SolidError is an [Error][3] subclass so you can threat it as normal [Error][3] instance. You can log it, throw it, read its stack trace, the usual.
 
-However, when converted to a string, SolidError will render an in-depth, formatted, error explanation to the console that follows the convention:
+However, when logged using the `logError` utility method, SolidError will render an in-depth, formatted, error explanation to the console that follows the convention:
 
     ==== ERROR: <Human readable error name> ========================
 
@@ -107,7 +107,7 @@ Once logged, your solid error will look like:
 
 ### Wrapping errors
 
-Sometimes you may need to throw errors that are unknown and unexpected. Wrapping them in a SolidError will automatically format the error for you giving your users a consistent experience.
+Sometimes you may need to throw errors that are unknown and unexpected. Wrapping them in a SolidError will automatically format the errors for you giving your users a consistent experience.
 
 ```javascript
 import fs from 'fs'
@@ -251,7 +251,8 @@ solidErr.setOptions({
 })
 ```
 
-Take a look at [SolidRender](src/lib/solidrender), the default renderer, to learn how to write your custom renderer.
+Take a look at [SolidRender](src/class/SolidRender), the default renderer, and
+read the [API](docs/API.md) to learn how to write your custom renderer.
 
 ### Using custom languages
 
@@ -264,49 +265,53 @@ To override the default `ENOENT` SystemError definition, for example, create a f
 
 Define your translated error:
 
-  ```yaml
-  code  : ENOENT
-  errno : -2
-  name  : FileOrDirectoryNotFoundError
-  readableName : File o Directory Non Trovata
-  message : File o directory non trovata al percorso indicato.
-  explain : >
-  Tipicamente invocato da operazioni che coinvolgono il file system per
-  indicare che un componente al percorso specificato non esiste.
-  ```
+    ```yaml
+    code  : ENOENT
+    errno : -2
+    name  : FileOrDirectoryNotFoundError
+    readableName : File o Directory Non Trovata
+    message : File o directory non trovata al percorso indicato.
+    explain : >
+    Tipicamente invocato da operazioni che coinvolgono il file system per
+    indicare che un componente al percorso specificato non esiste.
+    ```
 
 Then simply change the language from the options and add your custom error definitions directory to the additional directories:
 
-```javascript
-import fs from 'fs'
-import path from 'path'
-import solidErr, { SolidError, logError } from 'solid-error'
+    ```javascript
+    import fs from 'fs'
+    import path from 'path'
+    import solidErr, { SolidError, logError } from 'solid-error'
 
-// Path that contains your Error Definitions files
-const customErrPath = path.join( __dirname, './definitions' )
+    // Path that contains your Error Definitions files
+    const customErrPath = path.join( __dirname, './definitions' )
 
-solidErr.setOptions({
-  lang: 'it',                   // set the language to 'it'
-  includes: [ customErrPath ]
-})
+    solidErr.setOptions({
+      lang: 'it',                   // set the language to 'it'
+      includes: [ customErrPath ]
+    })
 
-try {
-  // raise ENOENT (file or directory not found ) error
-  fs.readFileSync( '/non/existent/file' )
-}
-catch( readErr ) {
-  // log the translated error.
-  logError( new SolidError( readErr ) )
-}
-```
+    try {
+      // raise ENOENT (file or directory not found ) error
+      fs.readFileSync( '/non/existent/file' )
+    }
+    catch( readErr ) {
+      // log the translated error.
+      logError( new SolidError( readErr ) )
+    }
+    ```
 
 Now, when a `ENOENT` system error gets logged, you will get the transalted version of the error:
 
 ![translations](screenshots/04-translations.png)
 
+## API
+
+Here's your [API](docs/api.md), you nerd.
+
 ## HISTORY
 
-Review the [change log](CHANGELOG.md), if you're into that stuff! 🕵
+Review the [change log](CHANGELOG.md), if you're into that stuff!  🕵
 
 ## CREDITS
 
@@ -314,13 +319,14 @@ SolidError is written and mantained by Roberto Mauro.
 
 ## LICENSE
 
-SolidError is released under the MIT License. For more informations read the [LICENSE](LICENSE) file.
+SolidError is released under the [MIT][4] License. For more informations read the [LICENSE](LICENSE) file.
 
 
 [1]: http://elm-lang.org "Open Elm Lang Official Site"
 [2]: screenshots/screenshot.png "SolidError Example Screenshot"
 [3]: https://nodejs.org/api/errors.html#errors_class_error "View Node's Error documentation"
 [4]: https://nodejs.org/api/errors.html "View Node Error Documentation."
+[5]: https://opensource.org/licenses/MIT "View the MIT License site"
 
 [npm-img]: https://nodei.co/npm/solid-error.png
 [npm-url]: https://npmjs.org/package/solid-error

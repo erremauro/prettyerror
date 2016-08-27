@@ -13,53 +13,62 @@ jest.unmock( '../dist/lib/SolidText' )
 jest.unmock( '../dist/lib/SysErrors' )
 jest.unmock( '../dist/shared/SolidApi' )
 
-let SolidApi
+var SolidApi = null
 
-describe( 'shared/SolidApi', () => {
+describe( 'shared/SolidApi', function () {
 
-  describe( 'getOptions', () => {
-    beforeEach( () => {
+  describe( 'getOptions', function () {
+    beforeEach( function () {
       SolidApi = require( '../dist/shared/SolidApi' )
     })
 
-    it( 'should get options', () => {
-      const actual = SolidApi.getOptions()
+    it( 'should get options', function () {
+      var actual = SolidApi.getOptions()
       expect( actual.renderer ).toBeDefined()
       expect( actual.lang ).toBeDefined()
       expect( actual.includes ).toBeDefined()
     })
   })
 
-  describe( 'setOptions', () => {
-    beforeEach( () => {
+  describe( 'setOptions', function () {
+    beforeEach( function () {
       SolidApi = require( '../dist/shared/SolidApi' )
     })
 
-    it( 'should set options', () => {
-      const testProps = { lang: 'it' }
+    it( 'should set options', function () {
+      var testProps = { lang: 'it' }
       SolidApi.setOptions( testProps )
-      const expected = SolidApi.getOptions()
+      var expected = SolidApi.getOptions()
       expect( expected.lang ).toEqual( 'it' )
     })
   })
 
-  describe( 'setStyles', () => {
-    beforeEach( () => {
+  describe( 'setStyles', function () {
+    beforeEach( function () {
       SolidApi = require( '../dist/shared/SolidApi' )
     })
 
-    it( 'should set styles on SolidRender', () => {
-      const mockRender = {
+    it( 'should set styles on SolidRender', function () {
+      var mockRender = {
         constructor: { name: 'SolidRender' },
         setProps: jest.fn()
       }
-      const testProps = {
+      var testProps = {
         headerColors: 'cyan'
       }
       SolidApi.setOptions({ renderer: mockRender })
       SolidApi.setStyles( testProps )
       expect( mockRender.setProps.mock.calls.length ).toBe( 1 )
       expect( mockRender.setProps.mock.calls[0][0] ).toBe( testProps )
+    })
+
+    it( 'should do nothing if no styles are provided', function () {
+      var mockRender = {
+        constructor: { name: 'SolidRender' },
+        setProps: jest.fn()
+      }
+      SolidApi.setStyles()
+      expect( mockRender.setProps.mock.calls.length ).toBe( 0 )
     })
   })
 })

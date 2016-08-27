@@ -16,32 +16,32 @@ jest.unmock( '../dist/class/SolidRender' )
 jest.unmock( '../dist/shared/SolidApi' )
 jest.unmock( '../dist/class/SolidError' )
 
-let SolidError
+var SolidError = void 0
 
-describe( 'class/SolidError', () => {
+describe( 'class/SolidError', function () {
 
-  describe( 'constructor', () => {
+  describe( 'constructor', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       SolidError = require( '../dist/class/SolidError' )
     })
 
-    it( 'should initialize solid error', () => {
-      const solidError = new SolidError()
+    it( 'should initialize solid error', function () {
+      var solidError = new SolidError()
       expect( solidError.props ).toBeDefined()
     })
 
-    it( 'should initialize with message', () => {
-      const MESSAGE = 'A test error occurred'
-      const solidError = new SolidError( MESSAGE )
+    it( 'should initialize with message', function () {
+      var MESSAGE = 'A test error occurred'
+      var solidError = new SolidError( MESSAGE )
       expect( solidError.message ).toEqual( MESSAGE )
       expect( solidError.props.message ).toEqual( MESSAGE )
       expect( solidError.props ).toBeDefined()
     })
 
-    it( 'should initialize with message and props', () => {
-      const MESSAGE = 'A test error occurred'
-      const testProps = {
+    it( 'should initialize with message and props', function () {
+      var MESSAGE = 'A test error occurred'
+      var testProps = {
         code: 'ETST',
         errno: -100,
         name: 'TestError',
@@ -50,16 +50,16 @@ describe( 'class/SolidError', () => {
         explain: 'Test Error explanation',
         hints: 'Test Error hints'
       }
-      const solidError = new SolidError( MESSAGE, testProps )
+      var solidError = new SolidError( MESSAGE, testProps )
 
       expect( solidError.message ).toEqual( MESSAGE )
       expect( solidError.props.message ).toEqual( MESSAGE )
       expect( solidError.props ).toEqual( testProps )
     })
 
-    it( 'should initialize with props only', () => {
-      const MESSAGE = 'A test error occurred'
-      const testProps = {
+    it( 'should initialize with props only', function () {
+      var MESSAGE = 'A test error occurred'
+      var testProps = {
         code: 'ETST',
         errno: -100,
         name: 'TestError',
@@ -68,17 +68,17 @@ describe( 'class/SolidError', () => {
         explain: 'Test Error explanation',
         hints: 'Test Error hints'
       }
-      const solidError = new SolidError( testProps )
+      var solidError = new SolidError( testProps )
 
       expect( solidError.message ).toEqual( MESSAGE )
       expect( solidError.props.message ).toEqual( MESSAGE )
       expect( solidError.props ).toEqual( testProps )
     })
 
-    it( 'should initialize with Error', () => {
-      const MESSAGE = 'A test error occurred'
-      const ERROR = new Error( MESSAGE )
-      const solidError = new SolidError( ERROR )
+    it( 'should initialize with Error', function () {
+      var MESSAGE = 'A test error occurred'
+      var ERROR = new Error( MESSAGE )
+      var solidError = new SolidError( ERROR )
 
       expect( MESSAGE ).toEqual( solidError.message )
       expect( MESSAGE ).toEqual( solidError.props.message )

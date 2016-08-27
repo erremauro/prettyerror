@@ -25,6 +25,7 @@ var config = {
   docsDir: docsDir,
   devDocsDir:  docsDir + '/dev',
   defsDir: srcDir + '/**/*.yaml',
+  coverageDir: './coverage',
   testDir: '__tests__',
   srcJs: 'src/**/*.js',
   babelrc: './.babelrc',
@@ -51,10 +52,9 @@ gulp.task( 'help', $.taskListing )
 gulp.task( 'test', function ( done ) {
   logInfo( 'Running test...' )
   sequence(
-    'build-test',
+    'build',
     'sync-definitions',
     'run-test',
-    'build',
     done
   )
 })
@@ -62,10 +62,9 @@ gulp.task( 'test', function ( done ) {
 gulp.task( 'ci-test', function ( done ) {
   logInfo( 'Running travis test...' )
   sequence(
-    'build-test',
+    'build',
     'run-test-coverage',
     'run-codecov',
-    'build',
     done
   )
 })
@@ -102,7 +101,7 @@ gulp.task( 'run-test', function ( done ) {
  */
 gulp.task( 'run-test-coverage', function ( done ) {
   logInfo( 'Running tests with coverage reporting....' )
-  jest.runCLI({ collectCoverage: true }, config.testDir, function( success ) {
+  jest.runCLI({ coverage: true }, config.testDir, function( success ) {
     done()
   })
 })
@@ -120,30 +119,12 @@ gulp.task( 'run-codecov', function () {
 })
 
 /**
- * @name         build-test
- * @description  Clean build dir and transpile src using rewire for testing
- */
-gulp.task( 'build-test', function () {
-  logInfo( 'Building tests....' )
-
-  fs.ensureDirSync( config.buildDir )
-  var babelrc = JSON.parse( fs.readFileSync( config.babelrc ) )
-  babelrc.plugins.push('rewire')
-
-  return gulp
-    .src( config.srcJs )
-    .pipe( $.plumber() )
-    .pipe( $.babel( babelrc ) )
-    .pipe( gulp.dest( config.buildDir ) )
-})
-
-/**
  * @name          watch-source
  * @description   Watch source dir and rebuild on file changes.
  */
 gulp.task( 'watch', function () {
   logInfo( 'Watching sources for changes' )
-  return gulp.watch( config.srcJs, [ 'typecheck', 'run-build' ] )
+  return gulp.watch( config.srcJs, [ 'typecheck', 'build' ] )
 })
 
 /**
@@ -157,7 +138,7 @@ gulp.task( 'sync-definitions', function() {
 })
 
 /**
- * @name          run-build
+ * @name          build
  * @description   Parse sources with Babel and ouput results to build dir.
  */
 gulp.task( 'build', function () {
