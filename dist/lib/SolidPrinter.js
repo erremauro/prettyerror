@@ -5,6 +5,7 @@
  * 2016, Roberto Mauro
  * 
  */
+var SolidError = require('../class/SolidError');
 var SolidApi = require('../shared/SolidApi');
 
 /**
@@ -24,7 +25,7 @@ var SolidPrinter = {
    * @since 0.1.0
    */
   logError: function logError(error) {
-    if (error.constructor.name !== 'SolidError') {
+    if (!error instanceof SolidError) {
       console.log(error);
       return;
     }

@@ -3,7 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). However, note tha **major** API changes could be pushed on a minor semantic version until version 1.0.0 is reached.
 
-## [Unreleased]
+## [0.3.2] - 2016-09-01
+
+### Fixed
+- A bug that prevented objects extended from SolidError from being rendered correctly was fixed.
+
+## [0.3.1] - 2016-09-01
 
 - Source code converted to typeflow.
 

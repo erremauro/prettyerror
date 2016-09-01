@@ -3,6 +3,7 @@
  * 2016, Roberto Mauro
  * @flow
  */
+const SolidError = require( '../class/SolidError' )
 const SolidApi = require( '../shared/SolidApi' )
 
 /**
@@ -22,7 +23,7 @@ const SolidPrinter = {
    * @since 0.1.0
    */
   logError: ( error: any ) => {
-    if ( error.constructor.name !== 'SolidError' ) {
+    if ( !error instanceof SolidError ) {
       console.log( error )
       return
     }
