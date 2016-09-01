@@ -7,25 +7,25 @@ jest.unmock( '../dist/class/SolidObject' )
 jest.unmock( '../dist/lib/SolidText' )
 jest.unmock( '../dist/class/TTYRender' )
 
-const colors = require( 'chalk' )
-let TTYRender = null
+var colors = require( 'chalk' )
+var TTYRender = void 0
 
-describe( 'lib/ttyrender', () => {
+describe( 'lib/ttyrender', function () {
 
-  describe( 'constructor', () => {
+  describe( 'constructor', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should initialize with props', () => {
-      const testProps = {
+    it( 'should initialize with props', function () {
+      var testProps = {
         tables: false,
         columns: 70,
         wordwrap: false,
       }
 
-      const ttyRender = new TTYRender( testProps )
+      var ttyRender = new TTYRender( testProps )
 
       expect( testProps.tables ).toEqual( ttyRender.props.tables )
       expect( testProps.columns ).toEqual( ttyRender.props.columns )
@@ -33,16 +33,16 @@ describe( 'lib/ttyrender', () => {
     })
   })
 
-  describe( 'setProps', () => {
+  describe( 'setProps', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'it should set props', () => {
-      const ttyRender = new TTYRender()
+    it( 'it should set props', function () {
+      var ttyRender = new TTYRender()
 
-      const testProps = {
+      var testProps = {
         tables: false,
         columns: 70,
       }
@@ -55,19 +55,19 @@ describe( 'lib/ttyrender', () => {
 
   })
 
-  describe( 'transform', () => {
+  describe( 'transform', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should compose function arguments', () => {
-      const ttyRender = new TTYRender()
-      const argText = 'TEST'
-      const fn1 = jest.fn()
-      const fn2 = jest.fn()
+    it( 'should compose function arguments', function () {
+      var ttyRender = new TTYRender()
+      var argText = 'TEST'
+      var fn1 = jest.fn()
+      var fn2 = jest.fn()
 
-      const composeFn = ttyRender.compose( fn1, fn2 )
+      var composeFn = ttyRender.compose( fn1, fn2 )
       expect( typeof composeFn ).toEqual( 'function' )
 
       composeFn( argText )
@@ -76,37 +76,37 @@ describe( 'lib/ttyrender', () => {
       expect( fn2.mock.calls.length ).toBe( 1 )
     })
 
-    it( 'should have emojis function', () => {
-      const ttyRender = new TTYRender()
+    it( 'should have emojis function', function () {
+      var ttyRender = new TTYRender()
       expect( typeof ttyRender.emojis ).toEqual( 'function' )
     })
 
-    it( 'should restore colon from placeholder', () => {
-      const ttyRender = new TTYRender()
-      const TEXT = 'TEST*#COLON|*'
-      const expected = 'TEST:'
-      const actual = ttyRender.undoColon( TEXT )
+    it( 'should restore colon from placeholder', function () {
+      var ttyRender = new TTYRender()
+      var TEXT = 'TEST*#COLON|*'
+      var expected = 'TEST:'
+      var actual = ttyRender.undoColon( TEXT )
       expect( expected ).toEqual( actual )
 
     })
 
-    it( 'should unescape entities', () => {
-      const ttyRender = new TTYRender()
-      const TEXT = '&quot;result&quot;: i &amp; j &lt;&gt; &#39;a&#39;'
-      const expected = '"result": i & j <> \'a\''
-      const actual = ttyRender.unescapeEntities( TEXT )
+    it( 'should unescape entities', function () {
+      var ttyRender = new TTYRender()
+      var TEXT = '&quot;result&quot;: i &amp; j &lt;&gt; &#39;a&#39;'
+      var expected = '"result": i & j <> \'a\''
+      var actual = ttyRender.unescapeEntities( TEXT )
       expect( expected ).toEqual( actual )
     })
 
-    it( 'it should apply default transformation to text', () => {
-      const ttyRender = new TTYRender()
-      const TEXT = '&quot;result&quot;*#COLON|* :heart:'
-      const expected = '"result": '
-      const expectedEmojiCode = 10084 // unicode entity decimal
-      const actual = ttyRender.transform( TEXT )
-      const actualEmojiCode = actual.codePointAt(10)
+    it( 'it should apply default transformation to text', function () {
+      var ttyRender = new TTYRender()
+      var TEXT = '&quot;result&quot;*#COLON|* :heart:'
+      var expected = '"result": '
+      var expectedEmojiCode = 10084 // unicode entity decimal
+      var actual = ttyRender.transform( TEXT )
+      var actualEmojiCode = actual.codePointAt(10)
 
-      const actualTextOnly = actual.substr( 0, actual.length -3 )
+      var actualTextOnly = actual.substr( 0, actual.length -3 )
 
       expect( expected ).toEqual( actualTextOnly )
       expect( expectedEmojiCode ).toEqual( actualEmojiCode )
@@ -114,184 +114,184 @@ describe( 'lib/ttyrender', () => {
 
   })
 
-  describe( 'blockquote', () => {
+  describe( 'blockquote', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'it should convert ""> blockquote" to markdown', () => {
-      const blockquote = colors.gray.italic
-      const ttyRender = new TTYRender({ blockquote })
-      const TEXT = 'Blockquote text'
+    it( 'it should convert ""> blockquote" to markdown', function () {
+      var blockquote = colors.gray.italic
+      var ttyRender = new TTYRender({ blockquote })
+      var TEXT = 'Blockquote text'
 
-      const expected = '\n' + blockquote( '   Blockquote text' ) + '\n'
-      const actual = ttyRender.blockquote( TEXT )
+      var expected = '\n' + blockquote( '   Blockquote text' ) + '\n'
+      var actual = ttyRender.blockquote( TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'br', () => {
+  describe( 'br', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should return an hard return (wordwrap: true)', () => {
-      const ttyRender = new TTYRender({ wordwrap: true })
-      const expected = '\r'
-      const actual = ttyRender.br()
+    it( 'should return an hard return (wordwrap: true)', function () {
+      var ttyRender = new TTYRender({ wordwrap: true })
+      var expected = '\r'
+      var actual = ttyRender.br()
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should return an soft return (wordwrap: false)', () => {
-      const ttyRender = new TTYRender({ wordwrap: false })
-      const expected = '\n'
-      const actual = ttyRender.br()
+    it( 'should return an soft return (wordwrap: false)', function () {
+      var ttyRender = new TTYRender({ wordwrap: false })
+      var expected = '\n'
+      var actual = ttyRender.br()
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'code', () => {
+  describe( 'code', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should highlight javascript `code` blocks', () => {
-      const ttyRender = new TTYRender()
-      const code = 'function sayHello() {\n'
+    it( 'should highlight javascript `code` blocks', function () {
+      var ttyRender = new TTYRender()
+      var code = 'function sayHello() {\n'
         + '    console.log( "Hello World!" );\n'
         + '};\n'
-      const expected = '\n   \u001b[94mfunction\u001b[39m '
+      var expected = '\n   \u001b[94mfunction\u001b[39m '
         + '\u001b[37msayHello\u001b[39m\u001b[90m(\u001b[39m\u001b[90m)'
         + '\u001b[39m \u001b[33m{\u001b[39m\n       \u001b[34mconsole\u001b[39m'
         + '\u001b[32m.\u001b[39m\u001b[34mlog\u001b[39m\u001b[90m(\u001b[39m '
         + '\u001b[92m"Hello World!"\u001b[39m \u001b[90m)\u001b[39m\u001b[90m;'
         + '\u001b[39m\n   \u001b[33m}\u001b[39m\u001b[90m;\u001b[39m\n   \n'
-      const actual = ttyRender.code( code, 'javascript' )
+      var actual = ttyRender.code( code, 'javascript' )
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'codespan', () => {
+  describe( 'codespan', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should convert non javascript `code` blocks to yellow text', () => {
-      const codespan = colors.yellow
-      const ttyRender = new TTYRender( { codespan } )
-      const text = 'def say_hello:\n'
+    it( 'should convert non javascript `code` blocks to yellow text', function () {
+      var codespan = colors.yellow
+      var ttyRender = new TTYRender( { codespan } )
+      var text = 'def say_hello:\n'
         + '  put "Hello World"\n'
         + 'end\n'
       // takes colon substitution into account
-      const expected = codespan( 'def say_hello*#COLON|*\n'
+      var expected = codespan( 'def say_hello*#COLON|*\n'
         + '  put "Hello World"\n'
         + 'end\n' )
-      const actual = ttyRender.codespan( text )
+      var actual = ttyRender.codespan( text )
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should convert `codespan` to yellow text', () => {
-      const codespan = colors.yellow
-      const ttyRender = new TTYRender( { codespan } )
-      const text = 'Test'
-      const expected = codespan( text )
-      const actual = ttyRender.codespan( text )
+    it( 'should convert `codespan` to yellow text', function () {
+      var codespan = colors.yellow
+      var ttyRender = new TTYRender( { codespan } )
+      var text = 'Test'
+      var expected = codespan( text )
+      var actual = ttyRender.codespan( text )
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'del', () => {
+  describe( 'del', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should convert ~~del~~ to strikethrough text', () => {
-      const strikethrough = colors.dim.gray.strikethrough
-      const ttyRender = new TTYRender( { strikethrough } )
-      const TEXT = 'Test'
-      const expected = strikethrough( TEXT )
-      const actual = ttyRender.del( TEXT )
-      expect( expected ).toEqual( actual )
-    })
-
-  })
-
-  describe( 'em', () => {
-
-    beforeEach( () => {
-      TTYRender = require( '../dist/class/TTYRender' )
-    })
-
-    it( 'should convert _em_ to italic', () => {
-      const em = colors.italic
-      const ttyRender = new TTYRender( { em } )
-      const text = 'Test'
-      const expected = em( text )
-      const actual = ttyRender.em( text )
+    it( 'should convert ~~del~~ to strikethrough text', function () {
+      var strikethrough = colors.dim.gray.strikethrough
+      var ttyRender = new TTYRender( { strikethrough } )
+      var TEXT = 'Test'
+      var expected = strikethrough( TEXT )
+      var actual = ttyRender.del( TEXT )
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'heading', () => {
+  describe( 'em', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should convert first heading to blue bold text', () => {
-      const firstHeading = colors.blue.bold
-      const ttyRender = new TTYRender( { firstHeading } )
-      const LEVEL = 1
-      const TEXT = 'Test'
-      const RAW = '# ' + TEXT
-      const expected = '\n' + firstHeading( RAW ) + '\n'
-      const actual = ttyRender.heading( TEXT, LEVEL )
+    it( 'should convert _em_ to italic', function () {
+      var em = colors.italic
+      var ttyRender = new TTYRender( { em } )
+      var text = 'Test'
+      var expected = em( text )
+      var actual = ttyRender.em( text )
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should convert other headings to green text', () => {
-      const heading = colors.green
-      const ttyRender = new TTYRender( { heading } )
-      const TEXT = 'Test'
-      let prefix = '#'
-      for ( let level = 2; level < 6; level++ ) {
+  })
+
+  describe( 'heading', function () {
+
+    beforeEach( function () {
+      TTYRender = require( '../dist/class/TTYRender' )
+    })
+
+    it( 'should convert first heading to blue bold text', function () {
+      var firstHeading = colors.blue.bold
+      var ttyRender = new TTYRender( { firstHeading } )
+      var LEVEL = 1
+      var TEXT = 'Test'
+      var RAW = '# ' + TEXT
+      var expected = '\n' + firstHeading( RAW ) + '\n'
+      var actual = ttyRender.heading( TEXT, LEVEL )
+      expect( expected ).toEqual( actual )
+    })
+
+    it( 'should convert other headings to green text', function () {
+      var heading = colors.green
+      var ttyRender = new TTYRender( { heading } )
+      var TEXT = 'Test'
+      var prefix = '#'
+      for ( var level = 2; level < 6; level++ ) {
         prefix += '#'
-        const raw = prefix + ' ' + TEXT
-        const expected = '\n' + heading( raw ) + '\n'
-        const actual = ttyRender.heading( TEXT, level, raw )
+        var raw = prefix + ' ' + TEXT
+        var expected = '\n' + heading( raw ) + '\n'
+        var actual = ttyRender.heading( TEXT, level, raw )
         expect( expected ).toEqual( actual )
       }
     })
 
-    it( 'should not wordwrap heading if specified', () => {
-      const ttyRender = new TTYRender( { wordwrap: false } )
-      const HEADING_LENGTH = 120
+    it( 'should not wordwrap heading if specified', function () {
+      var ttyRender = new TTYRender( { wordwrap: false } )
+      var HEADING_LENGTH = 120
       // create a TEXT of HEADING_LENGTH chars
-      const TEXT = ( () => {
-        const text = []
-        for ( let i = 0; i < HEADING_LENGTH; i++ ) {
+      var TEXT = ( function () {
+        var text = []
+        for ( var i = 0; i < HEADING_LENGTH; i++ ) {
           text.push( 'a' )
         }
         return text.join('')
       })()
-      const prefix = '#'
-      const level = 1
-      const raw = prefix + ' ' + TEXT
+      var prefix = '#'
+      var level = 1
+      var raw = prefix + ' ' + TEXT
 
-      const expected = '\n' + colors.blue.bold( raw ) + '\n'
-      const expectedLength = raw.length
+      var expected = '\n' + colors.blue.bold( raw ) + '\n'
+      var expectedLength = raw.length
 
-      const actual = ttyRender.heading( TEXT, level, raw )
-      const actualLength = actual.split('\n')[1]
+      var actual = ttyRender.heading( TEXT, level, raw )
+      var actualLength = actual.split('\n')[1]
         .replace( /\u001b\[(?:\d{1,3})(?:;\d{1,3})*m/g, '' ).length
 
       expect( expected ).toEqual( actual )
@@ -299,238 +299,238 @@ describe( 'lib/ttyrender', () => {
     })
   })
 
-  describe( 'hr', () => {
+  describe( 'hr', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should convert --- and *** to an horizontal line', () => {
-      const COLUMNS = 80
-      const LINE_CHAR = '-'
-      const ttyRender = new TTYRender( { columns: COLUMNS, hr: colors.reset } )
-      const BRS = [ '---', '***' ]
+    it( 'should convert --- and *** to an horizontal line', function () {
+      var COLUMNS = 80
+      var LINE_CHAR = '-'
+      var ttyRender = new TTYRender( { columns: COLUMNS, hr: colors.reset } )
+      var BRS = [ '---', '***' ]
 
-      const expected = '\n' + colors.reset(
+      var expected = '\n' + colors.reset(
         new Array( COLUMNS ).join( LINE_CHAR ) ) + '\n'
 
-      BRS.forEach( line => {
-        const actual = ttyRender.hr( line )
+      BRS.forEach( function (line) {
+        var actual = ttyRender.hr( line )
         expect( expected ).toEqual( actual )
       })
     })
 
   })
 
-  describe( 'html', () => {
+  describe( 'html', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should convert html to stylized text', () => {
-      const TEXT = '<div id="app"><h1># Welcome to App</h1></div>'
-      const ttyRender = new TTYRender( { html: colors.gray } )
+    it( 'should convert html to stylized text', function () {
+      var TEXT = '<div id="app"><h1># Welcome to App</h1></div>'
+      var ttyRender = new TTYRender( { html: colors.gray } )
 
-      const expected = colors.gray( TEXT )
-      const actual = ttyRender.html( TEXT )
+      var expected = colors.gray( TEXT )
+      var actual = ttyRender.html( TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'image', () => {
+  describe( 'image', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should convert ![img](...) to blue text with title', () => {
-      const HREF = 'http://www.example.com/image.png'
-      const ALT_TEXT = 'alt-text'
-      const TITLE = 'image title'
-      const ttyRender = new TTYRender( { link: colors.blue } )
+    it( 'should convert ![img](...) to blue text with title', function () {
+      var HREF = 'http://www.example.com/image.png'
+      var ALT_TEXT = 'alt-text'
+      var TITLE = 'image title'
+      var ttyRender = new TTYRender( { link: colors.blue } )
 
-      const expected = '\n' + colors.blue(
+      var expected = '\n' + colors.blue(
         '![' + ALT_TEXT + ' - ' + TITLE + '](' + HREF + ')' ) + '\n'
-      const actual = ttyRender.image( HREF, TITLE, ALT_TEXT )
+      var actual = ttyRender.image( HREF, TITLE, ALT_TEXT )
 
       expect( expected.length ).toEqual( actual.length )
     })
 
-    it( 'should convert ![img](...) to blue text (no title)', () => {
-      const HREF = 'http://www.example.com/image.png'
-      const TITLE = null
-      const ALT_TEXT = 'alt-text'
-      const ttyRender = new TTYRender( { link: colors.blue } )
+    it( 'should convert ![img](...) to blue text (no title)', function () {
+      var HREF = 'http://www.example.com/image.png'
+      var TITLE = null
+      var ALT_TEXT = 'alt-text'
+      var ttyRender = new TTYRender( { link: colors.blue } )
 
-      const expected = '\n' + colors.blue(
+      var expected = '\n' + colors.blue(
         '![' + ALT_TEXT + '](' + HREF + ')' ) + '\n'
-      const actual = ttyRender.image( HREF, TITLE, ALT_TEXT )
+      var actual = ttyRender.image( HREF, TITLE, ALT_TEXT )
 
       expect( expected.length ).toEqual( actual.length )
     })
 
   })
 
-  describe( 'link', () => {
+  describe( 'link', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should render [link] to blue underlined text', () => {
-      const HREF = 'http://www.google.com'
-      const TITLE = 'Link'
-      const TEXT = 'link'
-      const ttyRender = new TTYRender({ emoji:false })
+    it( 'should render [link] to blue underlined text', function () {
+      var HREF = 'http://www.google.com'
+      var TITLE = 'Link'
+      var TEXT = 'link'
+      var ttyRender = new TTYRender({ emoji:false })
 
-      const expected = colors.blue(
+      var expected = colors.blue(
         TEXT + ' (' + colors.blue.underline( HREF ) + ')'
       )
-      const actual = ttyRender.link( HREF, TITLE, TEXT )
+      var actual = ttyRender.link( HREF, TITLE, TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should remove javascript from link', () => {
+    it( 'should remove javascript from link', function () {
       // eslint-disable-next-line
-      const HREF = 'javascript:() =>{ alert("Hello World"); };'
-      const TITLE = 'Link'
-      const TEXT = 'link'
-      const ttyRender = new TTYRender({emoji:false})
+      var HREF = 'javascript:function (){ alert("Hello World"); };'
+      var TITLE = 'Link'
+      var TEXT = 'link'
+      var ttyRender = new TTYRender({emoji:false})
 
-      const expected = ''
-      const actual = ttyRender.link( HREF, TITLE, TEXT )
+      var expected = ''
+      var actual = ttyRender.link( HREF, TITLE, TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'list', () => {
+  describe( 'list', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should render an unordered list of items', () => {
-      const IS_ORDERED = false
-      const LIST_BODY = '\n * First'
+    it( 'should render an unordered list of items', function () {
+      var IS_ORDERED = false
+      var LIST_BODY = '\n * First'
         + '\n * Second'
         + '\n * Third'
 
-      const ttyRender = new TTYRender({ listitem: colors.reset })
+      var ttyRender = new TTYRender({ listitem: colors.reset })
 
-      let expected = colors.reset( LIST_BODY )
+      var expected = colors.reset( LIST_BODY )
       expected = '\n' + expected
         .split('\n')
         .map( line => '    ' + line.trim() )
         .reduce( ( acc, line ) => acc + line + '\n' )
         .trim() + '\n'
-      const actual = ttyRender.list( LIST_BODY, IS_ORDERED )
+      var actual = ttyRender.list( LIST_BODY, IS_ORDERED )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should render an ordered list of items', () => {
-      const IS_ORDERED = true
-      const LIST_BODY = '\n * First'
+    it( 'should render an ordered list of items', function () {
+      var IS_ORDERED = true
+      var LIST_BODY = '\n * First'
         + '\n * Second'
         + '\n * Third'
-      let counter = 0
+      var counter = 0
         , expected = ''
 
-      const ttyRender = new TTYRender({ listitem: colors.reset })
+      var ttyRender = new TTYRender({ listitem: colors.reset })
 
       expected = colors.reset( LIST_BODY )
       expected = '\n' + expected
         .split('\n')
-        .map( line => {
+        .map( function (line) {
           if ( line.match( /\s\*\s/g ) ) { counter++ }
           return '    ' + line.replace( '*', counter + '.' ).trim()
         })
         .reduce( ( acc, line ) => acc + line + '\n' )
         .trim() + '\n'
-      const actual = ttyRender.list( LIST_BODY, IS_ORDERED )
+      var actual = ttyRender.list( LIST_BODY, IS_ORDERED )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should convert a single list item', () => {
-      const LIST_ITEM = 'Item'
+    it( 'should convert a single list item', function () {
+      var LIST_ITEM = 'Item'
 
-      const ttyRender = new TTYRender({ listitem: colors.reset })
+      var ttyRender = new TTYRender({ listitem: colors.reset })
 
-      const expected = '\n * ' + LIST_ITEM
-      const actual = ttyRender.listitem( LIST_ITEM )
+      var expected = '\n * ' + LIST_ITEM
+      var actual = ttyRender.listitem( LIST_ITEM )
 
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'table', () => {
+  describe( 'table', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should format a tablecell', () => {
-      const TABLE_CELL_SPLIT = '^*||*^'
-      const CELL_TEXT = 'test'
+    it( 'should format a tablecell', function () {
+      var TABLE_CELL_SPLIT = '^*||*^'
+      var CELL_TEXT = 'test'
 
-      const ttyRender = new TTYRender({})
+      var ttyRender = new TTYRender({})
 
-      const expected = CELL_TEXT + TABLE_CELL_SPLIT
-      const actual = ttyRender.tablecell( CELL_TEXT )
-
-      expect( expected ).toEqual( actual )
-    })
-
-    it( 'should format a tablerow', () => {
-      const TABLE_ROW_WRAP = '*|*|*|*'
-      const CELL_TEXT = 'test'
-      const ttyRender = new TTYRender({})
-
-      const expected = TABLE_ROW_WRAP + CELL_TEXT + TABLE_ROW_WRAP + '\n'
-      const actual = ttyRender.tablerow( CELL_TEXT )
+      var expected = CELL_TEXT + TABLE_CELL_SPLIT
+      var actual = ttyRender.tablecell( CELL_TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should convert markdown table to cli-table', () => {
-      const TABLE_CELL_SPLIT = '^*||*^'
-      const TABLE_ROW_WRAP = '*|*|*|*'
-      const HEADER = TABLE_ROW_WRAP + 'command' + TABLE_CELL_SPLIT
+    it( 'should format a tablerow', function () {
+      var TABLE_ROW_WRAP = '*|*|*|*'
+      var CELL_TEXT = 'test'
+      var ttyRender = new TTYRender({})
+
+      var expected = TABLE_ROW_WRAP + CELL_TEXT + TABLE_ROW_WRAP + '\n'
+      var actual = ttyRender.tablerow( CELL_TEXT )
+
+      expect( expected ).toEqual( actual )
+    })
+
+    it( 'should convert markdown table to cli-table', function () {
+      var TABLE_CELL_SPLIT = '^*||*^'
+      var TABLE_ROW_WRAP = '*|*|*|*'
+      var HEADER = TABLE_ROW_WRAP + 'command' + TABLE_CELL_SPLIT
         + 'description' + TABLE_CELL_SPLIT + TABLE_ROW_WRAP + '\n'
-      const BODY = TABLE_ROW_WRAP + 'ls -l' + TABLE_CELL_SPLIT
+      var BODY = TABLE_ROW_WRAP + 'ls -l' + TABLE_CELL_SPLIT
         + 'List all files' + TABLE_CELL_SPLIT + TABLE_ROW_WRAP + '\n'
-      const ttyRender = new TTYRender({})
-      const expected = '\n\u001b[0m\u001b[90m┌─────────┬────────────────┐\u001b[39m'
+      var ttyRender = new TTYRender({})
+      var expected = '\n\u001b[0m\u001b[90m┌─────────┬────────────────┐\u001b[39m'
         + '\n\u001b[90m│\u001b[39m\u001b[31m command \u001b[39m\u001b[90m│'
         + '\u001b[39m\u001b[31m description    \u001b[39m\u001b[90m│\u001b[39m'
         + '\n\u001b[90m├─────────┼────────────────┤\u001b[39m\n\u001b[90m│'
         + '\u001b[39m ls -l   \u001b[90m│\u001b[39m List all files \u001b[90m│'
         + '\u001b[39m\n\u001b[90m└─────────┴────────────────┘\u001b[39m\u001b[0m'
         + '\n'
-      const actual = ttyRender.table( HEADER, BODY )
+      var actual = ttyRender.table( HEADER, BODY )
       expect( expected ).toEqual( actual )
     })
 
   })
 
-  describe( 'paragraph', () => {
+  describe( 'paragraph', function () {
 
-    beforeEach( () => {
+    beforeEach( function () {
       TTYRender = require( '../dist/class/TTYRender' )
     })
 
-    it( 'should wrap paragraphs to given columns', () => {
-      const COLUMNS = 80
-      const ttyRender = new TTYRender( { columns: COLUMNS } )
-      const longText = 'Lorem Ipsum is simply dummy text of the printing and '
+    it( 'should wrap paragraphs to given columns', function () {
+      var COLUMNS = 80
+      var ttyRender = new TTYRender( { columns: COLUMNS } )
+      var longText = 'Lorem Ipsum is simply dummy text of the printing and '
         + 'typesetting industry. Lorem Ipsum has been the industry\'s standard '
         + 'dummy text ever since the 1500s, when an unknown printer took a '
         + 'galley of type and scrambled it to make a type specimen book. It has '
@@ -540,7 +540,7 @@ describe( 'lib/ttyrender', () => {
         + 'passages, and more recently with desktop publishing software like '
         + 'Aldus PageMaker including versions of Lorem Ipsum.'
       ttyRender.paragraph( longText )
-        .split('\n').forEach( item => {
+        .split('\n').forEach( function (item) {
           expect( item.length <= COLUMNS ).toBeTruthy()
         })
     })

@@ -8,23 +8,23 @@ jest.unmock( '../dist/lib/SolidText' )
 jest.unmock( '../dist/class/TTYRender' )
 jest.unmock( '../dist/class/SolidRender' )
 
-const colors = require( 'chalk' )
-let SolidRender
+var colors = require( 'chalk' )
+var SolidRender = void 0
 
-describe( 'lib/solidrender', () => {
-  describe( 'constructor', () => {
-    beforeEach( () => {
+describe( 'lib/solidrender', function () {
+  describe( 'constructor', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should initialize props', () => {
-      const solidRender = new SolidRender()
+    it( 'should initialize props', function () {
+      var solidRender = new SolidRender()
       expect( solidRender.props ).toBeDefined()
     })
 
-    it( 'should update props after initialization', () => {
-      const solidRender = new SolidRender()
-      const testProps = {
+    it( 'should update props after initialization', function () {
+      var solidRender = new SolidRender()
+      var testProps = {
         columns: 60,
         wordwrap: false
       }
@@ -36,235 +36,251 @@ describe( 'lib/solidrender', () => {
 
   })
 
-  describe( 'header', () => {
-    beforeEach( () => {
+  describe( 'header', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should render header', () => {
-      const solidRender = new SolidRender()
-      const TEXT = 'Test'
+    it( 'should render header', function () {
+      var solidRender = new SolidRender()
+      var TEXT = 'Test'
       solidRender.setProps({
         columns: 23,
         headerColor: 'cyan',
         wordwrap: true
       })
-      const expected = '\n' + colors.cyan( '==== ERROR: Test =====' ) + '\n'
-      const actual = solidRender.header( TEXT )
+      var expected = '\n' + colors.cyan( '==== ERROR: Test =====' ) + '\n'
+      var actual = solidRender.header( TEXT )
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should render header without readableName', () => {
-      const solidRender = new SolidRender()
+    it( 'should render header without readableName', function () {
+      var solidRender = new SolidRender()
       solidRender.setProps({
         columns: 23,
         headerColor: 'cyan',
         wordwrap: true
       })
-      const expected = '\n' + colors.cyan( '==== ERROR ===========' ) + '\n'
-      const actual = solidRender.header( )
+      var expected = '\n' + colors.cyan( '==== ERROR ===========' ) + '\n'
+      var actual = solidRender.header( )
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'message', () => {
-    beforeEach( () => {
+  describe( 'message', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should render message', () => {
-      const renderProps = { messageColor: 'reset', wordwrap: false }
-      const solidRender = new SolidRender( renderProps )
-      const TEXT = 'test'
+    it( 'should render message', function () {
+      var renderProps = { messageColor: 'reset', wordwrap: false }
+      var solidRender = new SolidRender( renderProps )
+      var TEXT = 'test'
+      var EXPECTED_TEXT = 'Test'
 
-      const actual = solidRender.message( TEXT )
-      const expected = '\n' + colors.reset( TEXT ) + '\n'
+      var actual = solidRender.message( TEXT )
+      var expected = '\n' + colors.reset( EXPECTED_TEXT ) + '\n'
+
+      expect( expected ).toEqual( actual )
+    })
+
+    it( 'should strip error codes from message', function () {
+      var renderProps = { messageColor: 'reset', wordwrap: true }
+      var solidRender = new SolidRender( renderProps )
+      var TEXT = 'Error: ENOENT: no such file or directory.'
+      var EXPECTED_TEXT = 'No such file or directory.'
+
+
+      var actual = solidRender.message( TEXT )
+      var expected = '\n' + colors.reset( EXPECTED_TEXT ) + '\n'
 
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'explain', () => {
-    beforeEach( () => {
+  describe( 'explain', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should render explain', () => {
-      const renderProps = {
+    it( 'should render explain', function () {
+      var renderProps = {
         explain: 'reset',
         wordwrap: true,
         markdown: false
       }
-      const solidRender = new SolidRender( renderProps )
-      const TEXT = 'test'
+      var solidRender = new SolidRender( renderProps )
+      var TEXT = 'test'
+      var EXPECTED_TEXT = 'Test'
 
-      const expected = '\n' + colors.reset( TEXT )
-      const actual = solidRender.explain( TEXT )
+      var expected = '\n' + colors.reset( EXPECTED_TEXT )
+      var actual = solidRender.explain( TEXT )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should format markdown in explain section', () => {
-      const renderProps = { markdown: true }
-      const solidRender = new SolidRender( renderProps )
-      const TEXT = 'bold text'
-      const MD_TEXT = '**' + TEXT + '**'
+    it( 'should format markdown in explain section', function () {
+      var renderProps = { markdown: true }
+      var solidRender = new SolidRender( renderProps )
+      var TEXT = 'bold text'
+      var MD_TEXT = '**' + TEXT + '**'
 
-      const expected = '\n' + colors.bold( TEXT ) + '\n'
-      const actual = solidRender.explain( MD_TEXT )
+      var expected = '\n' + colors.bold( TEXT ) + '\n'
+      var actual = solidRender.explain( MD_TEXT )
 
       expect( expected).toEqual( actual )
     })
   })
 
-  describe( 'trace', () => {
-    beforeEach( () => {
+  describe( 'trace', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should format trace', () => {
-      const TEXT = 'Test'
+    it( 'should format trace', function () {
+      var TEXT = 'Test'
 
-      const renderProps = {
+      var renderProps = {
         columns: 22,
         traceColor: 'reset',
         traceTitle: 'STACKTRACE',
         wordwrap: false,
       }
-      const solidRender = new SolidRender( renderProps )
+      var solidRender = new SolidRender( renderProps )
 
-      const expected = '\n' + colors.reset( '---- STACKTRACE -----' )
+      var expected = '\n' + colors.reset( '---- STACKTRACE -----' )
         + '\n\n' + TEXT
-      const actual = solidRender.trace( TEXT )
+      var actual = solidRender.trace( TEXT )
 
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'hints', () => {
-    beforeEach( () => {
+  describe( 'hints', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should render hints', () => {
-      const renderProps = {
+    it( 'should render hints', function () {
+      var renderProps = {
         columns: 22,
         hintsColor: 'reset',
         hintsTitle: 'HINTS',
         markdown: false,
         wordwrap: false,
       }
-      const solidRender = new SolidRender( renderProps )
-      const TEXT = 'example text'
-      const expected =
-        '\n' + colors.reset( '---- HINTS ----------' ) + '\n\n' + TEXT + '\n'
-      const actual = solidRender.hints( TEXT )
+      var solidRender = new SolidRender( renderProps )
+      var TEXT = 'example text'
+      var EXPECTED_TEXT = 'Example text'
+      var expected =
+        '\n' + colors.reset( '---- HINTS ----------' ) + '\n\n' + EXPECTED_TEXT + '\n'
+      var actual = solidRender.hints( TEXT )
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should format markdown in hints section', () => {
-      const renderProps = {
+    it( 'should format markdown in hints section', function () {
+      var renderProps = {
         columns: 22,
         hintsColor: 'reset',
         hintsTitle: 'HINTS',
         markdown: true,
         wordwrap: false,
       }
-      const solidRender = new SolidRender( renderProps )
+      var solidRender = new SolidRender( renderProps )
 
-      const TEXT = 'example text'
-      const MD_TEXT = '_' + TEXT + '_'
+      var TEXT = 'example text'
+      var MD_TEXT = '_' + TEXT + '_'
 
-      const coloredDivider = colors.reset( '---- HINTS ----------' )
-      const markdownContent = colors.italic( TEXT )
-      const expected = `\n${coloredDivider}\n\n${markdownContent}\n`
-      const actual = solidRender.hints( MD_TEXT )
+      var coloredDivider = colors.reset( '---- HINTS ----------' )
+      var markdownContent = colors.italic( TEXT )
+      var expected = `\n${coloredDivider}\n\n${markdownContent}\n`
+      var actual = solidRender.hints( MD_TEXT )
 
       expect( expected ).toEqual( actual )
     })
   })
 
-  describe( 'footer', () => {
-    beforeEach( () => {
+  describe( 'footer', function () {
+    beforeEach( function () {
       SolidRender = require( '../dist/class/SolidRender' )
     })
 
-    it( 'should render footer', () => {
-      const ECODE = 'ETEST'
-      const EPATH = '/path/to/test'
-      const renderProps = {
+    it( 'should render footer', function () {
+      var ECODE = 'ETEST'
+      var EPATH = '/path/to/test'
+      var renderProps = {
         columns: 22,
         footerColor: 'blue',
         markdown: false,
         wordwrap: true,
       }
-      const solidRender = new SolidRender( renderProps )
+      var solidRender = new SolidRender( renderProps )
 
-      const DIVIDER = '---------------------'
-      const expected = '\n' + colors.blue(
+      var DIVIDER = '---------------------'
+      var expected = '\n' + colors.blue(
         DIVIDER + '\n'
         + 'Code: ' + ECODE + '\n'
         + 'Path: ' + EPATH
         + '\n' + DIVIDER
       ) + '\n'
-      const actual = solidRender.footer( ECODE, EPATH )
+      var actual = solidRender.footer( ECODE, EPATH )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should format "footer" section without Path', () => {
-      const ECODE = 'ETEST'
-      const renderProps = {
+    it( 'should format "footer" section without Path', function () {
+      var ECODE = 'ETEST'
+      var renderProps = {
         columns: 22,
         footerColor: 'blue',
         markdown: false,
         wordwrap: true,
       }
-      const solidRender = new SolidRender( renderProps )
+      var solidRender = new SolidRender( renderProps )
 
-      const DIVIDER = '---------------------'
-      const expected = '\n' + colors.blue(
+      var DIVIDER = '---------------------'
+      var expected = '\n' + colors.blue(
         DIVIDER + '\n'
         + 'Code: ' + ECODE
         + '\n' + DIVIDER
       ) + '\n'
 
-      const actual = solidRender.footer( ECODE, null )
+      var actual = solidRender.footer( ECODE, null )
 
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should render footer section wihout code', () => {
-      const EPATH = '/path/to/test'
-      const renderProps = {
+    it( 'should render footer section wihout code', function () {
+      var EPATH = '/path/to/test'
+      var renderProps = {
         columns: 22,
         footerColor: 'blue',
         markdown: false,
         wordwrap: true,
       }
-      const solidRender = new SolidRender( renderProps )
+      var solidRender = new SolidRender( renderProps )
 
-      const DIVIDER = '---------------------'
-      const expected = '\n' + colors.blue(
+      var DIVIDER = '---------------------'
+      var expected = '\n' + colors.blue(
         DIVIDER + '\n'
         + 'Path: ' + EPATH
         + '\n' + DIVIDER
       ) + '\n'
 
-      const actual = solidRender.footer( null, EPATH )
+      var actual = solidRender.footer( null, EPATH )
       expect( expected ).toEqual( actual )
     })
 
-    it( 'should return nothing if parameters are missing', () => {
-      const renderProps = {
+    it( 'should return nothing if parameters are missing', function () {
+      var renderProps = {
         columns: 22,
         footerColor: 'blue',
         markdown: false,
         wordwrap: true,
       }
-      const solidRender = new SolidRender( renderProps )
+      var solidRender = new SolidRender( renderProps )
 
-      const actual = solidRender.footer( null, null )
+      var actual = solidRender.footer( null, null )
       expect( '' ).toEqual( actual )
     })
   })

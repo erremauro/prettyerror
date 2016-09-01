@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/). However, note tha **major** API changes could be pushed on a minor semantic version until version 1.0.0 is reached.
 
+## [Unreleased]
+
+- Source code converted to typeflow.
+
+### Changed
+- Native error's message will now render without error code prefix when using
+the default renderer.
+
+
 ## [0.3.0] - 2016-08-21
 
 ### Added

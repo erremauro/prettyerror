@@ -8,6 +8,8 @@ the terminal to help your users resolve the issue.
 **Author:** Roberto Mauro <erremauro@icloud.com>  
 **License**: MIT  
 
+#### Tables of Contents
+
 * [solid-error](#module_solid-error)
     * _static_
         * [.SolidError](#module_solid-error.SolidError)

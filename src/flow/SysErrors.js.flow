@@ -1,0 +1,10 @@
+/**
+ * @name module:lib/SysErrors~SysErrorsOptions
+ * @typedef SysErrorsOptions
+ * @property {string} lang The error language
+ * @property {string[]} includes Additional error definition directories
+ */
+declare type SysErrorsOptions = {
+  lang: string,
+  includes: string[]
+}

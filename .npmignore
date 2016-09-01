@@ -1,7 +1,8 @@
-./src/
+src
 .babelrc
 .bithoundrc
 .env
+.gitattributes
 .editorconfig
 .eslintrc.json
 .eslintignore
@@ -13,6 +14,7 @@ __tests__
 coverage
 examples
 jsdocs
+gulpfile.js
 no_flow
 report
 screenshots
