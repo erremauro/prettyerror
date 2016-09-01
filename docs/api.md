@@ -4,11 +4,11 @@
 SolidError is a module that help you print meaningful, in-depth errors to
 the terminal to help your users resolve the issue.
 
-**Version**: 0.3.1
-**Author:** Roberto Mauro <erremauro@icloud.com>
-**License**: MIT
+**Version**: 0.3.1  
+**Author:** Roberto Mauro <erremauro@icloud.com>  
+**License**: MIT  
 
-#### Table of contents
+#### Tables of Contents
 
 * [solid-error](#module_solid-error)
     * _static_
@@ -48,7 +48,7 @@ SolidError is an Error object with properties to write a more verbose
 error explanation and hints to help the user understand and resolve
 the facing issue.
 
-**Kind**: static class of <code>[solid-error](#module_solid-error)</code>
+**Kind**: static class of <code>[solid-error](#module_solid-error)</code>  
 **Properties**
 
 | Name | Type | Description |
@@ -79,24 +79,24 @@ Extends Error with provided `message` and `props`
 ### solid-error.options : <code>[SolidErrorOptions](#module_solid-error..SolidErrorOptions)</code>
 solid-error options
 
-**Kind**: static constant of <code>[solid-error](#module_solid-error)</code>
-**Read only**: true
+**Kind**: static constant of <code>[solid-error](#module_solid-error)</code>  
+**Read only**: true  
 **Properties**
 
 | Name | Type | Default |
 | --- | --- | --- |
-| renderer | <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code> | <code>SolidRender</code> |
-| lang | <code>string</code> | <code>&quot;en&quot;</code> |
-| includes | <code>Array.&lt;string&gt;</code> | <code>[]</code> |
+| renderer | <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code> | <code>SolidRender</code> | 
+| lang | <code>string</code> | <code>&quot;en&quot;</code> | 
+| includes | <code>Array.&lt;string&gt;</code> | <code>[]</code> | 
 
 <a name="module_solid-error.SolidText"></a>
 
 ### solid-error.SolidText
 Utility library to format an manipulate text.
 
-**Kind**: static constant of <code>[solid-error](#module_solid-error)</code>
-**Since**: 0.3.0
-**Version**: 0.1.1
+**Kind**: static constant of <code>[solid-error](#module_solid-error)</code>  
+**Since**: 0.3.0  
+**Version**: 0.1.1  
 
 * [.SolidText](#module_solid-error.SolidText)
     * [.color](#module_solid-error.SolidText.color) : <code>[chalk](https://github.com/chalk/chalk)</code>
@@ -117,18 +117,18 @@ Utility library to format an manipulate text.
 Colorize text for terminal output using
 [chalk](https://github.com/chalk/chalk)
 
-**Kind**: static property of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Since**: 0.1.1
-**Version**: 0.1.0
+**Kind**: static property of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Since**: 0.1.1  
+**Version**: 0.1.0  
 <a name="module_solid-error.SolidText.wordwrap"></a>
 
 #### SolidText.wordwrap(text, width, gfm) ⇒ <code>string</code>
 Wordwrap `text` at max `width` with support for GitHub flavored markdown
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Wordwrapped text
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Wordwrapped text  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -141,10 +141,10 @@ Wordwrap `text` at max `width` with support for GitHub flavored markdown
 #### SolidText.textLength(text) ⇒ <code>number</code>
 Calculate the `text`'s length, escaping terminal entities.
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>number</code> - Text only length
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>number</code> - Text only length  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -155,10 +155,10 @@ Calculate the `text`'s length, escaping terminal entities.
 #### SolidText.truncate(text, maxlen) ⇒ <code>string</code>
 Truncate the give `string` to `maxlen` and add ellipsis at th end.
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Truncated text
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Truncated text  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -170,10 +170,10 @@ Truncate the give `string` to `maxlen` and add ellipsis at th end.
 #### SolidText.capitalizeFirstLetter(text) ⇒ <code>string</code>
 Capitalize the first letter of the given `text`
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Text with first letter capitalized
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Text with first letter capitalized  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -184,10 +184,10 @@ Capitalize the first letter of the given `text`
 #### SolidText.stripErrorCodes(errorMessage) ⇒ <code>string</code>
 Strip syserrors Error prefix text
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Syserror message without prefix text.
-**Since**: 0.1.1
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Syserror message without prefix text.  
+**Since**: 0.1.1  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -198,10 +198,10 @@ Strip syserrors Error prefix text
 #### SolidText.escapeRegExp(text) ⇒ <code>string</code>
 Escape RegExp from the give `text`
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Escaped RegExp
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Escaped RegExp  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -212,10 +212,10 @@ Escape RegExp from the give `text`
 #### SolidText.emojis(text) ⇒ <code>string</code>
 Render emoji from emoji tag (i.e. :heart: ) found in given `text`.
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Text with rendered emoji tags
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Text with rendered emoji tags  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -226,8 +226,8 @@ Render emoji from emoji tag (i.e. :heart: ) found in given `text`.
 #### SolidText.findEmojiFrom(emojiString) ⇒ <code>string</code>
 Return the corresponding unicode emoji from a give ejomi code.
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - Unicode emoji string
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - Unicode emoji string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -238,10 +238,10 @@ Return the corresponding unicode emoji from a give ejomi code.
 #### SolidText.markdown2tty(text) ⇒ <code>string</code>
 Render markdown syntax to terminal syntax
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>string</code> - terminal rendered text
-**Since**: 0.1.2
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>string</code> - terminal rendered text  
+**Since**: 0.1.2  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -252,10 +252,10 @@ Render markdown syntax to terminal syntax
 #### SolidText.setMarkedOptions(props) ⇒ <code>Object</code>
 Set marked options.
 
-**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>
-**Returns**: <code>Object</code> - marked option object
-**Since**: 0.1.2
-**Version**: 0.1.0
+**Kind**: static method of <code>[SolidText](#module_solid-error.SolidText)</code>  
+**Returns**: <code>Object</code> - marked option object  
+**Since**: 0.1.2  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -269,9 +269,9 @@ Log an error to the console. If the provided error is a
 it will be renderer using the current solid-error's
 [renderer](module:solid-error.options.renderer)
 
-**Kind**: static method of <code>[solid-error](#module_solid-error)</code>
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[solid-error](#module_solid-error)</code>  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -282,10 +282,10 @@ it will be renderer using the current solid-error's
 ### solid-error.render(solidError) ⇒ <code>string</code>
 Render a [SolidError](#module_solid-error.SolidError)
 
-**Kind**: static method of <code>[solid-error](#module_solid-error)</code>
-**Returns**: <code>string</code> - Renderer SolidError
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[solid-error](#module_solid-error)</code>  
+**Returns**: <code>string</code> - Renderer SolidError  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -296,10 +296,10 @@ Render a [SolidError](#module_solid-error.SolidError)
 ### solid-error.setOptions(props) ⇒ <code>SolidErrorOptions</code>
 Update solid-error's options.
 
-**Kind**: static method of <code>[solid-error](#module_solid-error)</code>
-**Returns**: <code>SolidErrorOptions</code> - Updated options
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: static method of <code>[solid-error](#module_solid-error)</code>  
+**Returns**: <code>SolidErrorOptions</code> - Updated options  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -311,7 +311,7 @@ Update solid-error's options.
 A renderer for handling [SolidError](module:solid-error~SolidError)
 rendering process.
 
-**Kind**: inner typedef of <code>[solid-error](#module_solid-error)</code>
+**Kind**: inner typedef of <code>[solid-error](#module_solid-error)</code>  
 
 * [~SolidRenderer](#module_solid-error..SolidRenderer) : <code>Object</code>
     * [.header(readableName)](#module_solid-error..SolidRenderer.header) ⇒ <code>string</code>
@@ -326,8 +326,8 @@ rendering process.
 #### SolidRenderer.header(readableName) ⇒ <code>string</code>
 Render the error header
 
-**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>
-**Returns**: <code>string</code> - Rendered header string
+**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>  
+**Returns**: <code>string</code> - Rendered header string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -338,8 +338,8 @@ Render the error header
 #### SolidRenderer.message(text) ⇒ <code>string</code>
 Render the error message
 
-**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>
-**Returns**: <code>string</code> - Rendered error string
+**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>  
+**Returns**: <code>string</code> - Rendered error string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -350,8 +350,8 @@ Render the error message
 #### SolidRenderer.explain(text) ⇒ <code>string</code>
 Render the error explanation
 
-**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>
-**Returns**: <code>string</code> - Rendered explain string
+**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>  
+**Returns**: <code>string</code> - Rendered explain string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -362,8 +362,8 @@ Render the error explanation
 #### SolidRenderer.hints(text) ⇒ <code>string</code>
 Render some error hints
 
-**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>
-**Returns**: <code>string</code> - Rendered hints string
+**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>  
+**Returns**: <code>string</code> - Rendered hints string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -374,8 +374,8 @@ Render some error hints
 #### SolidRenderer.trace(stack, callSite) ⇒ <code>string</code>
 Render the stack trace
 
-**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>
-**Returns**: <code>string</code> - Rendered stack trace string
+**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>  
+**Returns**: <code>string</code> - Rendered stack trace string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -387,8 +387,8 @@ Render the stack trace
 #### SolidRenderer.footer(errorCode, errorPath) ⇒ <code>string</code>
 Render the error footer
 
-**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>
-**Returns**: <code>string</code> - Rendered footer string
+**Kind**: static method of <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code>  
+**Returns**: <code>string</code> - Rendered footer string  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -400,9 +400,9 @@ Render the error footer
 ### solid-error~SolidErrorProps
 SolidError object property.
 
-**Kind**: inner typedef of <code>[solid-error](#module_solid-error)</code>
-**Since**: 0.3.0
-**Version**: 0.1.0
+**Kind**: inner typedef of <code>[solid-error](#module_solid-error)</code>  
+**Since**: 0.3.0  
+**Version**: 0.1.0  
 **Properties**
 
 | Name | Type | Default | Description |
@@ -420,14 +420,14 @@ SolidError object property.
 <a name="module_solid-error..SolidErrorOptions"></a>
 
 ### solid-error~SolidErrorOptions
-**Kind**: inner typedef of <code>[solid-error](#module_solid-error)</code>
-**Since**: 0.1.0
-**Version**: 0.1.0
+**Kind**: inner typedef of <code>[solid-error](#module_solid-error)</code>  
+**Since**: 0.1.0  
+**Version**: 0.1.0  
 **Properties**
 
 | Name | Type |
 | --- | --- |
-| renderer | <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code> |
-| lang | <code>string</code> |
-| includes | <code>Array.&lt;string&gt;</code> |
+| renderer | <code>[SolidRenderer](#module_solid-error..SolidRenderer)</code> | 
+| lang | <code>string</code> | 
+| includes | <code>Array.&lt;string&gt;</code> | 
 
