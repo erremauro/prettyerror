@@ -158,4 +158,18 @@ describe( 'lib/solidtext', function () {
 
   })
 
+  describe( 'stripErrorCodes', function () {
+    beforeEach( function () {
+      SolidText = require( '../dist/lib/SolidText' )
+    })
+
+    it( 'should strip error codes from syserror\'s message', function () {
+      var MESSAGE = 'ENOENT: no such file or directory.'
+      var expected = 'no such file or directory.'
+      var actual = SolidText.stripErrorCodes( MESSAGE )
+
+      expect( expected ).toEqual( actual )
+    })
+  })
+
 })

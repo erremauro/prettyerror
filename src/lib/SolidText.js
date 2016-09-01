@@ -133,7 +133,7 @@ const SolidText = {
    * @version 0.1.0
    */
   stripErrorCodes: ( errorMessage: string ): string =>
-    errorMessage.replace( /Error:\s[A-Z]+:\s/g, '' ),
+    errorMessage.replace( /^((Error:\s)?[A-Z]+:\s|Error:\s)/, '' ),
 
   /**
    * Escape RegExp from the give `text`

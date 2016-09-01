@@ -76,9 +76,23 @@ describe( 'lib/solidrender', function () {
       var renderProps = { messageColor: 'reset', wordwrap: false }
       var solidRender = new SolidRender( renderProps )
       var TEXT = 'test'
+      var EXPECTED_TEXT = 'Test'
 
       var actual = solidRender.message( TEXT )
-      var expected = '\n' + colors.reset( TEXT ) + '\n'
+      var expected = '\n' + colors.reset( EXPECTED_TEXT ) + '\n'
+
+      expect( expected ).toEqual( actual )
+    })
+
+    it( 'should strip error codes from message', function () {
+      var renderProps = { messageColor: 'reset', wordwrap: true }
+      var solidRender = new SolidRender( renderProps )
+      var TEXT = 'Error: ENOENT: no such file or directory.'
+      var EXPECTED_TEXT = 'No such file or directory.'
+
+
+      var actual = solidRender.message( TEXT )
+      var expected = '\n' + colors.reset( EXPECTED_TEXT ) + '\n'
 
       expect( expected ).toEqual( actual )
     })
@@ -97,8 +111,9 @@ describe( 'lib/solidrender', function () {
       }
       var solidRender = new SolidRender( renderProps )
       var TEXT = 'test'
+      var EXPECTED_TEXT = 'Test'
 
-      var expected = '\n' + colors.reset( TEXT )
+      var expected = '\n' + colors.reset( EXPECTED_TEXT )
       var actual = solidRender.explain( TEXT )
 
       expect( expected ).toEqual( actual )
@@ -156,8 +171,9 @@ describe( 'lib/solidrender', function () {
       }
       var solidRender = new SolidRender( renderProps )
       var TEXT = 'example text'
+      var EXPECTED_TEXT = 'Example text'
       var expected =
-        '\n' + colors.reset( '---- HINTS ----------' ) + '\n\n' + TEXT + '\n'
+        '\n' + colors.reset( '---- HINTS ----------' ) + '\n\n' + EXPECTED_TEXT + '\n'
       var actual = solidRender.hints( TEXT )
       expect( expected ).toEqual( actual )
     })

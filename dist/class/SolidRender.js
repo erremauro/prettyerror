@@ -117,7 +117,8 @@ var SolidRender = function (_SolidObject) {
   }, {
     key: 'message',
     value: function message(text) {
-      var formattedText = this.formatText(text);
+      var formattedText = SolidText.stripErrorCodes(text);
+      formattedText = this.formatText(formattedText);
       var color = this.props.messageColor;
       return '\n' + this.applyColor(color, formattedText) + '\n';
     }
@@ -248,10 +249,11 @@ var SolidRender = function (_SolidObject) {
   }, {
     key: 'formatText',
     value: function formatText(text) {
+      var formattedText = SolidText.capitalizeFirstLetter(text);
       if (this.props.wordwrap) {
-        return SolidText.wordwrap(text, this.props.columns, true);
+        return SolidText.wordwrap(formattedText, this.props.columns, true);
       }
-      return text;
+      return formattedText;
     }
 
     /**

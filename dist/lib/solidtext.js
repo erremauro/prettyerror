@@ -135,7 +135,7 @@ var SolidText = {
    * @version 0.1.0
    */
   stripErrorCodes: function stripErrorCodes(errorMessage) {
-    return errorMessage.replace(/Error:\s[A-Z]+:\s/g, '');
+    return errorMessage.replace(/^((Error:\s)?[A-Z]+:\s|Error:\s)/, '');
   },
 
   /**

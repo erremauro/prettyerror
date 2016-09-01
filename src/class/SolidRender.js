@@ -103,7 +103,8 @@ class SolidRender extends SolidObject {
    * @version 0.1.0
    */
   message( text: string ): string {
-    const formattedText = this.formatText( text )
+    let formattedText = SolidText.stripErrorCodes( text )
+    formattedText = this.formatText( formattedText )
     const color = this.props.messageColor
     return '\n' + this.applyColor( color, formattedText  ) + '\n'
   }
@@ -230,10 +231,11 @@ class SolidRender extends SolidObject {
    * @version 0.1.0
    */
   formatText( text: string ): string {
+    const formattedText = SolidText.capitalizeFirstLetter( text )
     if ( this.props.wordwrap ) {
-      return SolidText.wordwrap( text, this.props.columns, true )
+      return SolidText.wordwrap( formattedText, this.props.columns, true )
     }
-    return text
+    return formattedText
   }
 
   /**
