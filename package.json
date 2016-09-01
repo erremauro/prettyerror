@@ -1,6 +1,6 @@
 {
   "name": "solid-error",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Print meaningful errors to the terminal.",
   "main": "dist/index.js",
   "repository": "https://github.com/erremauro/solid-error",
