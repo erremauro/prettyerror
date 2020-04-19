@@ -23,7 +23,7 @@
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-flow-strip-types": "^6.8.0",
     "babel-preset-es2015": "^6.13.2",
-    "codecov": "^1.0.1",
+    "codecov": "^3.6.5",
     "eslint": "~3.4.0",
     "eslint-plugin-flowtype": "^2.11.1",
     "flow-bin": "^0.31.1",
